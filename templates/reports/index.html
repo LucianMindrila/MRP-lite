@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Reports{% endblock %}
+{% block page_title %}Reports{% endblock %}
+
+{% block content %}
+<div class="row g-3 mb-4">
+  <div class="col-md-3">
+    <div class="stat-card" style="border-color:#0d6efd;">
+      <div class="text-muted small">Sales (last {{ period_days }} days)</div>
+      <div class="fs-3 fw-bold text-primary">£{{ '%.2f'|format(sales_total) }}</div>
+      <div class="text-muted small">{{ order_count }} orders</div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="stat-card" style="border-color:#198754;">
+      <div class="text-muted small">Stock Value (at cost)</div>
+      <div class="fs-3 fw-bold text-success">£{{ '%.2f'|format(stock_value) }}</div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="stat-card" style="border-color:#6f42c1;">
+      <div class="text-muted small">Open PO Value</div>
+      <div class="fs-3 fw-bold" style="color:#6f42c1;">£{{ '%.2f'|format(po_value) }}</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header fw-semibold">Recent Stock Movements (last 20)</div>
+  <div class="card-body p-0">
+    <table class="table table-sm mb-0">
+      <thead class="table-light">
+        <tr><th>Date</th><th>Type</th><th>Material</th><th>Qty</th><th>Reference</th></tr>
+      </thead>
+      <tbody>
+        {% for mv in movements %}
+        <tr>
+          <td class="text-muted small">{{ mv.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+          <td>
+            {% if mv.movement_type == 'goods_in' %}<span class="badge bg-success">In</span>
+            {% elif mv.movement_type == 'goods_out' %}<span class="badge bg-warning text-dark">Out</span>
+            {% else %}<span class="badge bg-info text-dark">{{ mv.movement_type }}</span>{% endif %}
+          </td>
+          <td>{{ mv.material.code }}</td>
+          <td class="{% if mv.qty > 0 %}text-success{% else %}text-danger{% endif %}">
+            {% if mv.qty > 0 %}+{% endif %}{{ mv.qty }}
+          </td>
+          <td>{{ mv.reference or '—' }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" class="text-muted text-center py-3">No movements recorded.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

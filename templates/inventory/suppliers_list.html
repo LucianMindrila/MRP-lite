@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Suppliers{% endblock %}
+{% block page_title %}Inventory — Suppliers{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <span class="text-muted">{{ suppliers|length }} supplier{{ 's' if suppliers|length != 1 }}</span>
+  <a href="{{ url_for('inventory.supplier_add') }}" class="btn btn-primary btn-sm">
+    <i class="bi bi-plus-lg me-1"></i>Add Supplier
+  </a>
+</div>
+
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table table-hover mb-0">
+      <thead class="table-light">
+        <tr><th>Name</th><th>Contact</th><th>Email</th><th>Phone</th><th>Lead Time</th><th>Materials</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for s in suppliers %}
+        <tr>
+          <td><strong>{{ s.name }}</strong></td>
+          <td>{{ s.contact or '—' }}</td>
+          <td>{{ s.email or '—' }}</td>
+          <td>{{ s.phone or '—' }}</td>
+          <td>{{ s.lead_time_days }} day{{ 's' if s.lead_time_days != 1 }}</td>
+          <td>{{ s.materials|length }}</td>
+          <td class="text-end">
+            <a href="{{ url_for('inventory.supplier_edit', sid=s.id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+            <form method="POST" action="{{ url_for('inventory.supplier_delete', sid=s.id) }}" class="d-inline"
+                  onsubmit="return confirm('Delete {{ s.name }}?')">
+              <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7" class="text-muted text-center py-4">No suppliers yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

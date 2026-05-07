@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Warehouse{% endblock %}
+{% block page_title %}Warehouse — Recent Movements{% endblock %}
+
+{% block content %}
+<div class="d-flex gap-2 mb-3 no-print">
+  <a href="{{ url_for('warehouse.goods_in_po') }}" class="btn btn-success"><i class="bi bi-box-arrow-in-down me-1"></i>Goods In</a>
+  <a href="{{ url_for('warehouse.goods_out_order') }}" class="btn btn-warning"><i class="bi bi-box-arrow-up me-1"></i>Goods Out</a>
+  <a href="{{ url_for('warehouse.stock_check') }}" class="btn btn-outline-secondary"><i class="bi bi-clipboard-check me-1"></i>Stock Check</a>
+</div>
+
+<div class="card">
+  <div class="card-header fw-semibold">Recent Stock Movements</div>
+  <div class="card-body p-0">
+    <table class="table table-hover mb-0">
+      <thead class="table-light">
+        <tr><th>Date</th><th>Type</th><th>Material</th><th>Qty</th><th>Reference</th><th>Notes</th><th>By</th></tr>
+      </thead>
+      <tbody>
+        {% for mv in movements %}
+        <tr>
+          <td class="text-muted small">{{ mv.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+          <td>
+            {% if mv.movement_type == 'goods_in' %}<span class="badge bg-success">Goods In</span>
+            {% elif mv.movement_type == 'goods_out' %}<span class="badge bg-warning text-dark">Goods Out</span>
+            {% elif mv.movement_type == 'stock_check' %}<span class="badge bg-info text-dark">Stock Check</span>
+            {% else %}<span class="badge bg-secondary">{{ mv.movement_type }}</span>{% endif %}
+          </td>
+          <td>{{ mv.material.code }} — {{ mv.material.name }}</td>
+          <td class="{% if mv.qty > 0 %}text-success{% else %}text-danger{% endif %} fw-semibold">
+            {% if mv.qty > 0 %}+{% endif %}{{ mv.qty }} {{ mv.material.unit }}
+          </td>
+          <td>{{ mv.reference or '—' }}</td>
+          <td>{{ mv.notes or '—' }}</td>
+          <td>{{ mv.user.username if mv.user else '—' }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7" class="text-muted text-center py-4">No movements recorded yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

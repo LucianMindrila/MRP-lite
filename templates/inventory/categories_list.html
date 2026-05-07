@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Material Categories{% endblock %}
+{% block page_title %}Inventory — Material Categories{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <span class="text-muted">{{ categories|length }} categor{{ 'ies' if categories|length != 1 else 'y' }}</span>
+  <a href="{{ url_for('inventory.category_add') }}" class="btn btn-primary btn-sm">
+    <i class="bi bi-plus-lg me-1"></i>Add Category
+  </a>
+</div>
+
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table table-hover mb-0">
+      <thead class="table-light">
+        <tr><th>Name</th><th>Description</th><th>Materials</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for cat in categories %}
+        <tr>
+          <td><strong>{{ cat.name }}</strong></td>
+          <td class="text-muted">{{ cat.description or '—' }}</td>
+          <td>{{ cat.materials|length if cat.materials is defined else 0 }}</td>
+          <td class="text-end">
+            <a href="{{ url_for('inventory.category_edit', cid=cat.id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+            <form method="POST" action="{{ url_for('inventory.category_delete', cid=cat.id) }}" class="d-inline"
+                  onsubmit="return confirm('Delete category {{ cat.name }}?')">
+              <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4" class="text-muted text-center py-4">No categories yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

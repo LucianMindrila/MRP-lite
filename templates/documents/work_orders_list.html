@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Work Orders{% endblock %}
+{% block page_title %}Work Orders{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table table-hover mb-0">
+      <thead class="table-light">
+        <tr><th>WO Ref</th><th>Order</th><th>Product</th><th>Qty</th><th>Status</th><th>Created</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for wo in work_orders %}
+        <tr>
+          <td><strong>{{ wo.wo_ref }}</strong></td>
+          <td><a href="{{ url_for('orders.view_order', order_id=wo.order_id) }}">{{ wo.order.order_ref }}</a></td>
+          <td>{{ wo.product.code }} — {{ wo.product.name }}</td>
+          <td>{{ wo.qty }}</td>
+          <td>
+            {% if wo.status == 'pending' %}<span class="badge bg-secondary">Pending</span>
+            {% elif wo.status == 'in_progress' %}<span class="badge bg-warning text-dark">In Progress</span>
+            {% else %}<span class="badge bg-success">Complete</span>{% endif %}
+          </td>
+          <td class="text-muted small">{{ wo.created_at.strftime('%d/%m/%Y') }}</td>
+          <td><a href="{{ url_for('documents.print_work_order', wo_id=wo.id) }}" class="btn btn-sm btn-outline-secondary" target="_blank"><i class="bi bi-printer me-1"></i>Print</a></td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7" class="text-muted text-center py-4">No work orders yet. Confirm an order to generate them.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

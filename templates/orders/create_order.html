@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block title %}New Order{% endblock %}
+{% block page_title %}Create New Order{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:900px;">
+  <div class="card-header fw-semibold">New Customer Order</div>
+  <div class="card-body">
+    <form method="POST" id="orderForm">
+      <div class="row g-3 mb-3">
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Customer *</label>
+          <select name="customer_id" class="form-select" required>
+            <option value="">— Select Customer —</option>
+            {% for c in customers %}<option value="{{ c.id }}">{{ c.name }}</option>{% endfor %}
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label fw-semibold">Required Date</label>
+          <input type="date" name="required_date" class="form-control"/>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Notes</label>
+        <textarea name="notes" class="form-control" rows="2"></textarea>
+      </div>
+
+      <h6 class="fw-semibold mt-4 mb-2">Order Lines</h6>
+      <table class="table table-sm" id="linesTable">
+        <thead class="table-light">
+          <tr><th>Product</th><th style="width:100px">Qty</th><th style="width:120px">Unit Price £</th><th style="width:40px"></th></tr>
+        </thead>
+        <tbody id="linesBody">
+          <tr class="line-row">
+            <td>
+              <select name="product_id[]" class="form-select form-select-sm product-select">
+                <option value="">— Select Product —</option>
+                {% for p in products %}<option value="{{ p.id }}" data-price="{{ p.sale_price }}">{{ p.code }} — {{ p.name }}</option>{% endfor %}
+              </select>
+            </td>
+            <td><input type="number" name="qty[]" class="form-control form-control-sm" min="1" step="0.01" value="1"/></td>
+            <td><input type="number" name="unit_price[]" class="form-control form-control-sm price-field" min="0" step="0.01"/></td>
+            <td><button type="button" class="btn btn-sm btn-outline-danger remove-line">✕</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-outline-secondary btn-sm mb-3" id="addLine">+ Add Line</button>
+
+      <div class="d-flex gap-2 mt-3">
+        <button type="submit" class="btn btn-primary fw-semibold">Create Order</button>
+        <a href="{{ url_for('orders.orders_list') }}" class="btn btn-outline-secondary">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const products = {{ products | tojson(attribute='id') if false else '[]' }};
+const rowTemplate = document.querySelector('.line-row').outerHTML;
+
+document.getElementById('addLine').addEventListener('click', () => {
+  document.getElementById('linesBody').insertAdjacentHTML('beforeend', rowTemplate);
+  attachHandlers();
+});
+
+function attachHandlers() {
+  document.querySelectorAll('.product-select').forEach(sel => {
+    sel.onchange = function() {
+      const opt = this.options[this.selectedIndex];
+      const price = opt.dataset.price || '';
+      this.closest('tr').querySelector('.price-field').value = price;
+    };
+  });
+  document.querySelectorAll('.remove-line').forEach(btn => {
+    btn.onclick = function() {
+      const rows = document.querySelectorAll('.line-row');
+      if (rows.length > 1) this.closest('tr').remove();
+    };
+  });
+}
+attachHandlers();
+</script>
+{% endblock %}

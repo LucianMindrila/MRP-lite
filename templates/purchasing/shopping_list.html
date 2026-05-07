@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}MRP Shopping List - MRP-Lite{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h4 class="mb-0"><i class="bi bi-cart-check"></i> MRP Shopping List</h4>
+        <small class="text-muted">Materials needed to fulfill open orders</small>
+    </div>
+</div>
+
+{% if not items %}
+<div class="text-center py-5">
+    <i class="bi bi-check-circle text-success" style="font-size: 4rem"></i>
+    <h5 class="mt-3 text-muted">All materials in stock!</h5>
+    <p class="text-muted">No purchase orders needed right now.</p>
+</div>
+{% else %}
+<div class="table-container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Material</th>
+                <th>SKU</th>
+                <th>In Stock</th>
+                <th>Required</th>
+                <th>To Order</th>
+                <th>Supplier</th>
+                <th>Lead Time</th>
+                <th>Est. Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td><strong>{{ item.material_name }}</strong></td>
+                <td>{{ item.sku }}</td>
+                <td>{{ item.in_stock }} {{ item.uom }}</td>
+                <td>{{ item.total_required }} {{ item.uom }}</td>
+                <td class="fw-bold">{{ item.order_quantity }} {{ item.uom }}</td>
+                <td>{{ item.supplier_name }}</td>
+                <td>{{ item.lead_time_days }} days</td>
+                <td>&pound;{{ "{:,.2f}".format(item.estimated_cost) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+{% endblock %}

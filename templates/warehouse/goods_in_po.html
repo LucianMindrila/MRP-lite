@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}Goods In{% endblock %}
+{% block page_title %}Warehouse — Goods In (Against PO){% endblock %}
+
+{% block content %}
+<div class="row g-3">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header fw-semibold">Select Purchase Order</div>
+      <div class="card-body">
+        {% if pos %}
+        <form method="POST">
+          <div class="mb-3">
+            <label class="form-label">Purchase Order</label>
+            <select name="po_id" class="form-select" onchange="this.form.submit()">
+              <option value="">— Select PO —</option>
+              {% for po in pos %}
+              <option value="{{ po.id }}" {% if selected_po and selected_po.id == po.id %}selected{% endif %}>
+                {{ po.po_ref }} — {{ po.supplier.name }}
+              </option>
+              {% endfor %}
+            </select>
+          </div>
+        </form>
+        {% else %}
+        <p class="text-muted mb-0">No purchase orders awaiting delivery.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% if selected_po %}
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header fw-semibold">Receive Stock — {{ selected_po.po_ref }}</div>
+      <div class="card-body">
+        <p class="text-muted small mb-3">Supplier: <strong>{{ selected_po.supplier.name }}</strong> &nbsp;|&nbsp; Expected: {{ selected_po.expected_date or 'TBC' }}</p>
+        <form method="POST">
+          <input type="hidden" name="po_id" value="{{ selected_po.id }}"/>
+          <input type="hidden" name="submit_recv" value="1"/>
+          <table class="table table-sm">
+            <thead class="table-light">
+              <tr><th>Material</th><th>Ordered</th><th>Received to Date</th><th>Receiving Now</th></tr>
+            </thead>
+            <tbody>
+              {% for item in selected_po.items %}
+              <tr>
+                <td>{{ item.material.code }}<br><small class="text-muted">{{ item.material.name }}</small></td>
+                <td>{{ item.qty }} {{ item.material.unit }}</td>
+                <td>{{ item.qty_received }} {{ item.material.unit }}</td>
+                <td>
+                  <input type="number" name="recv_{{ item.id }}" class="form-control form-control-sm"
+                         style="width:100px" min="0" step="0.01"
+                         max="{{ item.qty - item.qty_received }}" value="0"/>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <div class="mb-3">
+            <label class="form-label">Notes</label>
+            <input type="text" name="notes" class="form-control" placeholder="Optional delivery note, batch no. etc."/>
+          </div>
+          <button type="submit" class="btn btn-success"><i class="bi bi-check-lg me-1"></i>Confirm Receipt</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

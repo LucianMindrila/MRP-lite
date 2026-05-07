@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Edit' if product else 'Add' }} Product{% endblock %}
+{% block page_title %}{{ 'Edit — ' + product.code if product else 'Add Product' }}{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+
+  <!-- Product details -->
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-header fw-semibold">
+        {{ 'Edit Product — ' + product.code if product else 'New Product' }}
+      </div>
+      <div class="card-body">
+        <form method="POST">
+          <input type="hidden" name="action" value="save"/>
+          {% if not product %}
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Code *</label>
+            <input type="text" name="code" class="form-control text-uppercase" required/>
+          </div>
+          {% endif %}
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Name *</label>
+            <input type="text" name="name" class="form-control" required
+                   value="{{ product.name if product else '' }}"/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea name="description" class="form-control" rows="2">{{ product.description if product else '' }}</textarea>
+          </div>
+          <div class="row g-3 mb-3">
+            <div class="col-md-4">
+              <label class="form-label">Unit</label>
+              <select name="unit" class="form-select">
+                {% for u in ['pcs', 'set', 'm', 'm2'] %}
+                <option value="{{ u }}" {% if product and product.unit == u %}selected{% endif %}>{{ u }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Sale Price £</label>
+              <input type="number" name="sale_price" class="form-control" min="0" step="0.01"
+                     value="{{ product.sale_price if product else 0 }}"/>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Lead Time (days)</label>
+              <input type="number" name="lead_time_days" class="form-control" min="1"
+                     value="{{ product.lead_time_days if product else 1 }}"/>
+            </div>
+          </div>
+          <div class="d-flex gap-2 mt-3">
+            <button type="submit" class="btn btn-primary fw-semibold">
+              {{ 'Save Changes' if product else 'Create Product' }}
+            </button>
+            <a href="{{ url_for('inventory.products_list') }}" class="btn btn-outline-secondary">Cancel</a>
+          </div>
+        </form>
+
+        {% if product %}
+        <hr/>
+        <form method="POST" action="{{ url_for('inventory.product_delete', pid=product.id) }}"
+              onsubmit="return confirm('Delete {{ product.code }}?')">
+          <button type="submit" class="btn btn-outline-danger btn-sm">Delete Product</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- BOM management (only shown when editing an existing product) -->
+  {% if product %}
+  <div class="col-md-7">
+    <div class="card">
+      <div class="card-header fw-semibold">Bill of Materials</div>
+      <div class="card-body p-0">
+        <table class="table table-sm mb-0">
+          <thead class="table-light">
+            <tr><th>Material</th><th>Qty per Unit</th><th>Unit</th><th>Cost</th><th></th></tr>
+          </thead>
+          <tbody>
+            {% for bom in bom_items %}
+            <tr>
+              <td>{{ bom.material.code }}<br><small class="text-muted">{{ bom.material.name }}</small></td>
+              <td>{{ bom.qty_per_unit }}</td>
+              <td>{{ bom.material.unit }}</td>
+              <td class="text-muted small">£{{ '%.2f'|format(bom.qty_per_unit * bom.material.cost_price) }}</td>
+              <td>
+                <form method="POST">
+                  <input type="hidden" name="action" value="delete_bom"/>
+                  <input type="hidden" name="bom_id" value="{{ bom.id }}"/>
+                  <button type="submit" class="btn btn-sm btn-outline-danger"
+                          onclick="return confirm('Remove this BOM line?')">✕</button>
+                </form>
+              </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="5" class="text-muted text-center py-3">No BOM lines yet.</td></tr>
+            {% endfor %}
+          </tbody>
+          {% if bom_items %}
+          <tfoot class="table-light">
+            <tr>
+              <td colspan="3" class="text-end fw-semibold">Total material cost per unit</td>
+              <td class="fw-semibold">£{{ '%.2f'|format(total_bom_cost) }}</td>
+              <td></td>
+            </tr>
+          </tfoot>
+          {% endif %}
+        </table>
+      </div>
+      <div class="card-footer">
+        <form method="POST" class="row g-2 align-items-end">
+          <input type="hidden" name="action" value="add_bom"/>
+          <div class="col-md-6">
+            <label class="form-label small fw-semibold">Material</label>
+            <select name="bom_material_id" class="form-select form-select-sm" required>
+              <option value="">— Select —</option>
+              {% for m in materials %}
+              <option value="{{ m.id }}">{{ m.code }} — {{ m.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label small fw-semibold">Qty per Unit</label>
+            <input type="number" name="bom_qty" class="form-control form-control-sm" min="0.001" step="0.001" required/>
+          </div>
+          <div class="col-md-3">
+            <button type="submit" class="btn btn-success btn-sm w-100">
+              <i class="bi bi-plus-lg me-1"></i>Add Line
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}
