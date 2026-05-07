@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, abort
-from flask_login import login_required
-from models import Order, WorkOrder
+from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
+from flask_login import login_required, current_user
+from models import db, Order, WorkOrder, DeliveryNote, DeliveryNoteItem, BOMItem, StockMovement
+from datetime import datetime
 
 documents_bp = Blueprint('documents', __name__, url_prefix='/documents')
 
@@ -31,3 +32,64 @@ def print_invoice(order_id):
 def print_delivery_note(order_id):
     order = Order.query.get_or_404(order_id)
     return render_template('documents/print_delivery_note.html', order=order)
+
+
+@documents_bp.route('/delivery-note/<int:dn_id>')
+@login_required
+def print_delivery_note_dn(dn_id):
+    dn = DeliveryNote.query.get_or_404(dn_id)
+    return render_template('documents/print_delivery_note_dn.html', dn=dn)
+
+
+@documents_bp.route('/delivery-note/<int:dn_id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_delivery_note(dn_id):
+    dn = DeliveryNote.query.get_or_404(dn_id)
+    if request.method == 'POST':
+        # Update dispatch date and notes
+        date_str = request.form.get('dispatch_date')
+        if date_str:
+            dn.dispatch_date = datetime.strptime(date_str, '%Y-%m-%d').date()
+        dn.notes = request.form.get('dn_notes', '')
+
+        for dni in dn.items:
+            old_qty = dni.qty_dispatched
+            try:
+                new_qty = float(request.form.get(f'qty_{dni.id}', old_qty))
+            except ValueError:
+                new_qty = old_qty
+
+            # cap at ordered qty to prevent over-dispatch
+            max_qty = dni.order_item.qty
+            new_qty = max(0, min(new_qty, max_qty))
+            delta = new_qty - old_qty
+
+            if delta != 0:
+                # adjust order item dispatched total
+                dni.order_item.qty_dispatched = (dni.order_item.qty_dispatched or 0) + delta
+                # adjust stock for each BOM component
+                for bom in BOMItem.query.filter_by(product_id=dni.order_item.product_id).all():
+                    bom.material.stock_qty = (bom.material.stock_qty or 0) - (bom.qty_per_unit * delta)
+                    db.session.add(StockMovement(
+                        material_id=bom.material_id,
+                        movement_type='goods_out',
+                        qty=-(bom.qty_per_unit * delta),
+                        reference=f'{dn.dn_ref} (amended)',
+                        created_by=current_user.id,
+                    ))
+                dni.qty_dispatched = new_qty
+
+        # recalculate order status
+        order = dn.order
+        if all(i.qty_outstanding == 0 for i in order.items):
+            order.status = 'dispatched'
+        elif any((i.qty_dispatched or 0) > 0 for i in order.items):
+            order.status = 'in_production'
+        else:
+            order.status = 'confirmed'
+
+        db.session.commit()
+        flash(f'{dn.dn_ref} updated.', 'success')
+        return redirect(url_for('documents.print_delivery_note_dn', dn_id=dn.id))
+
+    return render_template('documents/edit_delivery_note.html', dn=dn)

@@ -4,33 +4,57 @@
 
 {% block content %}
 <div class="d-flex justify-content-between mb-3">
-  <span class="text-muted">{{ materials|length if materials is defined else 0 }} materials</span>
-  <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#materialModal"><i class="bi bi-plus-lg me-1"></i>Add Material</button>
+  <span class="text-muted">{{ materials|length }} material{{ 's' if materials|length != 1 }}</span>
+  <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#materialModal">
+    <i class="bi bi-plus-lg me-1"></i>Add Material
+  </button>
 </div>
+
+<!-- Category filter tabs -->
+{% if categories %}
+<div class="mb-3">
+  <ul class="nav nav-pills nav-fill flex-wrap gap-1" style="row-gap:.4rem;">
+    <li class="nav-item">
+      <a href="{{ url_for('inventory.materials_list') }}"
+         class="nav-link py-1 px-3 {% if not active_cat %}active{% endif %}">All</a>
+    </li>
+    {% for cat in categories %}
+    <li class="nav-item">
+      <a href="{{ url_for('inventory.materials_list', cat=cat.id) }}"
+         class="nav-link py-1 px-3 {% if active_cat == cat.id %}active{% endif %}">{{ cat.name }}</a>
+    </li>
+    {% endfor %}
+    <li class="nav-item">
+      <a href="{{ url_for('inventory.materials_list', cat='none') }}"
+         class="nav-link py-1 px-3 {% if active_cat == 'none' %}active{% endif %}">Uncategorised</a>
+    </li>
+  </ul>
+</div>
+{% endif %}
 
 <div class="card">
   <div class="card-body p-0">
     <table class="table table-hover mb-0">
       <thead class="table-light">
-        <tr><th>Code</th><th>Name</th><th>Unit</th><th>Stock</th><th>Reorder Pt</th><th>Cost</th><th>Supplier</th><th>Location</th><th></th></tr>
+        <tr><th>Code</th><th>Name</th><th>Category</th><th>Unit</th><th>Stock</th><th>Reorder Pt</th><th>Cost</th><th>Supplier</th><th></th></tr>
       </thead>
       <tbody>
         {% for m in materials %}
         <tr class="{% if m.stock_qty <= m.reorder_point and m.reorder_point > 0 %}table-warning{% endif %}">
           <td><strong>{{ m.code }}</strong></td>
           <td>{{ m.name }}</td>
+          <td><span class="badge bg-secondary">{{ m.category.name if m.category else '—' }}</span></td>
           <td>{{ m.unit }}</td>
           <td>{{ m.stock_qty }}</td>
           <td>{{ m.reorder_point }}</td>
           <td>£{{ '%.2f'|format(m.cost_price) }}</td>
           <td>{{ m.supplier.name if m.supplier else '—' }}</td>
-          <td>{{ m.location or '—' }}</td>
           <td>
             <a href="{{ url_for('inventory.material_edit', mid=m.id) }}" class="btn btn-sm btn-outline-secondary">Edit</a>
           </td>
         </tr>
         {% else %}
-        <tr><td colspan="9" class="text-muted text-center py-4">No materials yet. Add one above.</td></tr>
+        <tr><td colspan="9" class="text-muted text-center py-4">No materials in this category yet.</td></tr>
         {% endfor %}
       </tbody>
     </table>
@@ -42,26 +66,52 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <form method="POST" action="{{ url_for('inventory.material_add') }}">
-        <div class="modal-header"><h5 class="modal-title">New Material</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+        <div class="modal-header">
+          <h5 class="modal-title">New Material</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
         <div class="modal-body">
           <div class="row g-3">
-            <div class="col-md-4"><label class="form-label">Code *</label><input type="text" name="code" class="form-control" required/></div>
+            <div class="col-md-4"><label class="form-label">Code *</label><input type="text" name="code" class="form-control text-uppercase" required/></div>
             <div class="col-md-8"><label class="form-label">Name *</label><input type="text" name="name" class="form-control" required/></div>
             <div class="col-md-12"><label class="form-label">Description</label><textarea name="description" class="form-control" rows="2"></textarea></div>
-            <div class="col-md-3"><label class="form-label">Unit</label>
-              <select name="unit" class="form-select"><option>pcs</option><option>sheet</option><option>m</option><option>m2</option><option>kg</option><option>ltr</option></select>
+            <div class="col-md-4">
+              <label class="form-label">Category</label>
+              <select name="category_id" class="form-select">
+                <option value="">— None —</option>
+                {% for c in categories %}
+                <option value="{{ c.id }}">{{ c.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Unit</label>
+              <select name="unit" class="form-select">
+                {% for u in ['pcs','sheet','m','m2','kg','ltr','box'] %}
+                <option>{{ u }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Cost Price £</label>
+              <input type="number" name="cost_price" class="form-control" value="0" step="0.01"/>
             </div>
             <div class="col-md-3"><label class="form-label">Stock Qty</label><input type="number" name="stock_qty" class="form-control" value="0" step="0.01"/></div>
             <div class="col-md-3"><label class="form-label">Reorder Point</label><input type="number" name="reorder_point" class="form-control" value="0" step="0.01"/></div>
             <div class="col-md-3"><label class="form-label">Reorder Qty</label><input type="number" name="reorder_qty" class="form-control" value="0" step="0.01"/></div>
-            <div class="col-md-3"><label class="form-label">Cost Price £</label><input type="number" name="cost_price" class="form-control" value="0" step="0.01"/></div>
-            <div class="col-md-5"><label class="form-label">Supplier</label>
-              <select name="supplier_id" class="form-select"><option value="">— None —</option>{% for s in suppliers %}<option value="{{ s.id }}">{{ s.name }}</option>{% endfor %}</select>
+            <div class="col-md-5">
+              <label class="form-label">Supplier</label>
+              <select name="supplier_id" class="form-select">
+                <option value="">— None —</option>
+                {% for s in suppliers %}<option value="{{ s.id }}">{{ s.name }}</option>{% endfor %}
+              </select>
             </div>
             <div class="col-md-4"><label class="form-label">Location</label><input type="text" name="location" class="form-control" placeholder="e.g. Bay A1"/></div>
           </div>
         </div>
-        <div class="modal-footer"><button type="submit" class="btn btn-primary">Save Material</button></div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save Material</button>
+        </div>
       </form>
     </div>
   </div>

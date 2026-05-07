@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Edit {{ dn.dn_ref }}{% endblock %}
+{% block page_title %}Edit Delivery Note — {{ dn.dn_ref }}{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:760px;">
+  <div class="card-header fw-semibold d-flex justify-content-between align-items-center">
+    <span>{{ dn.dn_ref }} — <span class="text-muted">{{ dn.order.order_ref }} / {{ dn.order.customer.name }}</span></span>
+    <a href="{{ url_for('documents.print_delivery_note_dn', dn_id=dn.id) }}" class="btn btn-sm btn-outline-secondary">Cancel</a>
+  </div>
+  <div class="card-body">
+    <form method="POST">
+      <div class="row g-3 mb-4">
+        <div class="col-md-4">
+          <label class="form-label fw-semibold">Dispatch Date</label>
+          <input type="date" name="dispatch_date" class="form-control"
+                 value="{{ dn.dispatch_date.strftime('%Y-%m-%d') }}"/>
+        </div>
+        <div class="col-md-8">
+          <label class="form-label fw-semibold">Notes</label>
+          <input type="text" name="dn_notes" class="form-control" value="{{ dn.notes or '' }}"/>
+        </div>
+      </div>
+
+      <table class="table table-sm">
+        <thead class="table-light">
+          <tr>
+            <th>Code</th>
+            <th>Description</th>
+            <th>Total Ordered</th>
+            <th>On This DN</th>
+            <th style="width:130px">Amend Qty</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for dni in dn.items %}
+          <tr>
+            <td>{{ dni.order_item.product.code }}</td>
+            <td class="text-muted small">{{ dni.order_item.product.name }}</td>
+            <td>{{ dni.order_item.qty }}</td>
+            <td>{{ dni.qty_dispatched }}</td>
+            <td>
+              <input type="number" name="qty_{{ dni.id }}" class="form-control form-control-sm"
+                     min="0" max="{{ dni.order_item.qty }}" step="0.001"
+                     value="{{ dni.qty_dispatched }}"/>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="alert alert-warning py-2 small">
+        <i class="bi bi-exclamation-triangle me-1"></i>
+        Changing quantities will adjust the order's outstanding amounts and correct stock levels automatically.
+      </div>
+
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary fw-semibold">Save Changes</button>
+        <a href="{{ url_for('documents.print_delivery_note_dn', dn_id=dn.id) }}" class="btn btn-outline-secondary">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

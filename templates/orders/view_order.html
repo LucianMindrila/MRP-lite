@@ -14,6 +14,12 @@
   {% endif %}
   <a href="{{ url_for('documents.print_invoice', order_id=order.id) }}" class="btn btn-outline-dark btn-sm" target="_blank"><i class="bi bi-printer me-1"></i>Invoice</a>
   <a href="{{ url_for('documents.print_delivery_note', order_id=order.id) }}" class="btn btn-outline-dark btn-sm" target="_blank"><i class="bi bi-truck me-1"></i>Delivery Note</a>
+  <form method="POST" action="{{ url_for('orders.delete_order', order_id=order.id) }}" class="ms-auto"
+        onsubmit="return confirm('Delete order {{ order.order_ref }}? This cannot be undone.')">
+    <button type="submit" class="btn btn-outline-danger btn-sm">
+      <i class="bi bi-trash me-1"></i>Delete Order
+    </button>
+  </form>
 </div>
 
 <div class="row g-3">
@@ -49,26 +55,97 @@
       <div class="card-header fw-semibold">Order Lines</div>
       <div class="card-body p-0">
         <table class="table table-sm mb-0">
-          <thead class="table-light"><tr><th>Product</th><th>Qty</th><th>Unit Price</th><th>Line Total</th><th>Notes</th></tr></thead>
+          <thead class="table-light"><tr><th>Product</th><th>Ordered</th><th>Dispatched</th><th>Outstanding</th><th>Unit Price</th><th>Line Total</th></tr></thead>
           <tbody>
             {% for item in order.items %}
-            <tr>
+            <tr class="{% if item.qty_outstanding == 0 %}table-success{% elif item.qty_dispatched > 0 %}table-warning{% endif %}">
               <td>{{ item.product.code }}<br><small class="text-muted">{{ item.product.name }}</small></td>
               <td>{{ item.qty }}</td>
+              <td>{{ item.qty_dispatched or 0 }}</td>
+              <td>{{ item.qty_outstanding }}</td>
               <td>£{{ '%.2f'|format(item.unit_price) }}</td>
               <td>£{{ '%.2f'|format(item.qty * item.unit_price) }}</td>
-              <td>{{ item.notes or '—' }}</td>
             </tr>
             {% endfor %}
             <tr class="table-light fw-bold">
-              <td colspan="3" class="text-end">Total</td>
-              <td>£{{ '%.2f'|format(order.total) }}</td>
+              <td colspan="4" class="text-end">Total</td>
               <td></td>
+              <td>£{{ '%.2f'|format(order.total) }}</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+
+    <!-- Dispatch form -->
+    {% if order.status not in ['dispatched', 'invoiced'] %}
+    <div class="card mt-3 no-print">
+      <div class="card-header fw-semibold">Create Dispatch / Delivery Note</div>
+      <div class="card-body">
+        <form method="POST" action="{{ url_for('orders.dispatch_order', order_id=order.id) }}">
+          <div class="row g-2 mb-3">
+            <div class="col-md-4">
+              <label class="form-label small fw-semibold">Dispatch Date</label>
+              <input type="date" name="dispatch_date" class="form-control form-control-sm"
+                     value="{{ today }}"/>
+            </div>
+            <div class="col-md-8">
+              <label class="form-label small fw-semibold">Notes</label>
+              <input type="text" name="dn_notes" class="form-control form-control-sm" placeholder="Optional"/>
+            </div>
+          </div>
+          <table class="table table-sm">
+            <thead class="table-light">
+              <tr><th>Code</th><th>Description</th><th>Outstanding</th><th style="width:110px">Dispatch Qty</th></tr>
+            </thead>
+            <tbody>
+              {% for item in order.items %}
+              {% if item.qty_outstanding > 0 %}
+              <tr>
+                <td>{{ item.product.code }}</td>
+                <td class="text-muted small">{{ item.product.name }}</td>
+                <td>{{ item.qty_outstanding }}</td>
+                <td><input type="number" name="qty_{{ item.id }}" class="form-control form-control-sm"
+                           min="0" max="{{ item.qty_outstanding }}" step="0.001" value="0"/></td>
+              </tr>
+              {% endif %}
+              {% else %}
+              <tr><td colspan="4" class="text-muted text-center py-2">All lines fully dispatched.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <button type="submit" class="btn btn-success btn-sm">
+            <i class="bi bi-box-arrow-up me-1"></i>Create Delivery Note
+          </button>
+        </form>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Previous delivery notes -->
+    {% if order.delivery_notes %}
+    <div class="card mt-3 no-print">
+      <div class="card-header fw-semibold">Delivery Notes</div>
+      <div class="card-body p-0">
+        <table class="table table-sm mb-0">
+          <thead class="table-light"><tr><th>DN Ref</th><th>Date</th><th>Lines</th><th></th></tr></thead>
+          <tbody>
+            {% for dn in order.delivery_notes|sort(attribute='dispatch_date') %}
+            <tr>
+              <td><strong>{{ dn.dn_ref }}</strong></td>
+              <td>{{ dn.dispatch_date.strftime('%d/%m/%Y') }}</td>
+              <td>{{ dn.items|length }}</td>
+              <td class="text-end">
+                <a href="{{ url_for('documents.print_delivery_note_dn', dn_id=dn.id) }}" class="btn btn-sm btn-outline-secondary" target="_blank">Print</a>
+                <a href="{{ url_for('documents.edit_delivery_note', dn_id=dn.id) }}" class="btn btn-sm btn-outline-primary">Amend</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
     {% if order.work_orders %}
     <div class="card mt-3">
       <div class="card-header fw-semibold">Work Orders</div>

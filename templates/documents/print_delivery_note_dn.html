@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>{{ dn.dn_ref }}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body { font-size: 13px; }
+    @media print {
+      .no-print { display: none !important; }
+      body { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container mt-4" style="max-width:800px;">
+
+  <div class="no-print mb-3 d-flex gap-2">
+    <button onclick="window.print()" class="btn btn-sm btn-dark"><i class="bi bi-printer me-1"></i>Print</button>
+    <a href="{{ url_for('documents.edit_delivery_note', dn_id=dn.id) }}" class="btn btn-sm btn-outline-primary">
+      <i class="bi bi-pencil me-1"></i>Amend
+    </a>
+    <a href="{{ url_for('orders.view_order', order_id=dn.order.id) }}" class="btn btn-sm btn-outline-secondary">Back to Order</a>
+  </div>
+
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-start mb-4">
+    <div>
+      <h3 class="fw-bold mb-1">DELIVERY NOTE</h3>
+      <table class="table table-sm table-borderless mb-0" style="width:auto;">
+        <tr><th class="ps-0 text-muted">DN Number</th><td class="fw-bold">{{ dn.dn_ref }}</td></tr>
+        <tr><th class="ps-0 text-muted">Date</th><td>{{ dn.dispatch_date.strftime('%d/%m/%Y') }}</td></tr>
+        <tr><th class="ps-0 text-muted">Customer PO</th><td>{{ dn.order.order_ref }}</td></tr>
+      </table>
+    </div>
+    <div class="text-end">
+      <strong>DT Solutions Ltd</strong><br>
+      <span class="text-muted small">
+        Unit 7 Woodrow Way<br>
+        Gloucester<br>
+        GL2 5DX
+      </span>
+    </div>
+  </div>
+
+  <!-- Deliver To -->
+  <div class="row mb-4">
+    <div class="col-md-5">
+      <div class="border rounded p-2">
+        <div class="text-muted small fw-semibold mb-1">DELIVER TO</div>
+        <strong>{{ dn.order.customer.name }}</strong><br>
+        {% if dn.order.customer.address %}
+        <span class="text-muted small" style="white-space:pre-line;">{{ dn.order.customer.address }}</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Lines -->
+  <table class="table table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th style="width:80px">Qty</th>
+        <th style="width:140px">Code</th>
+        <th>Product Description</th>
+        <th style="width:120px">Customer PO</th>
+        <th style="width:140px">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for dni in dn.items %}
+      <tr>
+        <td class="fw-bold">{{ dni.qty_dispatched | int if dni.qty_dispatched == dni.qty_dispatched | int else dni.qty_dispatched }}</td>
+        <td>{{ dni.order_item.product.code }}</td>
+        <td>{{ dni.order_item.product.name }}</td>
+        <td>{{ dn.order.order_ref }}</td>
+        <td>{{ dn.notes or '' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% if dn.notes %}
+  <div class="alert alert-light border mt-2"><strong>Notes:</strong> {{ dn.notes }}</div>
+  {% endif %}
+
+  <!-- Signature block -->
+  <div class="row mt-5">
+    <div class="col-md-5">
+      <p class="text-muted small mb-1">Received by (print name)</p>
+      <div style="border-bottom:1px solid #333; height:32px;"></div>
+    </div>
+    <div class="col-md-4">
+      <p class="text-muted small mb-1">Signature</p>
+      <div style="border-bottom:1px solid #333; height:32px;"></div>
+    </div>
+    <div class="col-md-3">
+      <p class="text-muted small mb-1">Date</p>
+      <div style="border-bottom:1px solid #333; height:32px;"></div>
+    </div>
+  </div>
+
+</div>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+</body>
+</html>

@@ -69,6 +69,7 @@ class Product(db.Model):
     unit = db.Column(db.String(20), default='pcs')
     sale_price = db.Column(db.Float, default=0)
     lead_time_days = db.Column(db.Integer, default=1)
+    customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'))
     bom_items = db.relationship('BOMItem', backref='product', lazy=True, cascade='all, delete-orphan')
     order_items = db.relationship('OrderItem', backref='product', lazy=True)
     work_orders = db.relationship('WorkOrder', backref='product', lazy=True)
@@ -104,7 +105,7 @@ class Order(db.Model):
     dispatched_date = db.Column(db.Date)
     notes = db.Column(db.Text)
     items = db.relationship('OrderItem', backref='order', lazy=True, cascade='all, delete-orphan')
-    work_orders = db.relationship('WorkOrder', backref='order', lazy=True)
+    work_orders = db.relationship('WorkOrder', backref='order', lazy=True, cascade='all, delete-orphan')
 
     @property
     def total(self):
@@ -117,8 +118,40 @@ class OrderItem(db.Model):
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
     qty = db.Column(db.Float, nullable=False)
+    qty_dispatched = db.Column(db.Float, default=0)
     unit_price = db.Column(db.Float, nullable=False)
     notes = db.Column(db.String(200))
+
+    @property
+    def qty_outstanding(self):
+        return max(self.qty - (self.qty_dispatched or 0), 0)
+
+
+class DeliveryNote(db.Model):
+    __tablename__ = 'delivery_notes'
+    id = db.Column(db.Integer, primary_key=True)
+    dn_ref = db.Column(db.String(20), unique=True, nullable=False)
+    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
+    dispatch_date = db.Column(db.Date, nullable=False)
+    notes = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    order = db.relationship('Order', backref=db.backref('delivery_notes', lazy=True))
+    items = db.relationship('DeliveryNoteItem', backref='delivery_note', lazy=True, cascade='all, delete-orphan')
+
+    @staticmethod
+    def next_ref():
+        last = DeliveryNote.query.order_by(DeliveryNote.id.desc()).first()
+        n = (last.id + 1) if last else 1
+        return f'DN-{n:05d}'
+
+
+class DeliveryNoteItem(db.Model):
+    __tablename__ = 'delivery_note_items'
+    id = db.Column(db.Integer, primary_key=True)
+    dn_id = db.Column(db.Integer, db.ForeignKey('delivery_notes.id'), nullable=False)
+    order_item_id = db.Column(db.Integer, db.ForeignKey('order_items.id'), nullable=False)
+    qty_dispatched = db.Column(db.Float, nullable=False)
+    order_item = db.relationship('OrderItem')
 
 
 class WorkOrder(db.Model):

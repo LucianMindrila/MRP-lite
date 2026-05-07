@@ -25,14 +25,15 @@
           {{ 'Save Changes' if category else 'Add Category' }}
         </button>
         <a href="{{ url_for('inventory.categories_list') }}" class="btn btn-outline-secondary">Cancel</a>
-        {% if category %}
-        <form method="POST" action="{{ url_for('inventory.category_delete', cid=category.id) }}" class="ms-auto"
-              onsubmit="return confirm('Delete this category?')">
-          <button type="submit" class="btn btn-outline-danger">Delete</button>
-        </form>
-        {% endif %}
       </div>
     </form>
+
+    {% if category %}
+    <form method="POST" action="{{ url_for('inventory.category_delete', cid=category.id) }}" class="mt-3"
+          onsubmit="return confirm('Delete this category?')">
+      <button type="submit" class="btn btn-outline-danger btn-sm">Delete Category</button>
+    </form>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
