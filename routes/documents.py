@@ -1,9 +1,32 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
+from flask import Blueprint, render_template, request, redirect, url_for, flash, abort, send_file
 from flask_login import login_required, current_user
 from models import db, Order, WorkOrder, DeliveryNote, DeliveryNoteItem, BOMItem, StockMovement
 from datetime import datetime
+from pathlib import Path
+import os
+
+ONEDRIVE_POS = Path(r'C:\Users\conta\OneDrive - DT Solutions LTD\POs')
 
 documents_bp = Blueprint('documents', __name__, url_prefix='/documents')
+
+
+@documents_bp.route('/order-file')
+@login_required
+def serve_order_file():
+    """Serve a PO or email body file stored in OneDrive."""
+    path = request.args.get('path', '').strip()
+    if not path:
+        abort(400)
+    try:
+        real = Path(os.path.realpath(path))
+        base = Path(os.path.realpath(ONEDRIVE_POS))
+        if base not in real.parents and real != base:
+            abort(403)
+    except Exception:
+        abort(400)
+    if not real.exists():
+        abort(404)
+    return send_file(real, as_attachment=False)
 
 
 @documents_bp.route('/work-orders')

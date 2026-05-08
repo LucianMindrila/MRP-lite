@@ -29,7 +29,12 @@
           <td><span class="badge badge-{{ o.status }}">{{ o.status.replace('_', ' ').title() }}</span></td>
           <td>{{ o.required_date.strftime('%d/%m/%Y') if o.required_date else '—' }}</td>
           <td>{{ o.items|length }}</td>
-          <td>£{{ '%.2f'|format(o.total) }}</td>
+          <td>
+            £{{ '%.2f'|format(o.total) }}
+            {% set pm = namespace(flag=false) %}
+            {% for item in o.items %}{% if item.unit_price != item.product.sale_price %}{% set pm.flag = true %}{% endif %}{% endfor %}
+            {% if pm.flag %}<i class="bi bi-exclamation-triangle-fill text-warning ms-1" title="Price mismatch on one or more lines"></i>{% endif %}
+          </td>
           <td class="text-muted small">{{ o.created_at.strftime('%d/%m/%Y') }}</td>
           <td><a href="{{ url_for('orders.view_order', order_id=o.id) }}" class="btn btn-sm btn-outline-primary">View</a></td>
         </tr>

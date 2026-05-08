@@ -47,7 +47,13 @@
           <td>{{ p.unit }}</td>
           <td>£{{ '%.2f'|format(p.sale_price) }}</td>
           <td>{{ p.lead_time_days }} day{{ 's' if p.lead_time_days != 1 }}</td>
-          <td>{{ p.bom_items|length }}</td>
+          <td>
+            {% if p.bom_items|length > 0 %}
+            <span class="badge bg-success"><i class="bi bi-check-lg me-1"></i>{{ p.bom_items|length }} item{{ 's' if p.bom_items|length != 1 }}</span>
+            {% else %}
+            <span class="badge bg-danger"><i class="bi bi-exclamation-triangle me-1"></i>No BOM</span>
+            {% endif %}
+          </td>
           <td><a href="{{ url_for('inventory.product_edit', pid=p.id) }}" class="btn btn-sm btn-outline-secondary">Edit / BOM</a></td>
         </tr>
         {% else %}

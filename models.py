@@ -104,6 +104,8 @@ class Order(db.Model):
     required_date = db.Column(db.Date)
     dispatched_date = db.Column(db.Date)
     notes = db.Column(db.Text)
+    po_file_path = db.Column(db.String(500))
+    email_file_path = db.Column(db.String(500))
     items = db.relationship('OrderItem', backref='order', lazy=True, cascade='all, delete-orphan')
     work_orders = db.relationship('WorkOrder', backref='order', lazy=True, cascade='all, delete-orphan')
 

@@ -35,6 +35,24 @@
           <tr><th>Created</th><td>{{ order.created_at.strftime('%d/%m/%Y') }}</td></tr>
           <tr><th>Notes</th><td>{{ order.notes or '—' }}</td></tr>
         </table>
+        {% if order.po_file_path or order.email_file_path %}
+        <hr class="my-2"/>
+        <div class="d-flex flex-wrap gap-2">
+          {% if order.po_file_path %}
+          <a href="{{ url_for('documents.serve_order_file', path=order.po_file_path) }}"
+             class="btn btn-sm btn-outline-primary" target="_blank">
+            <i class="bi bi-file-earmark-pdf me-1"></i>Purchase Order
+          </a>
+          {% endif %}
+          {% if order.email_file_path %}
+          <a href="{{ url_for('documents.serve_order_file', path=order.email_file_path) }}"
+             class="btn btn-sm btn-outline-secondary" target="_blank">
+            <i class="bi bi-envelope me-1"></i>Email
+          </a>
+          {% endif %}
+        </div>
+        {% endif %}
+
         {% if order.status not in ['dispatched', 'invoiced'] %}
         <form method="POST" action="{{ url_for('orders.update_status', order_id=order.id) }}" class="mt-3 no-print">
           <div class="input-group">
@@ -50,32 +68,60 @@
       </div>
     </div>
   </div>
+  {% set ns = namespace(has_mismatch=false) %}
+  {% for item in order.items %}{% if item.unit_price != item.product.sale_price %}{% set ns.has_mismatch = true %}{% endif %}{% endfor %}
+
   <div class="col-md-7">
+    <form method="POST" action="{{ url_for('orders.update_prices', order_id=order.id) }}">
     <div class="card">
-      <div class="card-header fw-semibold">Order Lines</div>
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span class="fw-semibold">Order Lines</span>
+        {% if ns.has_mismatch %}<span class="badge bg-warning text-dark"><i class="bi bi-exclamation-triangle-fill me-1"></i>Price mismatch — review below</span>{% endif %}
+      </div>
       <div class="card-body p-0">
         <table class="table table-sm mb-0">
-          <thead class="table-light"><tr><th>Product</th><th>Ordered</th><th>Dispatched</th><th>Outstanding</th><th>Unit Price</th><th>Line Total</th></tr></thead>
+          <thead class="table-light">
+            <tr><th>Product</th><th>Ordered</th><th>Dispatched</th><th>Outstanding</th><th>Unit Price</th><th>List Price</th><th>Line Total</th></tr>
+          </thead>
           <tbody>
             {% for item in order.items %}
-            <tr class="{% if item.qty_outstanding == 0 %}table-success{% elif item.qty_dispatched > 0 %}table-warning{% endif %}">
+            {% set price_ok = item.unit_price == item.product.sale_price %}
+            <tr class="{% if item.qty_outstanding == 0 %}table-success{% elif item.qty_dispatched > 0 %}table-warning{% endif %}"
+                data-qty="{{ item.qty }}">
               <td>{{ item.product.code }}<br><small class="text-muted">{{ item.product.name }}</small></td>
               <td>{{ item.qty }}</td>
               <td>{{ item.qty_dispatched or 0 }}</td>
               <td>{{ item.qty_outstanding }}</td>
-              <td>£{{ '%.2f'|format(item.unit_price) }}</td>
-              <td>£{{ '%.2f'|format(item.qty * item.unit_price) }}</td>
+              <td>
+                <div class="input-group input-group-sm" style="min-width:115px">
+                  <span class="input-group-text py-0">£</span>
+                  <input type="number" name="price_{{ item.id }}"
+                         class="form-control form-control-sm{% if not price_ok %} border-warning bg-warning bg-opacity-10{% endif %}"
+                         value="{{ '%.2f'|format(item.unit_price) }}" step="0.01" min="0"
+                         data-list-price="{{ '%.2f'|format(item.product.sale_price) }}"/>
+                </div>
+                {% if not price_ok %}<small class="text-warning"><i class="bi bi-exclamation-triangle-fill"></i></small>{% endif %}
+              </td>
+              <td class="{% if not price_ok %}fw-semibold text-warning{% endif %}">
+                £{{ '%.2f'|format(item.product.sale_price) }}
+              </td>
+              <td class="line-total fw-semibold">£{{ '%.2f'|format(item.qty * item.unit_price) }}</td>
             </tr>
             {% endfor %}
             <tr class="table-light fw-bold">
-              <td colspan="4" class="text-end">Total</td>
+              <td colspan="5" class="text-end">Total</td>
               <td></td>
-              <td>£{{ '%.2f'|format(order.total) }}</td>
+              <td id="orderTotal">£{{ '%.2f'|format(order.total) }}</td>
             </tr>
           </tbody>
         </table>
       </div>
+      <div class="card-footer d-flex gap-2 no-print">
+        <button type="submit" class="btn btn-sm btn-primary">Save Prices</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="syncPrices">Sync to List Prices</button>
+      </div>
     </div>
+    </form>
 
     <!-- Dispatch form -->
     {% if order.status not in ['dispatched', 'invoiced'] %}
@@ -169,4 +215,38 @@
     {% endif %}
   </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const priceInputs = document.querySelectorAll('input[data-list-price]');
+
+priceInputs.forEach(function(input) {
+  input.addEventListener('input', updateTotals);
+});
+
+document.getElementById('syncPrices').addEventListener('click', function() {
+  priceInputs.forEach(function(input) {
+    input.value = input.dataset.listPrice;
+    input.classList.remove('border-warning', 'bg-warning', 'bg-opacity-10');
+  });
+  updateTotals();
+});
+
+function updateTotals() {
+  var grandTotal = 0;
+  document.querySelectorAll('tbody tr[data-qty]').forEach(function(row) {
+    var qty = parseFloat(row.dataset.qty) || 0;
+    var priceInput = row.querySelector('input[name^="price_"]');
+    if (!priceInput) return;
+    var price = parseFloat(priceInput.value) || 0;
+    var lineTotal = qty * price;
+    grandTotal += lineTotal;
+    var cell = row.querySelector('.line-total');
+    if (cell) cell.textContent = '£' + lineTotal.toFixed(2);
+  });
+  var totalCell = document.getElementById('orderTotal');
+  if (totalCell) totalCell.textContent = '£' + grandTotal.toFixed(2);
+}
+</script>
 {% endblock %}

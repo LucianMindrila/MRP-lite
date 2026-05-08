@@ -149,6 +149,22 @@ def dispatch_order(order_id):
     return redirect(url_for('documents.print_delivery_note_dn', dn_id=dn.id))
 
 
+@orders_bp.route('/<int:order_id>/update-prices', methods=['POST'])
+@login_required
+def update_prices(order_id):
+    order = Order.query.get_or_404(order_id)
+    for item in order.items:
+        price_str = request.form.get(f'price_{item.id}')
+        if price_str is not None:
+            try:
+                item.unit_price = float(price_str)
+            except ValueError:
+                pass
+    db.session.commit()
+    flash('Order prices updated.', 'success')
+    return redirect(url_for('orders.view_order', order_id=order.id))
+
+
 @orders_bp.route('/<int:order_id>/status', methods=['POST'])
 @login_required
 def update_status(order_id):
