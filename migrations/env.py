@@ -90,9 +90,18 @@ def run_migrations_online():
                 directives[:] = []
                 logger.info('No changes in schema detected.')
 
+    def include_object(obj, name, type_, reflected, compare_to):
+        # SQLite doesn't store unnamed constraint metadata reliably;
+        # skip unnamed unique constraints to avoid false-positive diffs.
+        if type_ == 'unique_constraint' and name is None:
+            return False
+        return True
+
     conf_args = current_app.extensions['migrate'].configure_args
     if conf_args.get("process_revision_directives") is None:
         conf_args["process_revision_directives"] = process_revision_directives
+    conf_args.setdefault("include_object", include_object)
+    conf_args.setdefault("compare_server_default", False)
 
     connectable = get_engine()
 
