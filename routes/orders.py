@@ -61,7 +61,15 @@ def create_order():
 @login_required
 def view_order(order_id):
     order = Order.query.get_or_404(order_id)
-    return render_template('orders/view_order.html', order=order, today=date.today().isoformat())
+    # Collect all DNs that include items from this order (including multi-order DNs)
+    dn_ids = db.session.query(DeliveryNoteItem.dn_id).join(
+        OrderItem, DeliveryNoteItem.order_item_id == OrderItem.id
+    ).filter(OrderItem.order_id == order.id).distinct()
+    all_dns = DeliveryNote.query.filter(
+        DeliveryNote.id.in_(dn_ids)
+    ).order_by(DeliveryNote.dispatch_date).all()
+    return render_template('orders/view_order.html', order=order,
+                           today=date.today().isoformat(), all_dns=all_dns)
 
 
 @orders_bp.route('/<int:order_id>/confirm', methods=['POST'])
@@ -111,6 +119,7 @@ def dispatch_order(order_id):
     dn = DeliveryNote(
         dn_ref=DeliveryNote.next_ref(),
         order_id=order.id,
+        customer_id=order.customer_id,
         dispatch_date=dispatch_date,
         notes=dn_notes,
     )
@@ -163,6 +172,98 @@ def update_prices(order_id):
     db.session.commit()
     flash('Order prices updated.', 'success')
     return redirect(url_for('orders.view_order', order_id=order.id))
+
+
+@orders_bp.route('/multi-dispatch', methods=['GET', 'POST'])
+@login_required
+def multi_dispatch():
+    customers = Customer.query.order_by(Customer.name).all()
+    selected_customer = None
+    outstanding_items = []
+
+    cust_id = request.args.get('customer_id') or request.form.get('customer_id')
+
+    if request.method == 'POST' and 'select_customer' not in request.form:
+        # Create the DN
+        customer = Customer.query.get_or_404(int(cust_id))
+        dispatch_date_str = request.form.get('dispatch_date') or date.today().isoformat()
+        dispatch_date = datetime.strptime(dispatch_date_str, '%Y-%m-%d').date()
+        dn_notes = request.form.get('dn_notes', '')
+
+        lines = []
+        for key, val in request.form.items():
+            if key.startswith('qty_'):
+                item_id = int(key[4:])
+                try:
+                    qty = float(val)
+                except ValueError:
+                    qty = 0
+                if qty > 0:
+                    item = OrderItem.query.get(item_id)
+                    if item and item.order.customer_id == customer.id:
+                        lines.append((item, min(qty, item.qty_outstanding)))
+
+        if not lines:
+            flash('No quantities entered — nothing dispatched.', 'warning')
+            return redirect(url_for('orders.multi_dispatch', customer_id=cust_id))
+
+        dn = DeliveryNote(
+            dn_ref=DeliveryNote.next_ref(),
+            order_id=None,
+            customer_id=customer.id,
+            dispatch_date=dispatch_date,
+            notes=dn_notes,
+        )
+        db.session.add(dn)
+        db.session.flush()
+
+        affected_orders = set()
+        for item, qty in lines:
+            db.session.add(DeliveryNoteItem(
+                dn_id=dn.id,
+                order_item_id=item.id,
+                qty_dispatched=qty,
+            ))
+            item.qty_dispatched = (item.qty_dispatched or 0) + qty
+            affected_orders.add(item.order)
+
+            for bom in BOMItem.query.filter_by(product_id=item.product_id).all():
+                deduct = bom.qty_per_unit * qty
+                bom.material.stock_qty = (bom.material.stock_qty or 0) - deduct
+                db.session.add(StockMovement(
+                    material_id=bom.material_id,
+                    movement_type='goods_out',
+                    qty=-deduct,
+                    reference=dn.dn_ref,
+                    created_by=current_user.id,
+                ))
+
+        for order in affected_orders:
+            if all(i.qty_outstanding == 0 for i in order.items):
+                order.status = 'dispatched'
+                order.dispatched_date = dispatch_date
+            elif order.status == 'confirmed':
+                order.status = 'in_production'
+
+        db.session.commit()
+        flash(f'Delivery note {dn.dn_ref} created covering {len(affected_orders)} order(s).', 'success')
+        return redirect(url_for('documents.print_delivery_note_dn', dn_id=dn.id))
+
+    if cust_id:
+        selected_customer = Customer.query.get(int(cust_id))
+        if selected_customer:
+            for order in Order.query.filter_by(customer_id=selected_customer.id).filter(
+                Order.status.notin_(['dispatched', 'invoiced', 'draft'])
+            ).order_by(Order.required_date).all():
+                for item in order.items:
+                    if item.qty_outstanding > 0:
+                        outstanding_items.append(item)
+
+    return render_template('orders/multi_dispatch.html',
+                           customers=customers,
+                           selected_customer=selected_customer,
+                           outstanding_items=outstanding_items,
+                           today=date.today().isoformat())
 
 
 @orders_bp.route('/<int:order_id>/status', methods=['POST'])

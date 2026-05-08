@@ -20,7 +20,11 @@
     <a href="{{ url_for('documents.edit_delivery_note', dn_id=dn.id) }}" class="btn btn-sm btn-outline-primary">
       <i class="bi bi-pencil me-1"></i>Amend
     </a>
+    {% if dn.order %}
     <a href="{{ url_for('orders.view_order', order_id=dn.order.id) }}" class="btn btn-sm btn-outline-secondary">Back to Order</a>
+    {% else %}
+    <a href="{{ url_for('orders.orders_list') }}" class="btn btn-sm btn-outline-secondary">Back to Orders</a>
+    {% endif %}
   </div>
 
   <!-- Header -->
@@ -30,7 +34,11 @@
       <table class="table table-sm table-borderless mb-0" style="width:auto;">
         <tr><th class="ps-0 text-muted">DN Number</th><td class="fw-bold">{{ dn.dn_ref }}</td></tr>
         <tr><th class="ps-0 text-muted">Date</th><td>{{ dn.dispatch_date.strftime('%d/%m/%Y') }}</td></tr>
+        {% if dn.order %}
         <tr><th class="ps-0 text-muted">Customer PO</th><td>{{ dn.order.order_ref }}</td></tr>
+        {% else %}
+        <tr><th class="ps-0 text-muted">Customer</th><td>{{ dn.customer.name }}</td></tr>
+        {% endif %}
       </table>
     </div>
     <div class="text-end">
@@ -48,9 +56,9 @@
     <div class="col-md-5">
       <div class="border rounded p-2">
         <div class="text-muted small fw-semibold mb-1">DELIVER TO</div>
-        <strong>{{ dn.order.customer.name }}</strong><br>
-        {% if dn.order.customer.address %}
-        <span class="text-muted small" style="white-space:pre-line;">{{ dn.order.customer.address }}</span>
+        <strong>{{ dn.customer.name }}</strong><br>
+        {% if dn.customer.address %}
+        <span class="text-muted small" style="white-space:pre-line;">{{ dn.customer.address }}</span>
         {% endif %}
       </div>
     </div>
@@ -63,7 +71,7 @@
         <th style="width:80px">Qty</th>
         <th style="width:140px">Code</th>
         <th>Product Description</th>
-        <th style="width:120px">Customer PO</th>
+        <th style="width:120px">Order Ref</th>
         <th style="width:140px">Notes</th>
       </tr>
     </thead>
@@ -73,7 +81,7 @@
         <td class="fw-bold">{{ dni.qty_dispatched | int if dni.qty_dispatched == dni.qty_dispatched | int else dni.qty_dispatched }}</td>
         <td>{{ dni.order_item.product.code }}</td>
         <td>{{ dni.order_item.product.name }}</td>
-        <td>{{ dn.order.order_ref }}</td>
+        <td>{{ dni.order_item.order.order_ref }}</td>
         <td>{{ dn.notes or '' }}</td>
       </tr>
       {% endfor %}

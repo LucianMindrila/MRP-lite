@@ -133,11 +133,13 @@ class DeliveryNote(db.Model):
     __tablename__ = 'delivery_notes'
     id = db.Column(db.Integer, primary_key=True)
     dn_ref = db.Column(db.String(20), unique=True, nullable=False)
-    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
+    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=True)
+    customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'), nullable=False)
     dispatch_date = db.Column(db.Date, nullable=False)
     notes = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    order = db.relationship('Order', backref=db.backref('delivery_notes', lazy=True))
+    order = db.relationship('Order', backref=db.backref('delivery_notes', lazy=True), foreign_keys=[order_id])
+    customer = db.relationship('Customer', backref='delivery_notes', lazy=True)
     items = db.relationship('DeliveryNoteItem', backref='delivery_note', lazy=True, cascade='all, delete-orphan')
 
     @staticmethod

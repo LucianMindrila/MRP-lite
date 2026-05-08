@@ -38,8 +38,11 @@
     </a>
 
     <div class="nav-section">Sales</div>
-    <a href="{{ url_for('orders.orders_list') }}" class="nav-link {% if 'orders.' in request.endpoint %}active{% endif %}">
+    <a href="{{ url_for('orders.orders_list') }}" class="nav-link {% if request.endpoint in ['orders.orders_list','orders.view_order','orders.create_order'] %}active{% endif %}">
       <i class="bi bi-cart3"></i> Orders
+    </a>
+    <a href="{{ url_for('orders.multi_dispatch') }}" class="nav-link {% if request.endpoint == 'orders.multi_dispatch' %}active{% endif %}">
+      <i class="bi bi-box-arrow-up"></i> Multi Dispatch
     </a>
 
     <div class="nav-section">Production</div>

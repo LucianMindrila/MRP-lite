@@ -169,14 +169,14 @@
     {% endif %}
 
     <!-- Previous delivery notes -->
-    {% if order.delivery_notes %}
+    {% if all_dns %}
     <div class="card mt-3 no-print">
       <div class="card-header fw-semibold">Delivery Notes</div>
       <div class="card-body p-0">
         <table class="table table-sm mb-0">
           <thead class="table-light"><tr><th>DN Ref</th><th>Date</th><th>Lines</th><th></th></tr></thead>
           <tbody>
-            {% for dn in order.delivery_notes|sort(attribute='dispatch_date') %}
+            {% for dn in all_dns %}
             <tr>
               <td><strong>{{ dn.dn_ref }}</strong></td>
               <td>{{ dn.dispatch_date.strftime('%d/%m/%Y') }}</td>

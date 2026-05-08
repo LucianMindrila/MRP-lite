@@ -12,7 +12,10 @@
     </a>
     {% endfor %}
   </div>
-  <a href="{{ url_for('orders.create_order') }}" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>New Order</a>
+  <div class="d-flex gap-2">
+    <a href="{{ url_for('orders.multi_dispatch') }}" class="btn btn-outline-success"><i class="bi bi-box-arrow-up me-1"></i>Multi-Order Dispatch</a>
+    <a href="{{ url_for('orders.create_order') }}" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>New Order</a>
+  </div>
 </div>
 
 <div class="card">
