@@ -63,28 +63,6 @@
 
 {% block scripts %}
 <script>
-const rowTemplate = document.querySelector('.line-row').outerHTML;
-
-document.getElementById('addLine').addEventListener('click', () => {
-  document.getElementById('linesBody').insertAdjacentHTML('beforeend', rowTemplate);
-  attachHandlers();
-});
-
-function attachHandlers() {
-  document.querySelectorAll('.material-select').forEach(sel => {
-    sel.onchange = function() {
-      const opt = this.options[this.selectedIndex];
-      const price = opt.dataset.price || '';
-      this.closest('tr').querySelector('.price-field').value = price;
-    };
-  });
-  document.querySelectorAll('.remove-line').forEach(btn => {
-    btn.onclick = function() {
-      const rows = document.querySelectorAll('.line-row');
-      if (rows.length > 1) this.closest('tr').remove();
-    };
-  });
-}
-attachHandlers();
+initDynamicLines({ addBtnId: 'addLine', linesBodyId: 'linesBody', selectClass: 'material-select', priceFieldClass: 'price-field' });
 </script>
 {% endblock %}

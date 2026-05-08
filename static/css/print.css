@@ -1,0 +1,13 @@
+/* Shared styles for standalone print/document pages */
+body { font-size: 13px; }
+
+.header-bar {
+  background: #1a1f2e; color: #fff;
+  padding: 12px 20px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { font-size: 12px; }
+}

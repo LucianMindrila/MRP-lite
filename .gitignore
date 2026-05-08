@@ -36,3 +36,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Scratch / command output files
+*.txt
