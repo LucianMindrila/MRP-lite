@@ -266,6 +266,60 @@ def multi_dispatch():
                            today=date.today().isoformat())
 
 
+@orders_bp.route('/history')
+@login_required
+def order_history():
+    today = date.today()
+    default_from = date(today.year, 1, 1)
+
+    from_str = request.args.get('from')
+    to_str = request.args.get('to')
+    customer_id = request.args.get('customer_id', type=int)
+    product_id = request.args.get('product_id', type=int)
+
+    try:
+        from_date = datetime.strptime(from_str, '%Y-%m-%d').date() if from_str else default_from
+    except (ValueError, TypeError):
+        from_date = default_from
+    try:
+        to_date = datetime.strptime(to_str, '%Y-%m-%d').date() if to_str else today
+    except (ValueError, TypeError):
+        to_date = today
+
+    q = Order.query.filter(
+        Order.status.in_(['dispatched', 'invoiced']),
+        Order.dispatched_date >= from_date,
+        Order.dispatched_date <= to_date,
+    )
+    if customer_id:
+        q = q.filter(Order.customer_id == customer_id)
+    if product_id:
+        order_ids = db.session.query(OrderItem.order_id).filter(
+            OrderItem.product_id == product_id
+        ).subquery()
+        q = q.filter(Order.id.in_(order_ids))
+
+    orders = q.order_by(Order.dispatched_date.desc()).all()
+    customers = Customer.query.order_by(Customer.name).all()
+    products = Product.query.order_by(Product.code).all()
+
+    total_revenue = sum(
+        sum((i.qty_dispatched or 0) * i.unit_price for i in o.items)
+        for o in orders
+    )
+
+    return render_template('orders/order_history.html',
+        orders=orders,
+        customers=customers,
+        products=products,
+        customer_id=customer_id,
+        product_id=product_id,
+        from_date=from_date.isoformat(),
+        to_date=to_date.isoformat(),
+        total_revenue=total_revenue,
+    )
+
+
 @orders_bp.route('/<int:order_id>/status', methods=['POST'])
 @login_required
 def update_status(order_id):

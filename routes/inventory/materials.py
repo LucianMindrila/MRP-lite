@@ -54,6 +54,7 @@ def material_add():
             supplier_id=request.form.get('supplier_id') or None,
             category_id=request.form.get('category_id') or None,
             location=request.form.get('location', '').strip(),
+            notes=request.form.get('notes', '').strip(),
         )
         db.session.add(m)
         db.session.commit()
@@ -79,6 +80,7 @@ def material_edit(mid):
         m.supplier_id = request.form.get('supplier_id') or None
         m.category_id = request.form.get('category_id') or None
         m.location = request.form.get('location', '').strip()
+        m.notes = request.form.get('notes', '').strip()
         db.session.commit()
         flash(f'Material {m.code} updated.', 'success')
         return redirect(url_for('inventory.materials_list'))

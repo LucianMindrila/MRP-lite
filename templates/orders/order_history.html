@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block title %}Order History{% endblock %}
+{% block page_title %}Sales — Order History{% endblock %}
+
+{% block content %}
+
+<!-- Filter bar -->
+<form method="GET" class="card mb-3">
+  <div class="card-body py-2">
+    <div class="row g-2 align-items-end">
+      <div class="col-auto">
+        <label class="form-label small fw-semibold mb-1">From</label>
+        <input type="date" name="from" class="form-control form-control-sm" value="{{ from_date }}"/>
+      </div>
+      <div class="col-auto">
+        <label class="form-label small fw-semibold mb-1">To</label>
+        <input type="date" name="to" class="form-control form-control-sm" value="{{ to_date }}"/>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label small fw-semibold mb-1">Customer</label>
+        <select name="customer_id" class="form-select form-select-sm">
+          <option value="">All Customers</option>
+          {% for c in customers %}
+          <option value="{{ c.id }}" {% if customer_id == c.id %}selected{% endif %}>{{ c.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label small fw-semibold mb-1">Product</label>
+        <select name="product_id" class="form-select form-select-sm">
+          <option value="">All Products</option>
+          {% for p in products %}
+          <option value="{{ p.id }}" {% if product_id == p.id %}selected{% endif %}>{{ p.code }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary btn-sm">Apply</button>
+        <a href="{{ url_for('orders.order_history') }}" class="btn btn-outline-secondary btn-sm ms-1">Reset</a>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- Summary -->
+<div class="d-flex gap-3 mb-3 align-items-center">
+  <span class="text-muted">{{ orders|length }} order{{ 's' if orders|length != 1 }}</span>
+  <span class="fw-semibold">Total revenue: £{{ '%.2f'|format(total_revenue) }}</span>
+  <span class="text-muted small">{{ from_date }} — {{ to_date }}</span>
+</div>
+
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table table-hover table-sm mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>Order Ref</th>
+          <th>Customer</th>
+          <th>Dispatched</th>
+          <th>Lines</th>
+          <th class="text-end">Total</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for o in orders %}
+        <tr>
+          <td><strong>{{ o.order_ref }}</strong></td>
+          <td>{{ o.customer.name }}</td>
+          <td>{{ o.dispatched_date.strftime('%d/%m/%Y') if o.dispatched_date else '—' }}</td>
+          <td class="text-muted small">
+            {% for item in o.items %}
+              {{ item.product.code }}{% if item.qty_dispatched and item.qty_dispatched > 0 %} ×{{ item.qty_dispatched | int }}{% endif %}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+          </td>
+          <td class="text-end fw-semibold">
+            {% set ns = namespace(rev=0) %}
+            {% for item in o.items %}{% set ns.rev = ns.rev + (item.qty_dispatched or 0) * item.unit_price %}{% endfor %}
+            £{{ '%.2f'|format(ns.rev) }}
+          </td>
+          <td>
+            {% if o.status == 'invoiced' %}
+              <span class="badge bg-success">Invoiced</span>
+            {% else %}
+              <span class="badge bg-secondary">Dispatched</span>
+            {% endif %}
+          </td>
+          <td>
+            <a href="{{ url_for('orders.view_order', order_id=o.id) }}" class="btn btn-sm btn-outline-secondary">View</a>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7" class="text-muted text-center py-4">No completed orders in this period.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

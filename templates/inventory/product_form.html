@@ -90,6 +90,18 @@
     <div class="card">
       <div class="card-header fw-semibold">Bill of Materials</div>
       <div class="card-body p-0">
+        {% for bom in bom_items %}
+        <form id="bom-save-{{ bom.id }}" method="POST">
+          <input type="hidden" name="action" value="update_bom"/>
+          <input type="hidden" name="bom_id" value="{{ bom.id }}"/>
+        </form>
+        <form id="bom-del-{{ bom.id }}" method="POST"
+              onsubmit="return confirm('Remove this BOM line?')">
+          <input type="hidden" name="action" value="delete_bom"/>
+          <input type="hidden" name="bom_id" value="{{ bom.id }}"/>
+        </form>
+        {% endfor %}
+
         <table class="table table-sm mb-0">
           <thead class="table-light">
             <tr><th>Material</th><th>Qty per Unit</th><th>Unit</th><th>Cost</th><th></th></tr>
@@ -98,16 +110,20 @@
             {% for bom in bom_items %}
             <tr>
               <td>{{ bom.material.code }}<br><small class="text-muted">{{ bom.material.name }}</small></td>
-              <td>{{ bom.qty_per_unit }}</td>
+              <td style="width:110px">
+                <input type="number" name="bom_qty" form="bom-save-{{ bom.id }}"
+                       class="form-control form-control-sm"
+                       value="{{ bom.qty_per_unit }}" min="0.001" step="0.001"/>
+              </td>
               <td>{{ bom.material.unit }}</td>
               <td class="text-muted small">£{{ '%.2f'|format(bom.qty_per_unit * bom.material.cost_price) }}</td>
               <td>
-                <form method="POST">
-                  <input type="hidden" name="action" value="delete_bom"/>
-                  <input type="hidden" name="bom_id" value="{{ bom.id }}"/>
-                  <button type="submit" class="btn btn-sm btn-outline-danger"
-                          onclick="return confirm('Remove this BOM line?')">✕</button>
-                </form>
+                <div class="d-flex gap-1">
+                  <button form="bom-save-{{ bom.id }}" type="submit"
+                          class="btn btn-sm btn-outline-primary" title="Save">✓</button>
+                  <button form="bom-del-{{ bom.id }}" type="submit"
+                          class="btn btn-sm btn-outline-danger" title="Remove">✕</button>
+                </div>
               </td>
             </tr>
             {% else %}

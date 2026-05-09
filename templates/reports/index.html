@@ -3,6 +3,31 @@
 {% block page_title %}Reports{% endblock %}
 
 {% block content %}
+
+<!-- Tab nav -->
+<ul class="nav nav-tabs mb-3">
+  <li class="nav-item">
+    <a class="nav-link {% if tab == 'overview' %}active{% endif %}"
+       href="{{ url_for('reports.index', tab='overview') }}">
+      <i class="bi bi-speedometer2 me-1"></i>Overview
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if tab == 'by_customer' %}active{% endif %}"
+       href="{{ url_for('reports.index', tab='by_customer', **({'from': from_date, 'to': to_date})) }}">
+      <i class="bi bi-people me-1"></i>Sales by Customer
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {% if tab == 'by_product' %}active{% endif %}"
+       href="{{ url_for('reports.index', tab='by_product', **({'from': from_date, 'to': to_date})) }}">
+      <i class="bi bi-box me-1"></i>Sales by Product
+    </a>
+  </li>
+</ul>
+
+<!-- ── OVERVIEW ── -->
+{% if tab == 'overview' %}
 <div class="row g-3 mb-4">
   <div class="col-md-3">
     <div class="stat-card" style="border-color:#0d6efd;">
@@ -54,4 +79,180 @@
     </table>
   </div>
 </div>
+{% endif %}
+
+<!-- ── SALES BY CUSTOMER ── -->
+{% if tab == 'by_customer' %}
+<form method="GET" class="card mb-3">
+  <input type="hidden" name="tab" value="by_customer"/>
+  <div class="card-body py-2">
+    <div class="row g-2 align-items-end">
+      <div class="col-auto">
+        <label class="form-label small fw-semibold mb-1">From</label>
+        <input type="date" name="from" class="form-control form-control-sm" value="{{ from_date }}"/>
+      </div>
+      <div class="col-auto">
+        <label class="form-label small fw-semibold mb-1">To</label>
+        <input type="date" name="to" class="form-control form-control-sm" value="{{ to_date }}"/>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label small fw-semibold mb-1">Filter by Product</label>
+        <select name="product_id" class="form-select form-select-sm">
+          <option value="">All Products</option>
+          {% for p in products %}
+          <option value="{{ p.id }}" {% if product_id == p.id %}selected{% endif %}>{{ p.code }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary btn-sm">Apply</button>
+        <a href="{{ url_for('reports.index', tab='by_customer') }}" class="btn btn-outline-secondary btn-sm ms-1">Reset</a>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center fw-semibold">
+    <span>Sales by Customer
+      {% if product_id %}<span class="badge bg-secondary ms-2">{{ products | selectattr('id', 'eq', product_id) | map(attribute='code') | first }}</span>{% endif %}
+    </span>
+    <span class="text-muted fw-normal small">{{ from_date }} — {{ to_date }}</span>
+  </div>
+  <div class="card-body p-0">
+    <table class="table table-hover table-sm mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>Customer</th>
+          <th class="text-center">Orders</th>
+          <th class="text-end">Units Dispatched</th>
+          <th class="text-end">Revenue</th>
+          <th class="text-end">% of Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in by_customer %}
+        <tr>
+          <td class="fw-semibold">{{ row.name }}</td>
+          <td class="text-center">{{ row.order_count }}</td>
+          <td class="text-end">{{ '%.0f'|format(row.qty_total) }}</td>
+          <td class="text-end fw-semibold">£{{ '%.2f'|format(row.revenue) }}</td>
+          <td class="text-end text-muted small">
+            {% if by_customer_total > 0 %}{{ '%.1f'|format(row.revenue / by_customer_total * 100) }}%{% else %}—{% endif %}
+          </td>
+          <td>
+            <a href="{{ url_for('reports.index', tab='by_product', customer_id=row.id, **({'from': from_date, 'to': to_date})) }}"
+               class="btn btn-sm btn-outline-secondary" title="View by product for this customer">
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" class="text-muted text-center py-4">No dispatched orders in this period.</td></tr>
+        {% endfor %}
+      </tbody>
+      {% if by_customer %}
+      <tfoot class="table-light">
+        <tr>
+          <td colspan="3" class="text-end fw-semibold">Total</td>
+          <td class="text-end fw-bold">£{{ '%.2f'|format(by_customer_total) }}</td>
+          <td colspan="2"></td>
+        </tr>
+      </tfoot>
+      {% endif %}
+    </table>
+  </div>
+</div>
+{% endif %}
+
+<!-- ── SALES BY PRODUCT ── -->
+{% if tab == 'by_product' %}
+<form method="GET" class="card mb-3">
+  <input type="hidden" name="tab" value="by_product"/>
+  <div class="card-body py-2">
+    <div class="row g-2 align-items-end">
+      <div class="col-auto">
+        <label class="form-label small fw-semibold mb-1">From</label>
+        <input type="date" name="from" class="form-control form-control-sm" value="{{ from_date }}"/>
+      </div>
+      <div class="col-auto">
+        <label class="form-label small fw-semibold mb-1">To</label>
+        <input type="date" name="to" class="form-control form-control-sm" value="{{ to_date }}"/>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label small fw-semibold mb-1">Filter by Customer</label>
+        <select name="customer_id" class="form-select form-select-sm">
+          <option value="">All Customers</option>
+          {% for c in customers %}
+          <option value="{{ c.id }}" {% if customer_id == c.id %}selected{% endif %}>{{ c.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary btn-sm">Apply</button>
+        <a href="{{ url_for('reports.index', tab='by_product') }}" class="btn btn-outline-secondary btn-sm ms-1">Reset</a>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center fw-semibold">
+    <span>Sales by Product
+      {% if customer_id %}<span class="badge bg-secondary ms-2">{{ customers | selectattr('id', 'eq', customer_id) | map(attribute='name') | first }}</span>{% endif %}
+    </span>
+    <span class="text-muted fw-normal small">{{ from_date }} — {{ to_date }}</span>
+  </div>
+  <div class="card-body p-0">
+    <table class="table table-hover table-sm mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>Code</th>
+          <th>Name</th>
+          <th class="text-end">Qty Dispatched</th>
+          <th class="text-end">Revenue</th>
+          <th class="text-end">Avg Unit Price</th>
+          <th class="text-end">% of Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in by_product %}
+        <tr>
+          <td><strong>{{ row.code }}</strong></td>
+          <td class="text-muted small">{{ row.name }}</td>
+          <td class="text-end">{{ '%.0f'|format(row.qty_total) }}</td>
+          <td class="text-end fw-semibold">£{{ '%.2f'|format(row.revenue) }}</td>
+          <td class="text-end text-muted small">
+            {% if row.qty_total > 0 %}£{{ '%.2f'|format(row.revenue / row.qty_total) }}{% else %}—{% endif %}
+          </td>
+          <td class="text-end text-muted small">
+            {% if by_product_total > 0 %}{{ '%.1f'|format(row.revenue / by_product_total * 100) }}%{% else %}—{% endif %}
+          </td>
+          <td>
+            <a href="{{ url_for('reports.index', tab='by_customer', product_id=row.id, **({'from': from_date, 'to': to_date})) }}"
+               class="btn btn-sm btn-outline-secondary" title="View by customer for this product">
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7" class="text-muted text-center py-4">No dispatched orders in this period.</td></tr>
+        {% endfor %}
+      </tbody>
+      {% if by_product %}
+      <tfoot class="table-light">
+        <tr>
+          <td colspan="3" class="text-end fw-semibold">Total</td>
+          <td class="text-end fw-bold">£{{ '%.2f'|format(by_product_total) }}</td>
+          <td colspan="3"></td>
+        </tr>
+      </tfoot>
+      {% endif %}
+    </table>
+  </div>
+</div>
+{% endif %}
+
 {% endblock %}

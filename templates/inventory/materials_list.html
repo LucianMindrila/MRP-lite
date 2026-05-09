@@ -40,7 +40,7 @@
       </thead>
       <tbody>
         {% for m in materials %}
-        <tr class="{% if m.stock_qty <= m.reorder_point and m.reorder_point > 0 %}table-warning{% endif %}">
+        <tr class="{% if (m.stock_qty or 0) <= (m.reorder_point or 0) and (m.reorder_point or 0) > 0 %}table-warning{% endif %}">
           <td><strong>{{ m.code }}</strong></td>
           <td>{{ m.name }}</td>
           <td><span class="badge bg-secondary">{{ m.category.name if m.category else '—' }}</span></td>

@@ -85,6 +85,16 @@ def product_edit(pid):
                     flash('BOM line added.', 'success')
                 db.session.commit()
 
+        elif action == 'update_bom':
+            bom_id = request.form.get('bom_id')
+            qty = request.form.get('bom_qty')
+            if bom_id and qty:
+                bom = BOMItem.query.get(int(bom_id))
+                if bom and bom.product_id == p.id and float(qty) > 0:
+                    bom.qty_per_unit = float(qty)
+                    db.session.commit()
+                    flash('BOM quantity updated.', 'success')
+
         elif action == 'delete_bom':
             bom_id = request.form.get('bom_id')
             if bom_id:

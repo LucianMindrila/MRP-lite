@@ -25,6 +25,10 @@
           <label class="form-label">Description</label>
           <textarea name="description" class="form-control" rows="2">{{ material.description if material else '' }}</textarea>
         </div>
+        <div class="col-12">
+          <label class="form-label">Notes</label>
+          <textarea name="notes" class="form-control" rows="3" placeholder="e.g. setup costs, special instructions, supplier notes">{{ material.notes if material else '' }}</textarea>
+        </div>
         <div class="col-md-4">
           <label class="form-label">Category</label>
           <select name="category_id" class="form-select">

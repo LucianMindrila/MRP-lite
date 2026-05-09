@@ -27,6 +27,9 @@
     <a href="{{ url_for('orders.multi_dispatch') }}" class="nav-link {% if request.endpoint == 'orders.multi_dispatch' %}active{% endif %}">
       <i class="bi bi-box-arrow-up"></i> Multi Dispatch
     </a>
+    <a href="{{ url_for('orders.order_history') }}" class="nav-link {% if request.endpoint == 'orders.order_history' %}active{% endif %}">
+      <i class="bi bi-clock-history"></i> Order History
+    </a>
 
     <div class="nav-section">Production</div>
     <a href="{{ url_for('documents.work_orders_list') }}" class="nav-link {% if request.endpoint == 'documents.work_orders_list' %}active{% endif %}">
