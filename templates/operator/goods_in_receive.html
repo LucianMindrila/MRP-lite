@@ -101,11 +101,11 @@
 
 {% block scripts %}
 <script>
-const BUILDINGS = {{ buildings | tojson }};
+const LOCATIONS = {{ locations | tojson }};
 
-function buildingOptions(selected) {
-  return BUILDINGS.map(b =>
-    `<option value="${b}" ${b === (selected || 'Unit 4') ? 'selected' : ''}>${b}</option>`
+function locationOptions(selected) {
+  return LOCATIONS.map(l =>
+    `<option value="${l}" ${l === (selected || LOCATIONS[4]) ? 'selected' : ''}>${l}</option>`
   ).join('');
 }
 
@@ -127,7 +127,7 @@ function updateTotal(itemId) {
     : 'small fw-bold mt-2 text-danger';
 }
 
-function addBatchRow(itemId, qty, building, location) {
+function addBatchRow(itemId, qty, location) {
   const container = document.getElementById(`batches-${itemId}`);
   const div = document.createElement('div');
   div.className = 'batch-row d-flex gap-2 mb-2 align-items-start flex-wrap';
@@ -139,16 +139,10 @@ function addBatchRow(itemId, qty, building, location) {
              placeholder="Qty" style="font-size:1.1rem"
              oninput="updateTotal(${itemId})">
     </div>
-    <div style="width:135px; flex-shrink:0">
-      <select name="batch_building_${itemId}[]" class="form-select form-select-lg">
-        ${buildingOptions(building)}
+    <div style="flex:1; min-width:200px">
+      <select name="batch_location_${itemId}[]" class="form-select form-select-lg">
+        ${locationOptions(location)}
       </select>
-    </div>
-    <div style="flex:1; min-width:180px">
-      <input type="text" name="batch_location_${itemId}[]"
-             class="form-control form-control-lg"
-             value="${location || ''}"
-             placeholder="e.g. middle racking left bay">
     </div>
     <div style="flex-shrink:0">
       <button type="button" class="btn btn-outline-danger btn-lg px-3"
@@ -163,7 +157,7 @@ function onRecvChange(itemId) {
   const container = document.getElementById(`batches-${itemId}`);
   const qty = parseFloat(document.getElementById(`recv_${itemId}`).value) || 0;
   if (qty > 0 && container.children.length === 0) {
-    addBatchRow(itemId, qty, 'Unit 4', '');
+    addBatchRow(itemId, qty, null);
   }
   updateTotal(itemId);
 }

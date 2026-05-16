@@ -1,0 +1,68 @@
+{% extends 'operator/base.html' %}
+{% set back_url = url_for('operator.goods_out_list') %}
+{% block title %}Dispatch — {{ dn.dn_ref }}{% endblock %}
+
+{% block content %}
+<h2 class="mt-2 mb-1">Confirm Dispatch</h2>
+<p class="text-muted mb-3">
+  <strong>{{ dn.dn_ref }}</strong> &mdash; {{ dn.customer.name }}
+  &mdash; <i class="bi bi-calendar me-1"></i>{{ dn.dispatch_date.strftime('%d %b %Y') }}
+</p>
+
+<div class="card mb-3 shadow-sm">
+  <div class="card-header fw-bold">Items going out</div>
+  <div class="table-responsive">
+    <table class="table table-bordered align-middle mb-0">
+      <thead class="table-dark">
+        <tr>
+          <th>Product</th>
+          <th class="text-center">Qty</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for dni in dn.items %}
+          <tr>
+            <td>
+              <div class="fw-bold">{{ dni.order_item.product.code }}</div>
+              <div class="text-muted small">{{ dni.order_item.product.name }}</div>
+              <div class="text-muted small">Order: {{ dni.order_item.order.order_ref }}</div>
+            </td>
+            <td class="text-center fw-bold fs-5">{{ dni.qty_dispatched | int }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% if dn.notes %}
+  <div class="alert alert-secondary py-2 mb-3">
+    <i class="bi bi-sticky me-1"></i><strong>Note:</strong> {{ dn.notes }}
+  </div>
+{% endif %}
+
+<form method="post" action="{{ url_for('operator.goods_out_dispatch', dn_id=dn.id) }}">
+  <div class="card mb-4 border-warning shadow-sm">
+    <div class="card-body">
+      <label for="initials" class="form-label fw-bold" style="font-size: 1.1rem;">
+        Your Initials <span class="text-danger">*</span>
+      </label>
+      <input type="text" id="initials" name="initials" maxlength="5"
+             class="form-control form-control-lg text-uppercase fw-bold"
+             placeholder="e.g. LM" autocomplete="off" required
+             style="max-width: 160px; font-size: 1.5rem; letter-spacing: 0.2em;">
+      <div class="form-text mt-1">Required for the dispatch audit trail.</div>
+    </div>
+  </div>
+
+  <div class="d-grid gap-2">
+    <button type="submit" class="btn btn-danger btn-op-lg"
+            onclick="return confirm('Confirm {{ dn.dn_ref }} is loaded and leaving now?')">
+      <i class="bi bi-truck me-2"></i>Mark as Dispatched
+    </button>
+    <a href="{{ url_for('operator.goods_out_list') }}" class="btn btn-outline-secondary btn-op-lg">
+      Cancel
+    </a>
+  </div>
+</form>
+{% endblock %}

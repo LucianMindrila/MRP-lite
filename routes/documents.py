@@ -82,34 +82,34 @@ def edit_delivery_note(dn_id):
             except ValueError:
                 new_qty = old_qty
 
-            # cap at ordered qty to prevent over-dispatch
             max_qty = dni.order_item.qty
             new_qty = max(0, min(new_qty, max_qty))
             delta = new_qty - old_qty
 
             if delta != 0:
-                # adjust order item dispatched total
                 dni.order_item.qty_dispatched = (dni.order_item.qty_dispatched or 0) + delta
-                # adjust stock for each BOM component
-                for bom in BOMItem.query.filter_by(product_id=dni.order_item.product_id).all():
-                    bom.material.stock_qty = (bom.material.stock_qty or 0) - (bom.qty_per_unit * delta)
-                    db.session.add(StockMovement(
-                        material_id=bom.material_id,
-                        movement_type='goods_out',
-                        qty=-(bom.qty_per_unit * delta),
-                        reference=f'{dn.dn_ref} (amended)',
-                        created_by=current_user.id,
-                    ))
+                # only adjust stock if the DN has already been dispatched
+                if dn.status == 'dispatched':
+                    for bom in BOMItem.query.filter_by(product_id=dni.order_item.product_id).all():
+                        bom.material.stock_qty = (bom.material.stock_qty or 0) - (bom.qty_per_unit * delta)
+                        db.session.add(StockMovement(
+                            material_id=bom.material_id,
+                            movement_type='goods_out',
+                            qty=-(bom.qty_per_unit * delta),
+                            reference=f'{dn.dn_ref} (amended)',
+                            created_by=current_user.id,
+                        ))
                 dni.qty_dispatched = new_qty
 
         # recalculate order status
         order = dn.order
-        if all(i.qty_outstanding == 0 for i in order.items):
-            order.status = 'dispatched'
-        elif any((i.qty_dispatched or 0) > 0 for i in order.items):
-            order.status = 'in_production'
-        else:
-            order.status = 'confirmed'
+        if order:
+            if all(i.qty_outstanding == 0 for i in order.items):
+                order.status = 'dispatched' if dn.status == 'dispatched' else 'ready'
+            elif any((i.qty_dispatched or 0) > 0 for i in order.items):
+                order.status = 'in_production'
+            else:
+                order.status = 'confirmed'
 
         db.session.commit()
         flash(f'{dn.dn_ref} updated.', 'success')

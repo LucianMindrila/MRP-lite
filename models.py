@@ -137,6 +137,7 @@ class DeliveryNote(db.Model):
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=True)
     customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'), nullable=False)
     dispatch_date = db.Column(db.Date, nullable=False)
+    status = db.Column(db.String(20), default='pending')  # pending, dispatched
     notes = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     order = db.relationship('Order', backref=db.backref('delivery_notes', lazy=True), foreign_keys=[order_id])

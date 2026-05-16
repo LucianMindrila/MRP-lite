@@ -121,6 +121,7 @@ def dispatch_order(order_id):
         order_id=order.id,
         customer_id=order.customer_id,
         dispatch_date=dispatch_date,
+        status='pending',
         notes=dn_notes,
     )
     db.session.add(dn)
@@ -134,27 +135,14 @@ def dispatch_order(order_id):
         ))
         item.qty_dispatched = (item.qty_dispatched or 0) + qty
 
-        # deduct BOM components from stock
-        for bom in BOMItem.query.filter_by(product_id=item.product_id).all():
-            deduct = bom.qty_per_unit * qty
-            bom.material.stock_qty = (bom.material.stock_qty or 0) - deduct
-            db.session.add(StockMovement(
-                material_id=bom.material_id,
-                movement_type='goods_out',
-                qty=-deduct,
-                reference=dn.dn_ref,
-                created_by=current_user.id,
-            ))
-
-    # update order status
+    # stock deduction happens when operator confirms dispatch via /operator/goods-out
     if all(i.qty_outstanding == 0 for i in order.items):
-        order.status = 'dispatched'
-        order.dispatched_date = dispatch_date
+        order.status = 'ready'
     elif order.status == 'confirmed':
         order.status = 'in_production'
 
     db.session.commit()
-    flash(f'Delivery note {dn.dn_ref} created.', 'success')
+    flash(f'Delivery note {dn.dn_ref} created — awaiting dispatch confirmation.', 'success')
     return redirect(url_for('documents.print_delivery_note_dn', dn_id=dn.id))
 
 
@@ -212,6 +200,7 @@ def multi_dispatch():
             order_id=None,
             customer_id=customer.id,
             dispatch_date=dispatch_date,
+            status='pending',
             notes=dn_notes,
         )
         db.session.add(dn)
@@ -227,26 +216,15 @@ def multi_dispatch():
             item.qty_dispatched = (item.qty_dispatched or 0) + qty
             affected_orders.add(item.order)
 
-            for bom in BOMItem.query.filter_by(product_id=item.product_id).all():
-                deduct = bom.qty_per_unit * qty
-                bom.material.stock_qty = (bom.material.stock_qty or 0) - deduct
-                db.session.add(StockMovement(
-                    material_id=bom.material_id,
-                    movement_type='goods_out',
-                    qty=-deduct,
-                    reference=dn.dn_ref,
-                    created_by=current_user.id,
-                ))
-
+        # stock deduction happens when operator confirms dispatch via /operator/goods-out
         for order in affected_orders:
             if all(i.qty_outstanding == 0 for i in order.items):
-                order.status = 'dispatched'
-                order.dispatched_date = dispatch_date
+                order.status = 'ready'
             elif order.status == 'confirmed':
                 order.status = 'in_production'
 
         db.session.commit()
-        flash(f'Delivery note {dn.dn_ref} created covering {len(affected_orders)} order(s).', 'success')
+        flash(f'Delivery note {dn.dn_ref} created covering {len(affected_orders)} order(s) — awaiting dispatch confirmation.', 'success')
         return redirect(url_for('documents.print_delivery_note_dn', dn_id=dn.id))
 
     if cust_id:

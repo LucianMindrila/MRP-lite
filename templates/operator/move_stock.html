@@ -25,20 +25,12 @@
     <div class="card-body">
 
       <div class="mb-3">
-        <label class="form-label fw-bold">Building</label>
-        <select name="building" class="form-select form-select-lg">
-          {% for b in buildings %}
-            <option value="{{ b }}" {% if b == batch.building %}selected{% endif %}>{{ b }}</option>
+        <label class="form-label fw-bold">New Location</label>
+        <select name="location" class="form-select form-select-lg">
+          {% for loc in locations %}
+            <option value="{{ loc }}" {% if loc == batch.location_detail %}selected{% endif %}>{{ loc }}</option>
           {% endfor %}
         </select>
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label fw-bold">Location</label>
-        <input type="text" name="location_detail"
-               class="form-control form-control-lg"
-               value="{{ batch.location_detail or '' }}"
-               placeholder="e.g. Unit 7 dispatch area">
       </div>
 
     </div>
