@@ -13,6 +13,8 @@ def login():
         user = User.query.filter_by(username=username).first()
         if user and user.check_password(password):
             login_user(user)
+            if user.role == 'operator':
+                return redirect(url_for('operator.dashboard'))
             return redirect(url_for('dashboard.index'))
         flash('Invalid username or password.', 'danger')
     return render_template('auth/login.html')

@@ -1,0 +1,68 @@
+{% extends 'operator/base.html' %}
+{% set back_url = url_for('operator.move_stock_list') %}
+{% block title %}Move — {{ batch.material.code }}{% endblock %}
+
+{% block content %}
+<h2 class="mt-2 mb-1">Move Batch</h2>
+<p class="text-muted mb-4">
+  <strong>{{ batch.material.code }}</strong> &mdash; {{ batch.material.name }}
+</p>
+
+<div class="card mb-3 border-secondary shadow-sm">
+  <div class="card-header fw-bold text-muted">Current location</div>
+  <div class="card-body py-3">
+    <div class="fs-5 fw-bold">{{ batch.building }}</div>
+    <div class="text-muted">{{ batch.location_detail or '— not set —' }}</div>
+    <div class="mt-2 text-muted small">Qty: <strong class="text-dark">{{ batch.qty | int }} {{ batch.material.unit }}</strong>
+    &nbsp;&bull;&nbsp; Received: {{ batch.received_at.strftime('%d %b %Y') }}
+    {% if batch.received_by %} by {{ batch.received_by }}{% endif %}</div>
+  </div>
+</div>
+
+<form method="post">
+  <div class="card mb-3 shadow-sm">
+    <div class="card-header fw-bold">New location</div>
+    <div class="card-body">
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Building</label>
+        <select name="building" class="form-select form-select-lg">
+          {% for b in buildings %}
+            <option value="{{ b }}" {% if b == batch.building %}selected{% endif %}>{{ b }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Location</label>
+        <input type="text" name="location_detail"
+               class="form-control form-control-lg"
+               value="{{ batch.location_detail or '' }}"
+               placeholder="e.g. Unit 7 dispatch area">
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card mb-4 border-warning shadow-sm">
+    <div class="card-body">
+      <label for="initials" class="form-label fw-bold" style="font-size: 1.1rem;">
+        Your Initials <span class="text-danger">*</span>
+      </label>
+      <input type="text" id="initials" name="initials" maxlength="5"
+             class="form-control form-control-lg text-uppercase fw-bold"
+             placeholder="e.g. LM" autocomplete="off" required
+             style="max-width: 160px; font-size: 1.5rem; letter-spacing: 0.2em;">
+    </div>
+  </div>
+
+  <div class="d-grid gap-2">
+    <button type="submit" class="btn btn-warning btn-op-lg text-dark">
+      <i class="bi bi-arrows-move me-2"></i>Confirm Move
+    </button>
+    <a href="{{ url_for('operator.move_stock_list') }}" class="btn btn-outline-secondary btn-op-lg">
+      Cancel
+    </a>
+  </div>
+</form>
+{% endblock %}

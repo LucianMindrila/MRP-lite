@@ -203,10 +203,27 @@ class StockMovement(db.Model):
     __tablename__ = 'stock_movements'
     id = db.Column(db.Integer, primary_key=True)
     material_id = db.Column(db.Integer, db.ForeignKey('materials.id'), nullable=False)
-    movement_type = db.Column(db.String(20), nullable=False)  # goods_in, goods_out, adjustment, stock_check
-    qty = db.Column(db.Float, nullable=False)  # positive = in, negative = out
+    movement_type = db.Column(db.String(20), nullable=False)  # goods_in, goods_out, adjustment, stock_check, transfer
+    qty = db.Column(db.Float, nullable=False)  # positive = in, negative = out, 0 = location transfer
     reference = db.Column(db.String(80))  # PO ref, order ref, etc.
     notes = db.Column(db.String(200))
     created_by = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     user = db.relationship('User', foreign_keys=[created_by])
+
+
+class StockBatch(db.Model):
+    __tablename__ = 'stock_batches'
+    id = db.Column(db.Integer, primary_key=True)
+    material_id = db.Column(db.Integer, db.ForeignKey('materials.id'), nullable=False)
+    qty = db.Column(db.Float, nullable=False)           # current qty on this batch
+    qty_original = db.Column(db.Float, nullable=False)  # qty when first received
+    building = db.Column(db.String(20), nullable=False) # Unit 4, Unit 7, Unit 16
+    location_detail = db.Column(db.String(200))         # freeform: 'middle racking left bay'
+    po_id = db.Column(db.Integer, db.ForeignKey('purchase_orders.id'), nullable=True)
+    received_by = db.Column(db.String(10))              # operator initials
+    received_at = db.Column(db.DateTime, default=datetime.utcnow)
+    status = db.Column(db.String(20), default='active') # active, empty
+    notes = db.Column(db.String(200))
+    material = db.relationship('Material', backref='stock_batches')
+    purchase_order = db.relationship('PurchaseOrder', backref='stock_batches')

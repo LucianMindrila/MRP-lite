@@ -1,0 +1,44 @@
+{% extends 'operator/base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2 class="mb-4 mt-2">What would you like to do?</h2>
+
+<div class="row g-3">
+  <div class="col-12 col-sm-6">
+    <a href="{{ url_for('operator.goods_in_list') }}"
+       class="btn btn-primary op-tile w-100 d-flex flex-column align-items-center justify-content-center shadow-sm">
+      <i class="bi bi-box-arrow-in-down" style="font-size: 2.5rem;"></i>
+      <span class="mt-2">Goods In</span>
+      <small class="fw-normal mt-1" style="font-size: 0.85rem;">
+        {% if open_pos == 0 %}
+          No open POs
+        {% elif due_today > 0 %}
+          {{ due_today }} due today &bull; {{ open_pos }} open
+        {% else %}
+          {{ open_pos }} open
+        {% endif %}
+      </small>
+    </a>
+  </div>
+
+  <div class="col-12 col-sm-6">
+    <a href="{{ url_for('operator.move_stock_list') }}"
+       class="btn btn-warning op-tile w-100 d-flex flex-column align-items-center justify-content-center shadow-sm text-dark">
+      <i class="bi bi-arrows-move" style="font-size: 2.5rem;"></i>
+      <span class="mt-2">Move Stock</span>
+      <small class="fw-normal mt-1" style="font-size: 0.85rem;">Update batch locations</small>
+    </a>
+  </div>
+
+  <div class="col-12 col-sm-6">
+    <a href="#"
+       class="btn btn-secondary op-tile w-100 d-flex flex-column align-items-center justify-content-center shadow-sm disabled"
+       style="opacity: 0.55; cursor: not-allowed;">
+      <i class="bi bi-box-arrow-up" style="font-size: 2.5rem;"></i>
+      <span class="mt-2">Goods Out</span>
+      <small class="fw-normal mt-1" style="font-size: 0.8rem;">Coming soon</small>
+    </a>
+  </div>
+</div>
+{% endblock %}

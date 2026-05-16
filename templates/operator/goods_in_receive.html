@@ -1,0 +1,195 @@
+{% extends 'operator/base.html' %}
+{% set back_url = url_for('operator.goods_in_list') %}
+{% block title %}Receive — {{ po.po_ref }}{% endblock %}
+
+{% block content %}
+<h2 class="mt-2 mb-1">Receive Goods</h2>
+<p class="text-muted mb-4">
+  <strong>{{ po.po_ref }}</strong> &mdash; {{ po.supplier.name }}
+  {% if po.expected_date %}&mdash; Due {{ po.expected_date.strftime('%d %b %Y') }}{% endif %}
+</p>
+
+<form method="post" action="{{ url_for('operator.goods_in_confirm', po_id=po.id) }}" id="recv-form">
+
+  {% for item in po.items %}
+    {% if item.qty_received < item.qty %}
+    <div class="card mb-3 shadow-sm" data-item-id="{{ item.id }}" data-material-code="{{ item.material.code }}" data-unit="{{ item.material.unit }}">
+      <div class="card-header d-flex justify-content-between align-items-center py-2">
+        <div>
+          <span class="fw-bold fs-5">{{ item.material.code }}</span>
+          <span class="text-muted ms-2">{{ item.material.name }}</span>
+        </div>
+        <div class="text-muted small text-end">
+          Ordered: <strong>{{ item.qty | int }}</strong> &nbsp;|&nbsp;
+          Recv'd: <strong>{{ item.qty_received | int }}</strong> {{ item.material.unit }}
+        </div>
+      </div>
+      <div class="card-body pb-2">
+
+        <div class="mb-3">
+          <label class="form-label fw-bold">Qty receiving now</label>
+          <input type="number"
+                 id="recv_{{ item.id }}"
+                 name="recv_{{ item.id }}"
+                 class="form-control form-control-lg"
+                 min="0" step="1" inputmode="numeric"
+                 placeholder="0"
+                 style="max-width: 180px; font-size: 1.3rem;"
+                 oninput="onRecvChange({{ item.id }})">
+        </div>
+
+        <div class="mb-1">
+          <label class="form-label fw-bold mb-2">Batch locations</label>
+          <div class="text-muted small mb-2">Enter one row per pallet, box or storage location.</div>
+          <div id="batches-{{ item.id }}">
+            {# rows injected by JS #}
+          </div>
+          <div id="batch-total-{{ item.id }}" class="small fw-bold mt-2 text-muted"></div>
+          <button type="button"
+                  class="btn btn-outline-secondary btn-sm mt-2"
+                  onclick="addBatchRow({{ item.id }})">
+            <i class="bi bi-plus-circle me-1"></i>Add batch
+          </button>
+        </div>
+
+      </div>
+    </div>
+    {% else %}
+    <div class="card mb-3 border-success">
+      <div class="card-body py-2 d-flex justify-content-between align-items-center">
+        <span class="fw-bold">{{ item.material.code }}</span>
+        <span class="text-success fw-bold"><i class="bi bi-check-circle-fill me-1"></i>Fully received</span>
+      </div>
+    </div>
+    {% endif %}
+  {% endfor %}
+
+  <div class="card mb-3 border-warning shadow-sm">
+    <div class="card-body">
+      <label for="initials" class="form-label fw-bold" style="font-size: 1.1rem;">
+        Your Initials <span class="text-danger">*</span>
+      </label>
+      <input type="text" id="initials" name="initials" maxlength="5"
+             class="form-control form-control-lg text-uppercase fw-bold"
+             placeholder="e.g. LM" autocomplete="off" required
+             style="max-width: 160px; font-size: 1.5rem; letter-spacing: 0.2em;">
+    </div>
+  </div>
+
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <label for="notes" class="form-label fw-bold">
+        Notes <span class="text-muted fw-normal small">(optional)</span>
+      </label>
+      <textarea id="notes" name="notes" rows="3" class="form-control form-control-lg"
+                placeholder="e.g. 5 units short, 2 units damaged on arrival…"
+                style="font-size: 1.05rem;"></textarea>
+    </div>
+  </div>
+
+  <div class="d-grid gap-2">
+    <button type="submit" class="btn btn-success btn-op-lg">
+      <i class="bi bi-check-circle me-2"></i>Confirm Receipt
+    </button>
+    <a href="{{ url_for('operator.goods_in_list') }}" class="btn btn-outline-secondary btn-op-lg">
+      Cancel
+    </a>
+  </div>
+
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const BUILDINGS = {{ buildings | tojson }};
+
+function buildingOptions(selected) {
+  return BUILDINGS.map(b =>
+    `<option value="${b}" ${b === (selected || 'Unit 4') ? 'selected' : ''}>${b}</option>`
+  ).join('');
+}
+
+function updateTotal(itemId) {
+  const container = document.getElementById(`batches-${itemId}`);
+  const card = container.closest('[data-item-id]');
+  const unit = card.dataset.unit;
+  let total = 0;
+  container.querySelectorAll('.batch-qty').forEach(inp => {
+    total += parseFloat(inp.value) || 0;
+  });
+  const received = parseFloat(document.getElementById(`recv_${itemId}`).value) || 0;
+  const el = document.getElementById(`batch-total-${itemId}`);
+  if (received === 0) { el.textContent = ''; return; }
+  const diff = Math.abs(total - received);
+  el.textContent = `Assigned: ${total} of ${received} ${unit}`;
+  el.className = diff < 0.001
+    ? 'small fw-bold mt-2 text-success'
+    : 'small fw-bold mt-2 text-danger';
+}
+
+function addBatchRow(itemId, qty, building, location) {
+  const container = document.getElementById(`batches-${itemId}`);
+  const div = document.createElement('div');
+  div.className = 'batch-row d-flex gap-2 mb-2 align-items-start flex-wrap';
+  div.innerHTML = `
+    <div style="width:110px; flex-shrink:0">
+      <input type="number" name="batch_qty_${itemId}[]"
+             class="form-control form-control-lg text-center batch-qty"
+             value="${qty != null ? qty : ''}" min="0" step="1" inputmode="numeric"
+             placeholder="Qty" style="font-size:1.1rem"
+             oninput="updateTotal(${itemId})">
+    </div>
+    <div style="width:135px; flex-shrink:0">
+      <select name="batch_building_${itemId}[]" class="form-select form-select-lg">
+        ${buildingOptions(building)}
+      </select>
+    </div>
+    <div style="flex:1; min-width:180px">
+      <input type="text" name="batch_location_${itemId}[]"
+             class="form-control form-control-lg"
+             value="${location || ''}"
+             placeholder="e.g. middle racking left bay">
+    </div>
+    <div style="flex-shrink:0">
+      <button type="button" class="btn btn-outline-danger btn-lg px-3"
+              onclick="this.closest('.batch-row').remove(); updateTotal(${itemId})">
+        &times;
+      </button>
+    </div>`;
+  container.appendChild(div);
+}
+
+function onRecvChange(itemId) {
+  const container = document.getElementById(`batches-${itemId}`);
+  const qty = parseFloat(document.getElementById(`recv_${itemId}`).value) || 0;
+  if (qty > 0 && container.children.length === 0) {
+    addBatchRow(itemId, qty, 'Unit 4', '');
+  }
+  updateTotal(itemId);
+}
+
+document.getElementById('recv-form').addEventListener('submit', function(e) {
+  const cards = document.querySelectorAll('[data-item-id]');
+  const warnings = [];
+  cards.forEach(card => {
+    const itemId = card.dataset.itemId;
+    const recvEl = document.getElementById(`recv_${itemId}`);
+    if (!recvEl) return;
+    const received = parseFloat(recvEl.value) || 0;
+    if (received === 0) return;
+    let total = 0;
+    document.getElementById(`batches-${itemId}`)
+      .querySelectorAll('.batch-qty')
+      .forEach(inp => { total += parseFloat(inp.value) || 0; });
+    if (Math.abs(total - received) > 0.001) {
+      warnings.push(`${card.dataset.materialCode}: assigned ${total} but entering ${received}`);
+    }
+  });
+  if (warnings.length > 0) {
+    if (!confirm('Batch totals don\'t match received quantities:\n\n' + warnings.join('\n') + '\n\nSubmit anyway?')) {
+      e.preventDefault();
+    }
+  }
+});
+</script>
+{% endblock %}

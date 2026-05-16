@@ -1,0 +1,40 @@
+{% extends 'operator/base.html' %}
+{% set back_url = url_for('operator.dashboard') %}
+{% block title %}Goods In — Select PO{% endblock %}
+
+{% block content %}
+<h2 class="mb-3 mt-2">Goods In</h2>
+<p class="text-muted mb-3">Select a purchase order to book in.</p>
+
+{% if not pos %}
+  <div class="alert alert-info fs-5">
+    <i class="bi bi-info-circle me-2"></i>No open purchase orders awaiting delivery.
+  </div>
+{% else %}
+  <div class="list-group shadow-sm">
+    {% for po in pos %}
+      <a href="{{ url_for('operator.goods_in_receive', po_id=po.id) }}"
+         class="list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3 px-3">
+        <div>
+          <div class="fw-bold" style="font-size: 1.2rem;">{{ po.po_ref }}</div>
+          <div class="text-muted">
+            {{ po.supplier.name }}
+            {% if po.expected_date %}
+              &mdash; Due <strong>{{ po.expected_date.strftime('%d %b %Y') }}</strong>
+            {% else %}
+              &mdash; <span class="text-warning">No due date</span>
+            {% endif %}
+          </div>
+          <div class="small text-muted mt-1">{{ po.items | length }} line(s)</div>
+        </div>
+        <div class="text-end ms-3">
+          <span class="badge fs-6 {% if po.status == 'partial' %}bg-warning text-dark{% else %}bg-primary{% endif %}">
+            {{ po.status | title }}
+          </span>
+          <div class="mt-2 text-muted"><i class="bi bi-chevron-right"></i></div>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+{% endif %}
+{% endblock %}

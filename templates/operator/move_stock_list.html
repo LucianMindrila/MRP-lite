@@ -1,0 +1,65 @@
+{% extends 'operator/base.html' %}
+{% set back_url = url_for('operator.dashboard') %}
+{% block title %}Move Stock{% endblock %}
+
+{% block content %}
+<h2 class="mt-2 mb-1">Move Stock</h2>
+<p class="text-muted mb-3">Select a batch to update its location.</p>
+
+<input type="search" id="batch-search" class="form-control form-control-lg mb-3"
+       placeholder="Search by material code or location…"
+       oninput="filterBatches(this.value)">
+
+{% if not batches %}
+  <div class="alert alert-info fs-5">
+    <i class="bi bi-info-circle me-2"></i>No active stock batches found.
+  </div>
+{% else %}
+  {% set ns = namespace(current_building='') %}
+  <div id="batch-list">
+  {% for batch in batches %}
+    {% if batch.building != ns.current_building %}
+      {% set ns.current_building = batch.building %}
+      <div class="text-muted fw-bold small text-uppercase mt-3 mb-1 ps-1 building-header">
+        <i class="bi bi-building me-1"></i>{{ batch.building }}
+      </div>
+    {% endif %}
+
+    <a href="{{ url_for('operator.move_stock', batch_id=batch.id) }}"
+       class="batch-item list-group-item list-group-item-action d-flex justify-content-between align-items-center py-3 px-3 mb-1 rounded border shadow-sm bg-white"
+       data-search="{{ batch.material.code | lower }} {{ (batch.location_detail or '') | lower }} {{ batch.building | lower }}">
+      <div>
+        <div class="fw-bold" style="font-size: 1.1rem;">{{ batch.material.code }}</div>
+        <div class="text-muted small">{{ batch.material.name }}</div>
+        <div class="small mt-1">
+          <i class="bi bi-geo-alt me-1 text-secondary"></i>
+          {{ batch.location_detail or '— no location set —' }}
+        </div>
+      </div>
+      <div class="text-end ms-3">
+        <div class="fw-bold fs-5">{{ batch.qty | int }}</div>
+        <div class="text-muted small">{{ batch.material.unit }}</div>
+        <div class="mt-1"><i class="bi bi-chevron-right text-muted"></i></div>
+      </div>
+    </a>
+  {% endfor %}
+  </div>
+  <div id="no-results" class="text-muted text-center py-4" style="display:none;">No batches match your search.</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+function filterBatches(query) {
+  const q = query.toLowerCase();
+  let visible = 0;
+  document.querySelectorAll('.batch-item').forEach(el => {
+    const match = el.dataset.search.includes(q);
+    el.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+  document.querySelectorAll('.building-header').forEach(h => h.style.display = q ? 'none' : '');
+  document.getElementById('no-results').style.display = visible === 0 ? '' : 'none';
+}
+</script>
+{% endblock %}

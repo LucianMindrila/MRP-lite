@@ -38,6 +38,7 @@ def create_app(config_name=None):
     from routes.warehouse import warehouse_bp
     from routes.documents import documents_bp
     from routes.reports import reports_bp
+    from routes.operator import operator_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(dashboard_bp)
@@ -47,6 +48,7 @@ def create_app(config_name=None):
     app.register_blueprint(warehouse_bp)
     app.register_blueprint(documents_bp)
     app.register_blueprint(reports_bp)
+    app.register_blueprint(operator_bp)
 
     # Register CLI commands
     register_seed_command(app)
