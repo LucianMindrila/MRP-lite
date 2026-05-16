@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %}Stock Check Results{% endblock %}
+{% block page_title %}Warehouse — Stock Check Results{% endblock %}
+
+{% block content %}
+{% set added = adjustments | selectattr('diff', 'gt', 0) | list %}
+{% set removed = adjustments | selectattr('diff', 'lt', 0) | list %}
+{% set total_added = added | sum(attribute='diff') %}
+{% set total_removed = removed | sum(attribute='diff') %}
+
+<div class="alert alert-success d-flex align-items-center mb-4">
+  <i class="bi bi-clipboard-check-fill fs-4 me-3"></i>
+  <div>
+    <strong>Stock check complete.</strong>
+    Reference: <strong>{{ reference }}</strong> &mdash;
+    {{ adjustments | length }} line{{ 's' if adjustments | length != 1 }} adjusted.
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-sm-4">
+    <div class="card text-center border-primary shadow-sm">
+      <div class="card-body py-3">
+        <div class="display-6 fw-bold text-primary">{{ adjustments | length }}</div>
+        <div class="text-muted small">Lines adjusted</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card text-center border-success shadow-sm">
+      <div class="card-body py-3">
+        <div class="display-6 fw-bold text-success">+{{ '%.2f' | format(total_added) }}</div>
+        <div class="text-muted small">Total stock added</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card text-center border-danger shadow-sm">
+      <div class="card-body py-3">
+        <div class="display-6 fw-bold text-danger">{{ '%.2f' | format(total_removed) }}</div>
+        <div class="text-muted small">Total stock removed</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card shadow-sm mb-4">
+  <div class="card-header fw-bold">Adjustments — {{ reference }}</div>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>Code</th>
+          <th>Name</th>
+          <th class="text-center">Unit</th>
+          <th class="text-end">Was</th>
+          <th class="text-end">Counted</th>
+          <th class="text-end">Difference</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a in adjustments %}
+        <tr class="{% if a.diff > 0 %}table-warning{% elif a.diff < 0 %}table-danger{% endif %}">
+          <td class="fw-bold font-monospace small">{{ a.code }}</td>
+          <td class="small">{{ a.name }}</td>
+          <td class="text-center small text-muted">{{ a.unit }}</td>
+          <td class="text-end">{{ '%.2f' | format(a.old_qty) }}</td>
+          <td class="text-end fw-bold">{{ '%.2f' | format(a.counted) }}</td>
+          <td class="text-end fw-bold">
+            {% if a.diff > 0 %}
+              <span class="text-primary">+{{ '%.2f' | format(a.diff) }}</span>
+            {% else %}
+              <span class="text-danger">{{ '%.2f' | format(a.diff) }}</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="d-flex gap-2">
+  <a href="{{ url_for('warehouse.stock_check') }}" class="btn btn-outline-primary">
+    <i class="bi bi-arrow-repeat me-1"></i>New stock check
+  </a>
+  <a href="{{ url_for('warehouse.index') }}" class="btn btn-outline-secondary">
+    <i class="bi bi-house me-1"></i>Warehouse home
+  </a>
+</div>
+{% endblock %}

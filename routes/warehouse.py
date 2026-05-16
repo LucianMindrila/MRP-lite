@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
-from models import db, StockMovement, Material, PurchaseOrder, Order
+from models import db, StockMovement, StockBatch, Material, PurchaseOrder, Order
 
 warehouse_bp = Blueprint('warehouse', __name__, url_prefix='/warehouse')
 
@@ -77,24 +77,65 @@ def goods_out_order():
 @warehouse_bp.route('/stock-check', methods=['GET', 'POST'])
 @login_required
 def stock_check():
-    materials = Material.query.order_by(Material.code).all()
+    show_all = request.args.get('show_all', '0') == '1'
+
     if request.method == 'POST':
-        for m in materials:
-            counted = request.form.get(f'count_{m.id}')
-            if counted is not None and counted != '':
-                counted = float(counted)
-                diff = counted - m.stock_qty
-                if diff != 0:
-                    db.session.add(StockMovement(
-                        material_id=m.id,
-                        movement_type='stock_check',
-                        qty=diff,
-                        reference='STOCK-CHECK',
-                        notes=request.form.get('notes', ''),
-                        created_by=current_user.id,
-                    ))
-                m.stock_qty = counted
+        reference = request.form.get('reference', '').strip() or 'STOCK-CHECK'
+        all_materials = Material.query.order_by(Material.code).all()
+        adjustments = []
+
+        for m in all_materials:
+            counted_str = request.form.get(f'count_{m.id}', '').strip()
+            if not counted_str:
+                continue
+            try:
+                counted = float(counted_str)
+            except ValueError:
+                continue
+
+            old_qty = m.stock_qty or 0
+            diff = counted - old_qty
+            m.stock_qty = counted
+
+            if diff != 0:
+                db.session.add(StockMovement(
+                    material_id=m.id,
+                    movement_type='stock_check',
+                    qty=diff,
+                    reference=reference,
+                    notes=f'Physical count: {counted} (was {old_qty:.2f})',
+                    created_by=current_user.id,
+                ))
+                adjustments.append({
+                    'code': m.code,
+                    'name': m.name,
+                    'unit': m.unit,
+                    'old_qty': old_qty,
+                    'counted': counted,
+                    'diff': diff,
+                })
+
         db.session.commit()
-        flash('Stock check saved.', 'success')
-        return redirect(url_for('warehouse.stock_check'))
-    return render_template('warehouse/stock_check.html', materials=materials)
+
+        if not adjustments:
+            flash('Stock check complete — no adjustments needed.', 'success')
+            return redirect(url_for('warehouse.stock_check'))
+
+        return render_template('warehouse/stock_check_results.html',
+                               adjustments=adjustments, reference=reference)
+
+    # GET — filter to active materials by default
+    if show_all:
+        materials = Material.query.order_by(Material.code).all()
+    else:
+        materials = Material.query.filter(
+            (Material.stock_qty > 0) | (Material.reorder_point > 0)
+        ).order_by(Material.code).all()
+
+    # Build batch map: material_id → list of active batches
+    batch_map = {}
+    for b in StockBatch.query.filter_by(status='active').all():
+        batch_map.setdefault(b.material_id, []).append(b)
+
+    return render_template('warehouse/stock_check.html',
+                           materials=materials, batch_map=batch_map, show_all=show_all)

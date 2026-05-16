@@ -3,37 +3,159 @@
 {% block page_title %}Warehouse — Stock Check{% endblock %}
 
 {% block content %}
-<div class="card">
-  <div class="card-header fw-semibold">
-    Stock Check — Enter physical counts below. Leave blank to skip a line.
-  </div>
-  <div class="card-body">
-    <form method="POST">
-      <div class="mb-3">
-        <label class="form-label">Notes</label>
-        <input type="text" name="notes" class="form-control" placeholder="e.g. Monthly count, 07/05/2026"/>
-      </div>
-      <table class="table table-hover">
-        <thead class="table-light">
-          <tr><th>Code</th><th>Name</th><th>Location</th><th>System Qty</th><th>Physical Count</th></tr>
-        </thead>
-        <tbody>
-          {% for m in materials %}
-          <tr>
-            <td>{{ m.code }}</td>
-            <td>{{ m.name }}</td>
-            <td>{{ m.location or '—' }}</td>
-            <td>{{ m.stock_qty }} {{ m.unit }}</td>
-            <td>
-              <input type="number" name="count_{{ m.id }}" class="form-control form-control-sm"
-                     style="width:110px" min="0" step="0.01" placeholder="{{ m.stock_qty }}"/>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      <button type="submit" class="btn btn-primary"><i class="bi bi-clipboard-check me-1"></i>Save Stock Check</button>
-    </form>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div></div>
+  <div>
+    {% if show_all %}
+      <a href="{{ url_for('warehouse.stock_check') }}" class="btn btn-outline-secondary btn-sm">
+        <i class="bi bi-funnel me-1"></i>Active only
+      </a>
+    {% else %}
+      <a href="{{ url_for('warehouse.stock_check', show_all=1) }}" class="btn btn-outline-secondary btn-sm">
+        <i class="bi bi-list-ul me-1"></i>Show all materials
+      </a>
+    {% endif %}
   </div>
 </div>
+
+<form method="post" id="stock-check-form">
+
+  <div class="card mb-3 shadow-sm">
+    <div class="card-body py-3">
+      <div class="row g-3 align-items-end">
+        <div class="col-md-5">
+          <label class="form-label fw-bold">Count Reference</label>
+          <input type="text" name="reference" class="form-control"
+                 placeholder="e.g. 31 May 2026 Physical Count"
+                 value="{{ request.form.get('reference', '') }}">
+          <div class="form-text">Leave blank to use "STOCK-CHECK"</div>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label fw-bold">Filter</label>
+          <input type="text" id="mat-filter" class="form-control"
+                 placeholder="Search code or name…" autocomplete="off">
+        </div>
+        <div class="col-md-3 d-grid">
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-clipboard-check me-1"></i>Submit Count
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle" id="check-table">
+      <thead class="table-dark">
+        <tr>
+          <th style="width:110px">Code</th>
+          <th>Name</th>
+          <th style="width:60px" class="text-center">Unit</th>
+          <th style="width:100px" class="text-end">System Qty</th>
+          <th>Batch locations</th>
+          <th style="width:130px" class="text-center">Physical count</th>
+          <th style="width:100px" class="text-center">Difference</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for m in materials %}
+        <tr class="mat-row" data-search="{{ m.code | lower }} {{ m.name | lower }}">
+          <td class="fw-bold font-monospace small">{{ m.code }}</td>
+          <td class="small">{{ m.name }}</td>
+          <td class="text-center small text-muted">{{ m.unit }}</td>
+          <td class="text-end fw-bold">{{ (m.stock_qty or 0) | round(2) }}</td>
+          <td class="small text-muted">
+            {% set batches = batch_map.get(m.id, []) %}
+            {% if batches %}
+              {% for b in batches %}
+                <div>
+                  <span class="badge bg-secondary me-1">{{ b.building }}</span>
+                  {% if b.location_detail and b.location_detail != b.building %}{{ b.location_detail }}{% endif %}
+                  &mdash; <strong>{{ b.qty | round(2) }}</strong> {{ m.unit }}
+                </div>
+              {% endfor %}
+            {% else %}
+              <span class="text-muted">—</span>
+            {% endif %}
+          </td>
+          <td class="text-center">
+            <input type="number"
+                   name="count_{{ m.id }}"
+                   class="form-control form-control-sm text-center count-input"
+                   data-system="{{ m.stock_qty or 0 }}"
+                   data-row-id="{{ m.id }}"
+                   min="0" step="0.01" inputmode="decimal"
+                   placeholder="—"
+                   style="min-width:90px">
+          </td>
+          <td class="text-center fw-bold diff-cell" id="diff-{{ m.id }}">
+            <span class="text-muted">—</span>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {% if not materials %}
+  <div class="alert alert-info">No materials match the current filter.</div>
+  {% endif %}
+
+  <div class="d-flex justify-content-end mt-3 mb-5">
+    <button type="submit" class="btn btn-primary btn-lg">
+      <i class="bi bi-clipboard-check me-1"></i>Submit Count
+    </button>
+  </div>
+
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.querySelectorAll('.count-input').forEach(function(inp) {
+  inp.addEventListener('input', function() {
+    const rowId = this.dataset.rowId;
+    const system = parseFloat(this.dataset.system) || 0;
+    const cell = document.getElementById('diff-' + rowId);
+    const row = this.closest('tr');
+    const val = this.value.trim();
+    if (val === '') {
+      cell.innerHTML = '<span class="text-muted">—</span>';
+      row.classList.remove('table-success', 'table-danger', 'table-warning');
+      return;
+    }
+    const counted = parseFloat(val);
+    if (isNaN(counted)) { return; }
+    const diff = counted - system;
+    const sign = diff > 0 ? '+' : '';
+    row.classList.remove('table-success', 'table-danger', 'table-warning');
+    if (Math.abs(diff) < 0.001) {
+      cell.innerHTML = '<span class="text-success fw-bold">✓ 0</span>';
+      row.classList.add('table-success');
+    } else if (diff > 0) {
+      cell.innerHTML = '<span class="text-primary fw-bold">' + sign + diff.toFixed(2) + '</span>';
+      row.classList.add('table-warning');
+    } else {
+      cell.innerHTML = '<span class="text-danger fw-bold">' + diff.toFixed(2) + '</span>';
+      row.classList.add('table-danger');
+    }
+  });
+});
+
+document.getElementById('mat-filter').addEventListener('input', function() {
+  const q = this.value.toLowerCase();
+  document.querySelectorAll('.mat-row').forEach(function(row) {
+    row.style.display = row.dataset.search.includes(q) ? '' : 'none';
+  });
+});
+
+document.getElementById('stock-check-form').addEventListener('submit', function(e) {
+  const filled = Array.from(document.querySelectorAll('.count-input'))
+                      .some(function(i) { return i.value.trim() !== ''; });
+  if (!filled) {
+    e.preventDefault();
+    alert('No counts have been entered. Fill in at least one physical count before submitting.');
+  }
+});
+</script>
 {% endblock %}
