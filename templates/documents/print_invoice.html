@@ -3,66 +3,142 @@
 <head>
   <meta charset="UTF-8"/>
   <title>Invoice — {{ order.order_ref }}</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="/static/css/print.css" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; font-size: 11px; color: #111; background: #fff; }
+    .page { max-width: 800px; margin: 0 auto; padding: 18px 24px; }
+    .no-print { margin-bottom: 12px; }
+    .no-print button, .no-print a {
+      display: inline-block; padding: 5px 14px; margin-right: 6px;
+      border: 1px solid #333; background: #333; color: #fff;
+      text-decoration: none; border-radius: 3px; font-size: 12px; cursor: pointer;
+    }
+    .no-print a { background: #fff; color: #333; }
+    hr.divider { border: none; border-top: 2px solid #1C3A6A; margin: 8px 0 12px 0; }
+    .header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+    .company-details { text-align: right; font-size: 11px; line-height: 1.5; }
+    .company-details strong { font-size: 13px; color: #1C3A6A; }
+    .bill-grid { display: flex; gap: 12px; margin-bottom: 14px; }
+    .addr-box { border: 1px solid #888; padding: 8px 10px; flex: 1; }
+    .addr-box .box-label { font-weight: bold; font-size: 10px; color: #555; margin-bottom: 4px; text-transform: uppercase; }
+    .details-box { border: 1px solid #888; min-width: 220px; }
+    .details-box table { width: 100%; border-collapse: collapse; }
+    .details-box td { padding: 4px 8px; border-bottom: 1px solid #ddd; font-size: 11px; }
+    .details-box td:first-child { font-weight: bold; background: #f0f0f0; white-space: nowrap; width: 45%; }
+    .details-box tr:last-child td { border-bottom: none; }
+    table.lines { width: 100%; border-collapse: collapse; margin-bottom: 0; }
+    table.lines thead tr { background: #1C3A6A; color: #fff; }
+    table.lines thead th { padding: 6px 8px; text-align: left; font-size: 11px; }
+    table.lines thead th.right { text-align: right; }
+    table.lines tbody td { padding: 5px 8px; border-bottom: 1px solid #ddd; }
+    table.lines tbody td.right { text-align: right; }
+    table.lines tbody tr:nth-child(even) { background: #fafafa; }
+    .totals-table { width: 260px; margin-left: auto; border-collapse: collapse; margin-top: 0; }
+    .totals-table td { padding: 4px 8px; border: 1px solid #ddd; font-size: 11px; }
+    .totals-table td:first-child { background: #f0f0f0; font-weight: bold; }
+    .totals-table td:last-child { text-align: right; }
+    .totals-table tr.grand td { background: #1C3A6A; color: #fff; font-weight: bold; font-size: 12px; }
+    .bank-section { margin-top: 16px; border: 1px solid #ddd; padding: 8px 10px; background: #fafafa; font-size: 11px; }
+    .bank-section strong { color: #1C3A6A; }
+    .payment-terms { margin-top: 10px; font-size: 11px; font-style: italic; color: #333; }
+    .company-reg { font-size: 9px; color: #555; text-align: center; margin-top: 16px; border-top: 1px solid #ccc; padding-top: 6px; }
+    @media print {
+      .no-print { display: none !important; }
+      body { padding: 0; }
+      .page { padding: 10px 14px; }
+    }
+  </style>
 </head>
 <body>
-<div class="container mt-4" style="max-width:760px;">
-  <div class="no-print mb-3">
-    <button onclick="window.print()" class="btn btn-sm btn-dark">Print</button>
-    <a href="{{ url_for('orders.view_order', order_id=order.id) }}" class="btn btn-sm btn-outline-secondary ms-2">Back</a>
+<div class="page">
+
+  <div class="no-print">
+    <button onclick="window.print()">&#128438; Print</button>
+    <a href="{{ url_for('orders.view_order', order_id=order.id) }}">Back to Order</a>
   </div>
 
-  <div class="d-flex justify-content-between align-items-start mb-4">
-    <div>
-      <h3 class="fw-bold mb-0">INVOICE</h3>
-      <p class="text-muted mb-0">{{ order.order_ref }}</p>
-    </div>
-    <div class="text-end">
-      <strong>Your Company Name</strong><br>
-      <small class="text-muted">Your Address Line 1<br>City, Postcode<br>VAT No: GB000000000</small>
+  <!-- Header -->
+  <div class="header-row">
+    <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="{{ co.name }}" style="height:55px;">
+    <div class="company-details">
+      <strong>{{ co.name }}</strong><br>
+      {{ co.addr1 }}<br>
+      {{ co.addr2 }}<br>
+      {{ co.postcode }}<br>
+      Tel: {{ co.tel }}
     </div>
   </div>
+  <hr class="divider">
 
-  <div class="row mb-4">
-    <div class="col-md-6">
-      <strong>Bill To:</strong><br>
-      {{ order.customer.name }}<br>
-      {{ order.customer.address or '' }}<br>
-      {{ order.customer.email or '' }}
+  <!-- Bill To + Invoice details -->
+  <div class="bill-grid">
+    <div class="addr-box">
+      <div class="box-label">To:</div>
+      <strong>{{ order.customer.name }}</strong><br>
+      {% if order.customer.address %}
+        <span style="white-space:pre-line;">{{ order.customer.address }}</span><br>
+      {% endif %}
+      {% if order.customer.phone %}<span>Tel: {{ order.customer.phone }}</span><br>{% endif %}
+      {% if order.customer.email %}<span>{{ order.customer.email }}</span>{% endif %}
     </div>
-    <div class="col-md-6 text-end">
-      <table class="table table-sm table-borderless ms-auto" style="width:auto;">
-        <tr><th>Invoice Date</th><td>{{ order.created_at.strftime('%d/%m/%Y') }}</td></tr>
-        <tr><th>Due Date</th><td>{{ order.required_date.strftime('%d/%m/%Y') if order.required_date else '30 days' }}</td></tr>
-        <tr><th>Reference</th><td>{{ order.order_ref }}</td></tr>
+    <div class="details-box">
+      <table>
+        <tr><td>Invoice No.</td><td><strong>{{ order.order_ref }}</strong></td></tr>
+        <tr><td>Date</td><td>{{ order.created_at.strftime('%d/%m/%Y') }}</td></tr>
+        <tr><td>Customer O/N</td><td>{{ order.order_ref }}</td></tr>
+        <tr><td>Payment Terms</td><td>{{ order.customer.payment_terms or '30 days Nett' }}</td></tr>
       </table>
     </div>
   </div>
 
-  <table class="table table-bordered">
-    <thead class="table-dark">
-      <tr><th>Product</th><th class="text-end">Qty</th><th class="text-end">Unit Price</th><th class="text-end">Total</th></tr>
+  <!-- Line items -->
+  <table class="lines">
+    <thead>
+      <tr>
+        <th style="width:50px">Qty</th>
+        <th>Description</th>
+        <th style="width:110px">Part No.</th>
+        <th class="right" style="width:90px">Unit Price</th>
+        <th class="right" style="width:90px">Total</th>
+      </tr>
     </thead>
     <tbody>
       {% for item in order.items %}
       <tr>
-        <td>{{ item.product.code }} — {{ item.product.name }}</td>
-        <td class="text-end">{{ item.qty }}</td>
-        <td class="text-end">£{{ '%.2f'|format(item.unit_price) }}</td>
-        <td class="text-end">£{{ '%.2f'|format(item.qty * item.unit_price) }}</td>
+        <td>{{ item.qty | int if item.qty == (item.qty | int) else item.qty }}</td>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.product.code }}</td>
+        <td class="right">£{{ '%.2f' | format(item.unit_price) }}</td>
+        <td class="right">£{{ '%.2f' | format(item.qty * item.unit_price) }}</td>
       </tr>
       {% endfor %}
     </tbody>
-    <tfoot>
-      <tr class="table-light"><th colspan="3" class="text-end">Subtotal (ex VAT)</th><td class="text-end">£{{ '%.2f'|format(order.total) }}</td></tr>
-      <tr class="table-light"><th colspan="3" class="text-end">VAT (20%)</th><td class="text-end">£{{ '%.2f'|format(order.total * 0.2) }}</td></tr>
-      <tr class="fw-bold"><th colspan="3" class="text-end">Total Inc. VAT</th><td class="text-end">£{{ '%.2f'|format(order.total * 1.2) }}</td></tr>
-    </tfoot>
   </table>
 
-  {% if order.notes %}<div class="alert alert-light border"><strong>Notes:</strong> {{ order.notes }}</div>{% endif %}
-  <p class="text-muted small mt-4">Payment terms: 30 days from invoice date. Thank you for your business.</p>
+  <!-- Totals -->
+  {% set subtotal = order.items | sum(attribute='line_total') if order.items[0].line_total is defined else order.total %}
+  <table class="totals-table">
+    <tr><td>Carriage</td><td>—</td></tr>
+    <tr><td>Subtotal</td><td>£{{ '%.2f' | format(order.total) }}</td></tr>
+    <tr><td>VAT @ 20%</td><td>£{{ '%.2f' | format(order.total * 0.2) }}</td></tr>
+    <tr class="grand"><td>Total</td><td>£{{ '%.2f' | format(order.total * 1.2) }}</td></tr>
+  </table>
+
+  <!-- Bank details -->
+  <div class="bank-section">
+    <strong>Please note our bank details:</strong><br>
+    {{ co.bank }}<br>
+    Sort code: {{ co.sort_code }}&nbsp;&nbsp;&nbsp; Account number: {{ co.account }}
+  </div>
+
+  <div class="payment-terms">
+    Payment terms: {{ order.customer.payment_terms or '30 days Nett' }}
+  </div>
+
+  <div class="company-reg">
+    Company Registration No. {{ co.reg }} &nbsp;&nbsp; VAT Registration No. {{ co.vat }}
+  </div>
+
 </div>
 </body>
 </html>

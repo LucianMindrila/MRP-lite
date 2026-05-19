@@ -81,6 +81,13 @@ def po_detail(po_id):
     return render_template('purchasing/po_detail.html', po=po)
 
 
+@purchasing_bp.route('/po/<int:po_id>/print')
+@login_required
+def po_print(po_id):
+    po = PurchaseOrder.query.get_or_404(po_id)
+    return render_template('purchasing/print_po.html', po=po)
+
+
 @purchasing_bp.route('/po/<int:po_id>/send', methods=['POST'])
 @login_required
 def po_send(po_id):

@@ -50,6 +50,27 @@ def create_app(config_name=None):
     app.register_blueprint(reports_bp)
     app.register_blueprint(operator_bp)
 
+    # Inject company config into all templates
+    @app.context_processor
+    def inject_company():
+        return {'co': {
+            'name':              app.config['COMPANY_NAME'],
+            'reg':               app.config['COMPANY_REG'],
+            'vat':               app.config['COMPANY_VAT'],
+            'tel':               app.config['COMPANY_TEL'],
+            'fax':               app.config['COMPANY_FAX'],
+            'email':             app.config['COMPANY_EMAIL'],
+            'addr1':             app.config['COMPANY_ADDR1'],
+            'addr2':             app.config['COMPANY_ADDR2'],
+            'postcode':          app.config['COMPANY_POSTCODE'],
+            'dispatch_addr1':    app.config['COMPANY_DISPATCH_ADDR1'],
+            'dispatch_addr2':    app.config['COMPANY_DISPATCH_ADDR2'],
+            'dispatch_postcode': app.config['COMPANY_DISPATCH_POSTCODE'],
+            'bank':              app.config['COMPANY_BANK'],
+            'sort_code':         app.config['COMPANY_SORT_CODE'],
+            'account':           app.config['COMPANY_ACCOUNT'],
+        }}
+
     # Register CLI commands
     register_seed_command(app)
 

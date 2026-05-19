@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Purchase Order — {{ po.po_ref }}</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; font-size: 11px; color: #111; background: #fff; }
+    .page { max-width: 800px; margin: 0 auto; padding: 18px 24px; }
+    .no-print { margin-bottom: 12px; }
+    .no-print button, .no-print a {
+      display: inline-block; padding: 5px 14px; margin-right: 6px;
+      border: 1px solid #333; background: #333; color: #fff;
+      text-decoration: none; border-radius: 3px; font-size: 12px; cursor: pointer;
+    }
+    .no-print a { background: #fff; color: #333; }
+    hr.divider { border: none; border-top: 2px solid #1C3A6A; margin: 8px 0; }
+    .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+    .doc-title { font-size: 22px; font-weight: bold; letter-spacing: 1px; color: #1C3A6A; }
+    .address-grid { display: flex; gap: 0; margin-bottom: 12px; border: 1px solid #888; }
+    .addr-cell { flex: 1; padding: 7px 10px; border-right: 1px solid #888; }
+    .addr-cell:last-child { border-right: none; }
+    .addr-cell .box-label { font-weight: bold; font-size: 10px; margin-bottom: 4px; text-transform: uppercase; color: #555; }
+    .po-meta-table { width: 100%; border-collapse: collapse; }
+    .po-meta-table td { padding: 3px 6px; border-bottom: 1px solid #ddd; font-size: 11px; }
+    .po-meta-table td:first-child { font-weight: bold; background: #f0f0f0; width: 50%; }
+    .po-meta-table tr:last-child td { border-bottom: none; }
+    table.lines { width: 100%; border-collapse: collapse; margin-bottom: 0; }
+    table.lines thead tr { background: #1C3A6A; color: #fff; }
+    table.lines thead th { padding: 6px 8px; text-align: left; font-size: 11px; }
+    table.lines thead th.center { text-align: center; }
+    table.lines thead th.right { text-align: right; }
+    table.lines tbody td { padding: 5px 8px; border-bottom: 1px solid #ddd; vertical-align: top; }
+    table.lines tbody td.center { text-align: center; }
+    table.lines tbody td.right { text-align: right; }
+    table.lines tbody tr:nth-child(even) { background: #fafafa; }
+    .totals-section { display: flex; justify-content: flex-end; margin-top: 0; border: 1px solid #888; border-top: none; }
+    .totals-table { width: 240px; border-collapse: collapse; }
+    .totals-table td { padding: 4px 8px; border-top: 1px solid #ddd; font-size: 11px; }
+    .totals-table td:first-child { font-weight: bold; background: #f0f0f0; }
+    .totals-table td:last-child { text-align: right; }
+    .totals-table tr.grand td { background: #1C3A6A; color: #fff; font-weight: bold; font-size: 12px; }
+    .warning-box { border: 1px solid #888; border-top: none; padding: 8px 10px; }
+    .warning-text { color: #c00; font-weight: bold; text-align: center; font-size: 10px; margin-bottom: 6px; }
+    .deliver-by { font-size: 11px; text-align: center; margin-bottom: 4px; }
+    .deliver-date { display: inline-block; border: 1px solid #888; padding: 3px 20px; font-weight: bold; font-size: 13px; }
+    .company-reg { font-size: 9px; color: #555; text-align: center; margin-top: 10px; border-top: 1px solid #ccc; padding-top: 6px; }
+    @media print {
+      .no-print { display: none !important; }
+      body { padding: 0; }
+      .page { padding: 10px 14px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="no-print">
+    <button onclick="window.print()">&#128438; Print</button>
+    <a href="{{ url_for('purchasing.po_detail', po_id=po.id) }}">Back to PO</a>
+  </div>
+
+  <!-- Header -->
+  <div class="header-row">
+    <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="{{ co.name }}" style="height:55px;">
+    <div class="doc-title">PURCHASE ORDER</div>
+  </div>
+  <hr class="divider">
+
+  <!-- Three-column address block -->
+  <div class="address-grid">
+    <div class="addr-cell">
+      <div class="box-label">To:</div>
+      <strong>{{ po.supplier.name }}</strong><br>
+      {% if po.supplier.address %}
+        <span style="white-space:pre-line;">{{ po.supplier.address }}</span><br>
+      {% endif %}
+      {% if po.supplier.phone %}<span>Tel: {{ po.supplier.phone }}</span><br>{% endif %}
+      {% if po.supplier.email %}<span>{{ po.supplier.email }}</span>{% endif %}
+    </div>
+    <div class="addr-cell">
+      <div class="box-label">Delivery Address:</div>
+      <strong>{{ co.name }}</strong><br>
+      {{ co.addr1 }}<br>
+      {{ co.addr2 }}<br>
+      {{ co.postcode }}<br>
+      Tel: {{ co.tel }}
+    </div>
+    <div class="addr-cell" style="flex:0.8">
+      <table class="po-meta-table">
+        <tr><td>P/O No.</td><td><strong>{{ po.po_ref }}</strong></td></tr>
+        <tr><td>Date</td><td>{{ po.created_at.strftime('%d/%m/%Y') }}</td></tr>
+        <tr><td>Delivery to Above Address</td><td></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Line items -->
+  <table class="lines">
+    <thead>
+      <tr>
+        <th class="center" style="width:50px">QTY</th>
+        <th style="width:60px">UNIT</th>
+        <th>DESCRIPTION</th>
+        <th style="width:80px">CODE</th>
+        <th class="right" style="width:90px">UNIT PRICE</th>
+        <th class="right" style="width:90px">AMOUNT</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in po.items %}
+      <tr>
+        <td class="center"><strong>{{ item.qty | int if item.qty == (item.qty | int) else item.qty }}</strong></td>
+        <td>{{ item.material.unit }}</td>
+        <td>{{ item.material.name }} <span style="color:#666;">({{ item.material.code }})</span></td>
+        <td>{{ item.material.code }}</td>
+        <td class="right">£{{ '%.2f' | format(item.unit_price) }}</td>
+        <td class="right">£{{ '%.2f' | format(item.qty * item.unit_price) }}</td>
+      </tr>
+      {% endfor %}
+      {% for i in range([8 - po.items|length, 2]|max) %}
+      <tr><td style="height:18px">&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Totals -->
+  <div class="totals-section">
+    <table class="totals-table">
+      <tr><td>Carriage</td><td>FREE</td></tr>
+      <tr><td>Subtotal</td><td>£{{ '%.2f' | format(po.total) }}</td></tr>
+      <tr><td>VAT 20%</td><td>£{{ '%.2f' | format(po.total * 0.2) }}</td></tr>
+      <tr class="grand"><td>Total</td><td>£{{ '%.2f' | format(po.total * 1.2) }}</td></tr>
+    </table>
+  </div>
+
+  <!-- Warning + deliver by -->
+  <div class="warning-box">
+    <div class="warning-text">PLEASE NOTIFY US IMMEDIATELY IF THIS ORDER CANNOT BE SHIPPED COMPLETE</div>
+    <div class="deliver-by">PLEASE DELIVER ON OR BEFORE:</div>
+    <div style="text-align:center; margin-top:4px;">
+      <span class="deliver-date">
+        {% if po.expected_date %}{{ po.expected_date.strftime('%d/%m/%Y') }}{% else %}ASAP{% endif %}
+      </span>
+    </div>
+  </div>
+
+  <div class="company-reg">
+    Company Registration No. {{ co.reg }} &nbsp;&nbsp; VAT Registration No. {{ co.vat }}
+  </div>
+
+</div>
+</body>
+</html>

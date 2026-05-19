@@ -35,6 +35,15 @@
         <label class="form-label">Address</label>
         <textarea name="address" class="form-control" rows="3">{{ customer.address if customer else '' }}</textarea>
       </div>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Payment Terms</label>
+        <select name="payment_terms" class="form-select">
+          {% set terms = customer.payment_terms if customer else '30 days Nett' %}
+          <option value="Pro Forma" {% if terms == 'Pro Forma' %}selected{% endif %}>Pro Forma</option>
+          <option value="30 days Nett" {% if terms == '30 days Nett' %}selected{% endif %}>30 days Nett</option>
+          <option value="60 days from invoice date" {% if terms == '60 days from invoice date' %}selected{% endif %}>60 days from invoice date</option>
+        </select>
+      </div>
       <div class="d-flex gap-2 mt-4">
         <button type="submit" class="btn btn-primary fw-semibold">
           {{ 'Save Changes' if customer else 'Add Customer' }}

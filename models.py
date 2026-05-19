@@ -92,6 +92,7 @@ class Customer(db.Model):
     email = db.Column(db.String(120))
     phone = db.Column(db.String(40))
     address = db.Column(db.Text)
+    payment_terms = db.Column(db.String(40), default='30 days Nett')
     orders = db.relationship('Order', backref='customer', lazy=True)
 
 

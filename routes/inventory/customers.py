@@ -21,6 +21,7 @@ def customer_add():
             email=request.form.get('email', '').strip(),
             phone=request.form.get('phone', '').strip(),
             address=request.form.get('address', '').strip(),
+            payment_terms=request.form.get('payment_terms', '30 days Nett').strip(),
         )
         db.session.add(c)
         db.session.commit()
@@ -39,6 +40,7 @@ def customer_edit(cid):
         c.email = request.form.get('email', '').strip()
         c.phone = request.form.get('phone', '').strip()
         c.address = request.form.get('address', '').strip()
+        c.payment_terms = request.form.get('payment_terms', '30 days Nett').strip()
         db.session.commit()
         flash(f'Customer "{c.name}" updated.', 'success')
         return redirect(url_for('inventory.customers_list'))
