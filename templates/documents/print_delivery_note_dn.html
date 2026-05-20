@@ -65,12 +65,6 @@
     <div class="doc-title">DELIVERY NOTE</div>
   </div>
   <hr class="divider">
-  <div class="company-addr">
-    {{ co.dispatch_addr1 }}, {{ co.dispatch_addr2 }}, {{ co.dispatch_postcode }}
-    &nbsp;&nbsp;|&nbsp;&nbsp; Tel: {{ co.tel }}
-    &nbsp;&nbsp;|&nbsp;&nbsp; Fax: {{ co.fax }}
-    &nbsp;&nbsp;|&nbsp;&nbsp; {{ co.email }}
-  </div>
 
   <!-- Address + Details -->
   <div class="address-grid">
@@ -146,6 +140,7 @@
   </div>
 
   <div class="company-reg">
+    Unit 4, Tuffley Industrial Park, Pearce Way, Gloucester, GL2 5YD &nbsp;|&nbsp; Tel: {{ co.tel }} &nbsp;|&nbsp; Fax: {{ co.fax }} &nbsp;|&nbsp; {{ co.email }}<br>
     Company Registration No. {{ co.reg }} &nbsp;&nbsp; VAT Registration No. {{ co.vat }}
   </div>
 

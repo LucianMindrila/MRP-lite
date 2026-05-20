@@ -60,13 +60,7 @@
   <!-- Header -->
   <div class="header-row">
     <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="{{ co.name }}" style="height:55px;">
-    <div class="company-details">
-      <strong>{{ co.name }}</strong><br>
-      {{ co.addr1 }}<br>
-      {{ co.addr2 }}<br>
-      {{ co.postcode }}<br>
-      Tel: {{ co.tel }}
-    </div>
+    <div style="font-size:22px; font-weight:bold; letter-spacing:1px; color:#1C3A6A;">INVOICE</div>
   </div>
   <hr class="divider">
 
@@ -116,7 +110,6 @@
   </table>
 
   <!-- Totals -->
-  {% set subtotal = order.items | sum(attribute='line_total') if order.items[0].line_total is defined else order.total %}
   <table class="totals-table">
     <tr><td>Carriage</td><td>—</td></tr>
     <tr><td>Subtotal</td><td>£{{ '%.2f' | format(order.total) }}</td></tr>
@@ -135,7 +128,8 @@
     Payment terms: {{ order.customer.payment_terms or '30 days Nett' }}
   </div>
 
-  <div class="company-reg">
+  <div class="company-reg" style="margin-top:16px; border-top:1px solid #ccc; padding-top:6px;">
+    Unit 4, Tuffley Industrial Park, Pearce Way, Gloucester, GL2 5YD &nbsp;|&nbsp; Tel: {{ co.tel }} &nbsp;|&nbsp; Fax: {{ co.fax }} &nbsp;|&nbsp; {{ co.email }}<br>
     Company Registration No. {{ co.reg }} &nbsp;&nbsp; VAT Registration No. {{ co.vat }}
   </div>
 
