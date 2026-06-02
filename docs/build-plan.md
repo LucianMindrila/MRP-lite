@@ -93,9 +93,31 @@ Full pipeline is implemented:
 
 ---
 
+## Database Setup — Current State (as of June 2026)
+
+The `scripts/` folder contains real business data captured as re-runnable scripts. These were added on top of a base database and **cannot be run on a fresh DB without a base setup first** (they assume suppliers/categories already exist).
+
+**Data confirmed in scripts:**
+- Customers: Safety Knife Company, Trend Tools, Axminster, Nuco
+- Suppliers: Allcap, Amari Plastics, Protective Solutions (UK) Ltd
+- Materials: 40+ Allcap ironmongery items, Amari PVC sheet, 9 PSL cardboard box types, Safety Knife components
+- Products + BOMs: Safety Knife Big Fish range, Trend jigs, Axminster jigs with packaging BOMs
+
+**Known gaps:**
+- Additional customers, suppliers, products and materials exist in the live database on the work PC that have NOT yet been captured in any script
+- No master setup script exists yet — creating one is the next task
+
+## Next Session — Work PC Tasks
+
+1. Pull the repo (`git pull`) to get latest CLAUDE.md and docs
+2. Copy `C:\Users\Lucian\.claude\CLAUDE.md` from home PC to same path on work PC (one-time)
+3. Run `scripts/export_db.py` to dump everything currently in the live database to `scripts/db_export.json`
+4. Review the export to identify what's missing vs what's already captured in scripts
+5. Build `scripts/setup_real_data.py` — a single master script that sets up everything from scratch in the correct order
+
 ## Known Gaps / To Be Investigated
 
 - Invoicing route (`routes/documents.py`) — extent of implementation unknown
 - Production scheduling view — Smartsheet Gantt replacement not yet assessed
 - UI completeness — templates may exist for routes but quality/completeness unknown
-- watch_orders.py path configuration needs updating per machine (currently hardcoded to `conta` user)
+- watch_orders.py path configuration needs updating for dedicated office machine
