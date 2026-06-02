@@ -85,6 +85,8 @@ Full pipeline is implemented:
 
 **These paths need updating for any new machine.**
 
+**Deployment plan:** MRP-lite will run on a dedicated machine at the DT Solutions office, online 24/7 as an internal server. Paths for `watch_orders.py` and `run_watcher_silent.vbs` should be configured once on that machine and left permanent. Staff access the app via browser on the local network.
+
 **Environment variable required:** `ANTHROPIC_API_KEY`
 
 **Dependencies:** `pip install anthropic pdfplumber`
