@@ -107,7 +107,7 @@ def product_edit(pid):
         return redirect(url_for('inventory.product_edit', pid=p.id))
 
     bom_items = BOMItem.query.filter_by(product_id=p.id).all()
-    total_bom_cost = sum(b.qty_per_unit * b.material.cost_price for b in bom_items)
+    total_bom_cost = sum(b.qty_per_unit * b.unit_cost for b in bom_items)
     customers = Customer.query.order_by(Customer.name).all()
     return render_template('inventory/product_form.html', product=p, bom_items=bom_items,
                            materials=materials, total_bom_cost=total_bom_cost, customers=customers)
@@ -142,6 +142,7 @@ def product_copy(pid):
         db.session.add(BOMItem(
             product_id=copy.id,
             material_id=b.material_id,
+            component_product_id=b.component_product_id,
             qty_per_unit=b.qty_per_unit,
         ))
     db.session.commit()

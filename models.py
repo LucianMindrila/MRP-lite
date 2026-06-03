@@ -71,8 +71,14 @@ class Product(db.Model):
     unit = db.Column(db.String(20), default='pcs')
     sale_price = db.Column(db.Float, default=0)
     lead_time_days = db.Column(db.Integer, default=1)
+    is_subassembly = db.Column(db.Boolean, default=False)
     customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'))
-    bom_items = db.relationship('BOMItem', backref='product', lazy=True, cascade='all, delete-orphan')
+    bom_items = db.relationship('BOMItem', foreign_keys='BOMItem.product_id',
+                                backref='product', lazy=True, cascade='all, delete-orphan')
+    used_in_boms = db.relationship('BOMItem', foreign_keys='BOMItem.component_product_id',
+                                   backref='component_product', lazy=True)
+    routing = db.relationship('ProductOperation', backref='product', lazy=True,
+                              order_by='ProductOperation.sequence', cascade='all, delete-orphan')
     order_items = db.relationship('OrderItem', backref='product', lazy=True)
     work_orders = db.relationship('WorkOrder', backref='product', lazy=True)
 
@@ -81,8 +87,23 @@ class BOMItem(db.Model):
     __tablename__ = 'bom_items'
     id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
-    material_id = db.Column(db.Integer, db.ForeignKey('materials.id'), nullable=False)
+    material_id = db.Column(db.Integer, db.ForeignKey('materials.id'), nullable=True)
+    component_product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=True)
     qty_per_unit = db.Column(db.Float, nullable=False)
+
+    @property
+    def component_name(self):
+        if self.material:
+            return self.material.name
+        if self.component_product:
+            return self.component_product.name
+        return '—'
+
+    @property
+    def unit_cost(self):
+        if self.material:
+            return self.material.cost_price
+        return 0
 
 
 class Customer(db.Model):
@@ -173,6 +194,8 @@ class WorkOrder(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     completed_at = db.Column(db.DateTime)
     notes = db.Column(db.Text)
+    parent_wo_id = db.Column(db.Integer, db.ForeignKey('work_orders.id'), nullable=True)
+    parent_wo = db.relationship('WorkOrder', remote_side='WorkOrder.id', backref='sub_work_orders')
 
 
 class PurchaseOrder(db.Model):
@@ -230,3 +253,61 @@ class StockBatch(db.Model):
     notes = db.Column(db.String(200))
     material = db.relationship('Material', backref='stock_batches')
     purchase_order = db.relationship('PurchaseOrder', backref='stock_batches')
+
+
+# --- Production Routing & Scheduling ---
+
+class Machine(db.Model):
+    __tablename__ = 'machines'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), unique=True, nullable=False)
+    machine_type = db.Column(db.String(40))   # CNC Router, CNC Milling, Beamsaw, etc.
+    unit = db.Column(db.String(10))            # U3, U4, U7, U16
+    is_active = db.Column(db.Boolean, default=True)
+    notes = db.Column(db.Text)
+
+
+operation_machines = db.Table(
+    'operation_machines',
+    db.Column('operation_id', db.Integer, db.ForeignKey('operations.id'), primary_key=True),
+    db.Column('machine_id', db.Integer, db.ForeignKey('machines.id'), primary_key=True)
+)
+
+
+class Operation(db.Model):
+    __tablename__ = 'operations'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), unique=True, nullable=False)  # Beamsaw, CNC Roughing, etc.
+    requires_machine = db.Column(db.Boolean, default=True)        # False for Assembly, Packing, QC
+    notes = db.Column(db.Text)
+    eligible_machines = db.relationship('Machine', secondary='operation_machines',
+                                        backref='operations', lazy=True)
+
+
+class ProductOperation(db.Model):
+    __tablename__ = 'product_operations'
+    id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+    operation_id = db.Column(db.Integer, db.ForeignKey('operations.id'), nullable=False)
+    sequence = db.Column(db.Integer, nullable=False)       # 1, 2, 3... defines the order
+    daily_output = db.Column(db.Float, nullable=True)      # units per working day; null = TBD
+    notes = db.Column(db.Text)
+    operation = db.relationship('Operation', backref='product_operations')
+
+
+class ProductionTask(db.Model):
+    __tablename__ = 'production_tasks'
+    id = db.Column(db.Integer, primary_key=True)
+    work_order_id = db.Column(db.Integer, db.ForeignKey('work_orders.id'), nullable=False)
+    product_operation_id = db.Column(db.Integer, db.ForeignKey('product_operations.id'), nullable=False)
+    machine_id = db.Column(db.Integer, db.ForeignKey('machines.id'), nullable=True)  # null for manual ops
+    planned_start = db.Column(db.Date, nullable=False)
+    planned_end = db.Column(db.Date, nullable=False)
+    qty = db.Column(db.Float, nullable=False)
+    status = db.Column(db.String(20), default='planned')  # planned, in_progress, complete
+    actual_start = db.Column(db.Date)
+    actual_end = db.Column(db.Date)
+    notes = db.Column(db.Text)
+    work_order = db.relationship('WorkOrder', backref='production_tasks')
+    product_operation = db.relationship('ProductOperation', backref='production_tasks')
+    machine = db.relationship('Machine', backref='production_tasks')

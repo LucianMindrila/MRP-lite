@@ -78,6 +78,7 @@ with app.app_context():
     bom_items = BOMItem.query.all()
     data['bom_items'] = [
         {'product_id': b.product_id, 'material_id': b.material_id,
+         'component_product_id': b.component_product_id,
          'qty_per_unit': b.qty_per_unit}
         for b in bom_items
     ]

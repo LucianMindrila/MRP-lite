@@ -2,10 +2,31 @@ from models import db, Order, OrderItem, BOMItem, Material, PurchaseOrder, Purch
 from datetime import datetime
 
 
+def _explode_bom(product_id, qty, requirements, order_ref, visited=None):
+    """Recursively explode a BOM, following sub-assembly links, collecting raw material totals."""
+    if visited is None:
+        visited = set()
+    if product_id in visited:
+        return  # prevent infinite loops from circular BOMs
+    visited.add(product_id)
+
+    for bom_item in BOMItem.query.filter_by(product_id=product_id).all():
+        needed = bom_item.qty_per_unit * qty
+        if bom_item.material_id:
+            mid = bom_item.material_id
+            if mid not in requirements:
+                requirements[mid] = {'material': bom_item.material, 'required': 0, 'orders': []}
+            requirements[mid]['required'] += needed
+            requirements[mid]['orders'].append({'order_ref': order_ref, 'qty': needed})
+        elif bom_item.component_product_id:
+            _explode_bom(bom_item.component_product_id, needed, requirements, order_ref, visited)
+
+
 def get_open_order_requirements():
     """
     For all confirmed/in_production orders, calculate total material requirements.
-    Returns a dict: { material_id: { 'material': obj, 'required': float } }
+    Fully explodes multi-level BOMs — sub-assemblies are resolved to raw materials.
+    Returns a dict: { material_id: { 'material': obj, 'required': float, 'orders': list } }
     """
     open_orders = Order.query.filter(
         Order.status.in_(['confirmed', 'in_production'])
@@ -14,21 +35,7 @@ def get_open_order_requirements():
     requirements = {}
     for order in open_orders:
         for item in order.items:
-            bom = BOMItem.query.filter_by(product_id=item.product_id).all()
-            for bom_item in bom:
-                mid = bom_item.material_id
-                needed = bom_item.qty_per_unit * item.qty
-                if mid not in requirements:
-                    requirements[mid] = {
-                        'material': bom_item.material,
-                        'required': 0,
-                        'orders': []
-                    }
-                requirements[mid]['required'] += needed
-                requirements[mid]['orders'].append({
-                    'order_ref': order.order_ref,
-                    'qty': needed
-                })
+            _explode_bom(item.product_id, item.qty, requirements, order.order_ref)
     return requirements
 
 

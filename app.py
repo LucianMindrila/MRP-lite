@@ -17,7 +17,7 @@ def create_app(config_name=None):
 
     # Initialise extensions
     db.init_app(app)
-    Migrate(app, db)
+    Migrate(app, db, render_as_batch=True)
 
     # Login manager
     login_manager = LoginManager()

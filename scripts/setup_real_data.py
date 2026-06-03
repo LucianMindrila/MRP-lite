@@ -149,10 +149,12 @@ def restore(data):
     # Flush parents so the BOM foreign keys resolve cleanly.
     db.session.flush()
 
-    # 7. BOM items (-> product, material)
+    # 7. BOM items (-> product, material or component product)
     for b in data.get('bom_items', []):
         db.session.add(BOMItem(
-            product_id=b['product_id'], material_id=b['material_id'],
+            product_id=b['product_id'],
+            material_id=b.get('material_id'),
+            component_product_id=b.get('component_product_id'),
             qty_per_unit=b['qty_per_unit']))
 
     db.session.commit()

@@ -70,6 +70,50 @@ See `docs/build-plan.md` for what's built, what's in progress, and what's next.
 
 See `docs/business-context.md` for the full DT Solutions business flow, pain points, and what this app is replacing.
 
+## Factory Layout & Machines
+
+### Units
+- **Unit 3 & 4** — same building, separated by a wall. Goods move between U3/4 and U16 by forklift.
+- **Unit 16** — across the street from U3-4. Forklift access.
+- **Unit 7** — further away. Goods move to/from U7 via 3.5t truck.
+
+### Dispatch locations
+- **Unit 7** — mainly Trend products
+- **Unit 4** — all Safety Knife, all NuCo, some Trend
+
+### Machines
+
+| Machine | Type | Unit |
+|---|---|---|
+| Selco SK4 | Beamsaw (sheet cutting) | U4 |
+| Raptor U4 | CNC Router | U4 |
+| Felder | CNC Router | U4 |
+| Raptor U3 | CNC Router | U3 |
+| Thermwood 1 | CNC Router | U7 |
+| Thermwood 2 | CNC Router | U7 |
+| Thermwood 3 | CNC Router | U7 |
+| Thermwood 4 | CNC Router | U7 |
+| Multicam | CNC Router | U7 |
+| Thermwood 5 | CNC Router | U16 |
+| Thermwood 6 | CNC Router | U16 |
+| Hurco VMC U4 | CNC Milling | U4 |
+| Hurco VMC U7 | CNC Milling | U7 |
+| Hurco VMC U16 | CNC Milling | U16 |
+| Hurco Lathe | CNC Lathe | U16 |
+| Lotus 1 | Laser Engraving | U7 |
+| Lotus 2 | Laser Engraving | U7 |
+| Lotus 3 | Laser Engraving | U7 |
+| Edgebander | Edgebanding | U3 |
+
+### Manual Operations (no machine — present for all products)
+- Assembly
+- Packing
+- Quality checking
+
+Daily throughput for manual operations is product-specific — to be defined per product routing.
+
+---
+
 ## Working with Lucian
 
 - Non-developer, business/product owner. Discuss approach before significant work; explain decisions in plain language.
