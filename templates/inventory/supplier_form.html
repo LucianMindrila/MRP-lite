@@ -32,6 +32,11 @@
         </div>
       </div>
       <div class="mb-3">
+        <label class="form-label">Address</label>
+        <textarea name="address" class="form-control" rows="4"
+                  placeholder="Street&#10;Town&#10;City&#10;Postcode">{{ supplier.address if supplier else '' }}</textarea>
+      </div>
+      <div class="mb-3">
         <label class="form-label">Lead Time (days)</label>
         <input type="number" name="lead_time_days" class="form-control" min="1"
                value="{{ supplier.lead_time_days if supplier else 7 }}" style="width:120px;"/>

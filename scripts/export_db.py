@@ -42,7 +42,8 @@ with app.app_context():
     suppliers = Supplier.query.order_by(Supplier.name).all()
     data['suppliers'] = [
         {'id': s.id, 'name': s.name, 'contact': s.contact,
-         'email': s.email, 'phone': s.phone, 'lead_time_days': s.lead_time_days}
+         'email': s.email, 'phone': s.phone, 'address': s.address,
+         'lead_time_days': s.lead_time_days}
         for s in suppliers
     ]
 

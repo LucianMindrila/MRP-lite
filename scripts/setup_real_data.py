@@ -119,7 +119,8 @@ def restore(data):
     for s in data.get('suppliers', []):
         db.session.add(Supplier(
             id=s['id'], name=s['name'], contact=s.get('contact'), email=s.get('email'),
-            phone=s.get('phone'), lead_time_days=s.get('lead_time_days', 7)))
+            phone=s.get('phone'), address=s.get('address'),
+            lead_time_days=s.get('lead_time_days', 7)))
 
     # 4. Customers (no dependencies)
     for c in data.get('customers', []):

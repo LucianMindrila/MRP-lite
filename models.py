@@ -37,6 +37,7 @@ class Supplier(db.Model):
     contact = db.Column(db.String(120))
     email = db.Column(db.String(120))
     phone = db.Column(db.String(40))
+    address = db.Column(db.Text)
     lead_time_days = db.Column(db.Integer, default=7)
     materials = db.relationship('Material', backref='supplier', lazy=True)
     purchase_orders = db.relationship('PurchaseOrder', backref='supplier', lazy=True)

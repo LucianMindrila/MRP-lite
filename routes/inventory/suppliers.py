@@ -20,6 +20,7 @@ def supplier_add():
             contact=request.form.get('contact', '').strip(),
             email=request.form.get('email', '').strip(),
             phone=request.form.get('phone', '').strip(),
+            address=request.form.get('address', '').strip(),
             lead_time_days=int(request.form.get('lead_time_days', 7)),
         )
         db.session.add(s)
@@ -38,6 +39,7 @@ def supplier_edit(sid):
         s.contact = request.form.get('contact', '').strip()
         s.email = request.form.get('email', '').strip()
         s.phone = request.form.get('phone', '').strip()
+        s.address = request.form.get('address', '').strip()
         s.lead_time_days = int(request.form.get('lead_time_days', 7))
         db.session.commit()
         flash(f'Supplier "{s.name}" updated.', 'success')
