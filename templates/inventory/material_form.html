@@ -2,6 +2,12 @@
 {% block title %}{{ 'Edit' if material else 'Add' }} Material{% endblock %}
 {% block page_title %}{{ 'Edit — ' + material.code if material else 'Add Material' }}{% endblock %}
 
+{% block head %}
+{% if material %}
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.min.css" rel="stylesheet"/>
+{% endif %}
+{% endblock %}
+
 {% block content %}
 <div class="card" style="max-width:680px;">
   <div class="card-header fw-semibold">
@@ -9,6 +15,7 @@
   </div>
   <div class="card-body">
     <form method="POST">
+      <input type="hidden" name="action" value="save"/>
       <div class="row g-3">
         <div class="col-md-4">
           <label class="form-label fw-semibold">Code *</label>
@@ -104,7 +111,90 @@
         <button type="submit" class="btn btn-outline-danger btn-sm">Delete Material</button>
       </form>
     </div>
+
+    {# ── Used For Products (BOM) ─────────────────────────────────────── #}
+    <hr class="my-4"/>
+    <h6 class="fw-semibold mb-3"><i class="bi bi-diagram-3 me-1"></i>Used For Products</h6>
+
+    {% if bom_items %}
+    <table class="table table-sm table-bordered align-middle mb-3" style="max-width:600px;">
+      <thead class="table-light">
+        <tr>
+          <th>Product</th>
+          <th style="width:120px;">Qty / Unit</th>
+          <th style="width:60px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for b in bom_items %}
+        <tr>
+          <td>
+            <span class="text-muted small me-1">{{ b.product.code }}</span>
+            {{ b.product.name }}
+          </td>
+          <td>
+            <form method="POST" class="d-flex gap-1 align-items-center">
+              <input type="hidden" name="action" value="update_bom"/>
+              <input type="hidden" name="bom_id" value="{{ b.id }}"/>
+              <input type="number" name="bom_qty" class="form-control form-control-sm"
+                     value="{{ b.qty_per_unit }}" min="0.001" step="0.001" style="width:80px;"/>
+              <button type="submit" class="btn btn-outline-secondary btn-sm" title="Update qty">
+                <i class="bi bi-check2"></i>
+              </button>
+            </form>
+          </td>
+          <td>
+            <form method="POST" onsubmit="return confirm('Remove this BOM line?')">
+              <input type="hidden" name="action" value="delete_bom"/>
+              <input type="hidden" name="bom_id" value="{{ b.id }}"/>
+              <button type="submit" class="btn btn-outline-danger btn-sm">
+                <i class="bi bi-trash"></i>
+              </button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="text-muted small mb-3">Not yet linked to any product.</p>
+    {% endif %}
+
+    {# Add new BOM link #}
+    <form method="POST" class="row g-2 align-items-end" style="max-width:600px;">
+      <input type="hidden" name="action" value="add_bom"/>
+      <div class="col-7">
+        <label class="form-label form-label-sm fw-semibold">Add Product</label>
+        <select id="bom-product-select" name="bom_product_id" class="form-select form-select-sm" required>
+          <option value="">— Search product —</option>
+          {% for p in products %}
+          <option value="{{ p.id }}">{{ p.code }} — {{ p.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-3">
+        <label class="form-label form-label-sm fw-semibold">Qty / Unit</label>
+        <input type="number" name="bom_qty" class="form-control form-control-sm"
+               value="1" min="0.001" step="0.001"/>
+      </div>
+      <div class="col-2">
+        <button type="submit" class="btn btn-primary btn-sm w-100">Add</button>
+      </div>
+    </form>
+
     {% endif %}
   </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+{% if material %}
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+<script>
+  new TomSelect('#bom-product-select', {
+    placeholder: 'Search by code or name…',
+    allowEmptyOption: true,
+  });
+</script>
+{% endif %}
 {% endblock %}

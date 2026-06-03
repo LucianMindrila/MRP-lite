@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required
-from models import db, Material, Supplier, Category
+from models import db, Material, Supplier, Category, Product, BOMItem
 from . import inventory_bp
 
 
@@ -70,22 +70,65 @@ def material_edit(mid):
     m = Material.query.get_or_404(mid)
     suppliers = Supplier.query.order_by(Supplier.name).all()
     categories = _all_categories()
+    products = Product.query.order_by(Product.code).all()
+
     if request.method == 'POST':
-        m.name = request.form['name'].strip()
-        m.description = request.form.get('description', '').strip()
-        m.unit = request.form.get('unit', 'pcs')
-        m.reorder_point = float(request.form.get('reorder_point', 0))
-        m.reorder_qty = float(request.form.get('reorder_qty', 0))
-        m.cost_price = float(request.form.get('cost_price', 0))
-        m.supplier_id = request.form.get('supplier_id') or None
-        m.category_id = request.form.get('category_id') or None
-        m.location = request.form.get('location', '').strip()
-        m.notes = request.form.get('notes', '').strip()
-        db.session.commit()
-        flash(f'Material {m.code} updated.', 'success')
-        return redirect(url_for('inventory.materials_list'))
+        action = request.form.get('action', 'save')
+
+        if action == 'save':
+            m.name = request.form['name'].strip()
+            m.description = request.form.get('description', '').strip()
+            m.unit = request.form.get('unit', 'pcs')
+            m.reorder_point = float(request.form.get('reorder_point', 0))
+            m.reorder_qty = float(request.form.get('reorder_qty', 0))
+            m.cost_price = float(request.form.get('cost_price', 0))
+            m.supplier_id = request.form.get('supplier_id') or None
+            m.category_id = request.form.get('category_id') or None
+            m.location = request.form.get('location', '').strip()
+            m.notes = request.form.get('notes', '').strip()
+            db.session.commit()
+            flash(f'Material {m.code} updated.', 'success')
+            return redirect(url_for('inventory.materials_list'))
+
+        elif action == 'add_bom':
+            product_id = request.form.get('bom_product_id')
+            qty = request.form.get('bom_qty', 1)
+            if product_id and float(qty) > 0:
+                existing = BOMItem.query.filter_by(product_id=int(product_id), material_id=m.id).first()
+                if existing:
+                    existing.qty_per_unit = float(qty)
+                    flash('BOM line updated.', 'success')
+                else:
+                    db.session.add(BOMItem(product_id=int(product_id), material_id=m.id, qty_per_unit=float(qty)))
+                    flash('BOM line added.', 'success')
+                db.session.commit()
+            return redirect(url_for('inventory.material_edit', mid=mid))
+
+        elif action == 'update_bom':
+            bom_id = request.form.get('bom_id')
+            qty = request.form.get('bom_qty')
+            if bom_id and qty:
+                bom = BOMItem.query.get(int(bom_id))
+                if bom and bom.material_id == m.id and float(qty) > 0:
+                    bom.qty_per_unit = float(qty)
+                    db.session.commit()
+                    flash('Quantity updated.', 'success')
+            return redirect(url_for('inventory.material_edit', mid=mid))
+
+        elif action == 'delete_bom':
+            bom_id = request.form.get('bom_id')
+            if bom_id:
+                bom = BOMItem.query.get(int(bom_id))
+                if bom and bom.material_id == m.id:
+                    db.session.delete(bom)
+                    db.session.commit()
+                    flash('BOM line removed.', 'success')
+            return redirect(url_for('inventory.material_edit', mid=mid))
+
+    bom_items = BOMItem.query.filter_by(material_id=m.id).all()
     return render_template('inventory/material_form.html', material=m,
-                           suppliers=suppliers, categories=categories)
+                           suppliers=suppliers, categories=categories,
+                           products=products, bom_items=bom_items)
 
 
 @inventory_bp.route('/materials/<int:mid>/delete', methods=['POST'])
