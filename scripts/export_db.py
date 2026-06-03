@@ -14,12 +14,20 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from app import create_app
-from models import db, Customer, Supplier, Category, Material, Product, BOMItem, Order, OrderItem
+from models import db, User, Customer, Supplier, Category, Material, Product, BOMItem, Order, OrderItem
 
 app = create_app()
 
 with app.app_context():
     data = {}
+
+    # Users (logins) — password hashes deliberately NOT exported.
+    # setup_real_data.py recreates users with default passwords.
+    users = User.query.order_by(User.id).all()
+    data['users'] = [
+        {'id': u.id, 'username': u.username, 'email': u.email, 'role': u.role}
+        for u in users
+    ]
 
     # Customers
     customers = Customer.query.order_by(Customer.name).all()
@@ -48,8 +56,8 @@ with app.app_context():
     # Materials
     materials = Material.query.order_by(Material.code).all()
     data['materials'] = [
-        {'id': m.id, 'code': m.code, 'name': m.name, 'unit': m.unit,
-         'stock_qty': m.stock_qty, 'cost_price': m.cost_price,
+        {'id': m.id, 'code': m.code, 'name': m.name, 'description': m.description,
+         'unit': m.unit, 'stock_qty': m.stock_qty, 'cost_price': m.cost_price,
          'reorder_point': m.reorder_point, 'reorder_qty': m.reorder_qty,
          'supplier_id': m.supplier_id, 'category_id': m.category_id,
          'location': m.location, 'notes': m.notes}
@@ -59,8 +67,8 @@ with app.app_context():
     # Products
     products = Product.query.order_by(Product.code).all()
     data['products'] = [
-        {'id': p.id, 'code': p.code, 'name': p.name, 'unit': p.unit,
-         'sale_price': p.sale_price, 'lead_time_days': p.lead_time_days,
+        {'id': p.id, 'code': p.code, 'name': p.name, 'description': p.description,
+         'unit': p.unit, 'sale_price': p.sale_price, 'lead_time_days': p.lead_time_days,
          'customer_id': p.customer_id}
         for p in products
     ]
@@ -94,6 +102,7 @@ with app.app_context():
 
     # Print summary
     print("\n=== DATABASE EXPORT SUMMARY ===")
+    print(f"  Users      : {len(data['users'])}")
     print(f"  Customers  : {len(data['customers'])}")
     print(f"  Suppliers  : {len(data['suppliers'])}")
     print(f"  Categories : {len(data['categories'])}")

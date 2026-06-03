@@ -93,27 +93,54 @@ Full pipeline is implemented:
 
 ---
 
-## Database Setup — Current State (as of June 2026)
+## Database Setup — DONE (June 2026)
 
-The `scripts/` folder contains real business data captured as re-runnable scripts. These were added on top of a base database and **cannot be run on a fresh DB without a base setup first** (they assume suppliers/categories already exist).
+A clean export/restore pair is now the canonical mechanism for the master data:
 
-**Data confirmed in scripts:**
-- Customers: Safety Knife Company, Trend Tools, Axminster, Nuco
-- Suppliers: Allcap, Amari Plastics, Protective Solutions (UK) Ltd
-- Materials: 40+ Allcap ironmongery items, Amari PVC sheet, 9 PSL cardboard box types, Safety Knife components
-- Products + BOMs: Safety Knife Big Fish range, Trend jigs, Axminster jigs with packaging BOMs
+- **`scripts/export_db.py`** — dumps the catalog (users, categories, suppliers, customers,
+  materials, products, BOMs) + active orders to `scripts/db_export.json`. Run on the work PC.
+- **`scripts/db_export.json`** — version-controlled source of truth for the real data.
+- **`scripts/setup_real_data.py`** — rebuilds the catalog + logins on any machine from that
+  JSON. Builds the schema itself, preserves original IDs (so all FK links survive), is
+  idempotent (refuses to run twice without `--force`), and refuses `--force` if transactional
+  data is present (so it can never orphan live records).
 
-**Known gaps:**
-- Additional customers, suppliers, products and materials exist in the live database on the work PC that have NOT yet been captured in any script
-- No master setup script exists yet — creating one is the next task
+**Restore scope decision:** the setup script restores the **master/reference catalog + logins
+only** — NOT transactional data (orders, POs, delivery notes, stock movements/batches). For an
+exact clone of a live machine, copy the `instance/mrp.db` file directly.
+
+**Migration-chain gap discovered:** `flask db upgrade` cannot build a fresh DB — the root
+migration assumes the base tables already exist (the original DB was built with `create_all`,
+migrations were only recorded later). `setup_real_data.py` works around this by creating the
+schema from the models and stamping Alembic to head. *Future cleanup: author a proper initial
+migration so `flask db upgrade` works from scratch — deferred to avoid desyncing the live DB's
+migration stamp.*
+
+The old per-supplier hand-written scripts (`add_allcap_ironmongery.py`, `seed_safety_knife.py`,
+`rebuild_*_orders.py`, etc.) are now **superseded** by this pair. Kept for history; not part of setup.
+
+## Live Data Audit (June 2026) — what's captured vs what's missing
+
+Snapshot: 2 users, 3 customers, 17 suppliers, 7 categories, 90 materials, 65 products, 136 BOM
+items, 95 orders (26 active). Functional gaps that block features (these are **data-entry tasks
+for Lucian**, not code):
+
+- **37 of 65 products have no BOM** → can't drive material planning (Phase 2). Biggest gap.
+- **84 of 90 materials have reorder_point = 0** → MRP shopping list never triggers (Phase 3).
+- **12 materials have no supplier; 12 have no cost price** → can't be auto-purchased/costed.
+- Contact data thin: 2/3 customers and 12/17 suppliers have no email (POs/invoices can't be emailed).
+- Stock barely populated (5/90 materials carry stock) — expected, goods-in was never historically booked.
+
+**Next focus (agreed):** build tools to help Lucian close these gaps fast — e.g. bulk import of
+BOMs and reorder points from a spreadsheet — to unlock the already-built MRP & purchasing engines.
 
 ## Next Session — Work PC Tasks
 
-1. Pull the repo (`git pull`) to get latest CLAUDE.md and docs
-2. Copy `C:\Users\Lucian\.claude\CLAUDE.md` from home PC to same path on work PC (one-time)
-3. Run `scripts/export_db.py` to dump everything currently in the live database to `scripts/db_export.json`
-4. Review the export to identify what's missing vs what's already captured in scripts
-5. Build `scripts/setup_real_data.py` — a single master script that sets up everything from scratch in the correct order
+1. ~~Pull the repo~~ ✓ done
+2. Copy `C:\Users\Lucian\.claude\CLAUDE.md` from home PC to same path on work PC (one-time) — *Lucian's task*
+3. ~~Run `scripts/export_db.py`~~ ✓ done
+4. ~~Review the export to identify what's missing~~ ✓ done (see audit above)
+5. ~~Build `scripts/setup_real_data.py`~~ ✓ done and tested on a fresh DB
 
 ## Known Gaps / To Be Investigated
 

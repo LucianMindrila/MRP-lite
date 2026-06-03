@@ -1,0 +1,3594 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "email": "admin@example.com",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "username": "operator",
+      "email": "operator@example.com",
+      "role": "operator"
+    }
+  ],
+  "customers": [
+    {
+      "id": 2,
+      "name": "NuCo Tools",
+      "contact": "Kieran Love",
+      "email": "",
+      "phone": "01297 613261",
+      "address": "NuCo Tools Ltd\nUnit 16C, Weycroft Avenue\nAxminster\nDevon\nEX13 5HU",
+      "payment_terms": null
+    },
+    {
+      "id": 3,
+      "name": "The Safety Knife Company",
+      "contact": "Laura Collins",
+      "email": "sales@safetyknife.net",
+      "phone": "01452 887900",
+      "address": "Olympus Park, Quedgeley, Gloucestershire, GL2 4NF",
+      "payment_terms": null
+    },
+    {
+      "id": 1,
+      "name": "Trend",
+      "contact": "Kevin Kelly",
+      "email": "",
+      "phone": "",
+      "address": "",
+      "payment_terms": null
+    }
+  ],
+  "suppliers": [
+    {
+      "id": 18,
+      "name": "Allcap",
+      "contact": "",
+      "email": "",
+      "phone": "",
+      "lead_time_days": 7
+    },
+    {
+      "id": 9,
+      "name": "Amari Plastics",
+      "contact": "Richard Hill",
+      "email": "richard.hill@amariplastics.com",
+      "phone": "01179 723 900",
+      "lead_time_days": 4
+    },
+    {
+      "id": 5,
+      "name": "Amberlea Plastics",
+      "contact": "Random",
+      "email": "",
+      "phone": "",
+      "lead_time_days": 60
+    },
+    {
+      "id": 20,
+      "name": "Aylesbury Box Company",
+      "contact": "",
+      "email": "",
+      "phone": "01296 436888",
+      "lead_time_days": 7
+    },
+    {
+      "id": 16,
+      "name": "Colour Connection",
+      "contact": "",
+      "email": "",
+      "phone": "",
+      "lead_time_days": 7
+    },
+    {
+      "id": 14,
+      "name": "Dore Metals",
+      "contact": "",
+      "email": "",
+      "phone": "",
+      "lead_time_days": 7
+    },
+    {
+      "id": 21,
+      "name": "Dummy Supplier",
+      "contact": "Test Contact",
+      "email": "test@dummysupplier.com",
+      "phone": "01234 000000",
+      "lead_time_days": 14
+    },
+    {
+      "id": 10,
+      "name": "GR Fastners",
+      "contact": "",
+      "email": "",
+      "phone": "",
+      "lead_time_days": 3
+    },
+    {
+      "id": 8,
+      "name": "Meyer Timber- Boards",
+      "contact": "Louis Whittaker",
+      "email": "",
+      "phone": "",
+      "lead_time_days": 2
+    },
+    {
+      "id": 3,
+      "name": "Meyer Timber-Greenlam",
+      "contact": "Richard Crisp",
+      "email": "richardcr@greenlam.com",
+      "phone": "07966 351394",
+      "lead_time_days": 100
+    },
+    {
+      "id": 12,
+      "name": "NuCo",
+      "contact": "",
+      "email": "",
+      "phone": "",
+      "lead_time_days": 7
+    },
+    {
+      "id": 17,
+      "name": "Oadby Plastics",
+      "contact": "",
+      "email": "",
+      "phone": "",
+      "lead_time_days": 7
+    },
+    {
+      "id": 11,
+      "name": "Protective Solutions (UK) Ltd",
+      "contact": "",
+      "email": "",
+      "phone": "",
+      "lead_time_days": 7
+    },
+    {
+      "id": 19,
+      "name": "RH Fibreboard",
+      "contact": "B Jones",
+      "email": "bjones@rhfibreboard.co.uk",
+      "phone": "01179 604 136",
+      "lead_time_days": 7
+    },
+    {
+      "id": 6,
+      "name": "Springpack",
+      "contact": "Random",
+      "email": "",
+      "phone": "",
+      "lead_time_days": 7
+    },
+    {
+      "id": 13,
+      "name": "The Safety Knife Company",
+      "contact": "",
+      "email": "",
+      "phone": "",
+      "lead_time_days": 7
+    },
+    {
+      "id": 7,
+      "name": "Trend",
+      "contact": "Kevin Kelly",
+      "email": "accounts@trend-uk.com",
+      "phone": "01923 249911",
+      "lead_time_days": 30
+    }
+  ],
+  "categories": [
+    {
+      "id": 2,
+      "name": "Cardboard Boxes",
+      "description": null
+    },
+    {
+      "id": 4,
+      "name": "Fishknife Free Issued",
+      "description": null
+    },
+    {
+      "id": 5,
+      "name": "Ironmongery and Fixings",
+      "description": null
+    },
+    {
+      "id": 3,
+      "name": "Manuals and Labels",
+      "description": null
+    },
+    {
+      "id": 7,
+      "name": "Metal and Others",
+      "description": null
+    },
+    {
+      "id": 6,
+      "name": "Screw and Pin Packs",
+      "description": null
+    },
+    {
+      "id": 1,
+      "name": "Sheet Materials",
+      "description": null
+    }
+  ],
+  "materials": [
+    {
+      "id": 37,
+      "code": "05ZM05",
+      "name": "M5 Full Nuts BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0074,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 36,
+      "code": "05ZM05SQ-562",
+      "name": "M5 Square Nuts BZP DIN562",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.018,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 38,
+      "code": "05ZM06",
+      "name": "M6 Full Nuts BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0105,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 39,
+      "code": "05ZM06W",
+      "name": "M6 Wing Nuts BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.083,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 40,
+      "code": "05ZM08",
+      "name": "M8 Full Nuts BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0168,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 41,
+      "code": "06ZM06C",
+      "name": "M6 Form C Washers BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0142,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 42,
+      "code": "06ZM06SS",
+      "name": "M6 Square Section Spring Washers BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.007,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 8,
+      "code": "1 1/2 LAY FLAT",
+      "name": "1 1/2 lay flat tubbing",
+      "description": "",
+      "unit": "m",
+      "stock_qty": 151.0,
+      "cost_price": 18.5,
+      "reorder_point": 50.0,
+      "reorder_qty": 200.0,
+      "supplier_id": 6,
+      "category_id": 5,
+      "location": "Unit 3-Heike room",
+      "notes": null
+    },
+    {
+      "id": 43,
+      "code": "10M06016",
+      "name": "M6 X 16 Socket Cap Screws",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0305,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 7,
+      "code": "10MM PIN",
+      "name": "10mm ABS pin",
+      "description": "",
+      "unit": "pcs",
+      "stock_qty": 100000.0,
+      "cost_price": 0.07,
+      "reorder_point": 40000.0,
+      "reorder_qty": 100000.0,
+      "supplier_id": 5,
+      "category_id": null,
+      "location": "Unit 4",
+      "notes": null
+    },
+    {
+      "id": 44,
+      "code": "12M06030",
+      "name": "M6 X 30 CSK Socket Screws",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0528,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 6,
+      "code": "12MM HPL",
+      "name": "FSC 3050 x 1300 x 12mm white compact laminate-Greenlam",
+      "description": "",
+      "unit": "pcs",
+      "stock_qty": 559.0,
+      "cost_price": 111.3,
+      "reorder_point": 300.0,
+      "reorder_qty": 359.0,
+      "supplier_id": 3,
+      "category_id": 1,
+      "location": "Unit 4",
+      "notes": null
+    },
+    {
+      "id": 45,
+      "code": "12SM06025",
+      "name": "M6 X 25 CSK Socket Screws S/S A2",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0629,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 46,
+      "code": "12ZM05010",
+      "name": "M5 X 10 CSK Socket Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.03,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 47,
+      "code": "12ZM05025",
+      "name": "M5 X 25 CSK Socket Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0428,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 48,
+      "code": "13SM05014",
+      "name": "M5 X 14 S/S Socket Button Screws",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0387,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 49,
+      "code": "13ZM05008",
+      "name": "M5 X 8 Socket Buttonhead Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0372,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 26,
+      "code": "30SPCM05006",
+      "name": "M5 X 6 S/S Pozi CSK Screws A2",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0235,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 28,
+      "code": "30SPCM05008",
+      "name": "M5 X 8 S/S Pozi CSK Screws A2",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.024,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 29,
+      "code": "30SPCM05010",
+      "name": "M5 X 10 S/S Pozi CSK Screws",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0225,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 30,
+      "code": "30SPCM05020",
+      "name": "M5 X 20 S/S Pozi CSK Machine Screw A2",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.035,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 31,
+      "code": "30SPCM05025",
+      "name": "M5 X 25 S/S Pozi CSK Screws A2",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.037,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 32,
+      "code": "30SPCM05030",
+      "name": "M5 X 30 S/S Pozi CSK Screws",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0494,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 33,
+      "code": "30SPCM05035",
+      "name": "M5 X 35 S/S Pozi CSK Screws",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0555,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 35,
+      "code": "30SPCM06030",
+      "name": "M6 X 30 S/S Pozi CSK Screws",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0906,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 27,
+      "code": "30SPPM050008",
+      "name": "M5 X 8 S/S Pozi Pan Screws",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.033,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 34,
+      "code": "30SPPM060016",
+      "name": "M6 X 16 S/S Pozi Pan Screws",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0543,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 50,
+      "code": "30ZPCKM05006",
+      "name": "M5 X 6 Pozi CSK Machine Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0235,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 51,
+      "code": "30ZPCKM05008",
+      "name": "M5 X 8 Pozi CSK Machine Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.024,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 52,
+      "code": "30ZPCKM05010",
+      "name": "M5 X 10 Pozi CSK Machine Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0209,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 53,
+      "code": "30ZPCKM05020",
+      "name": "M5 X 20 Pozi CSK Machine Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0215,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 54,
+      "code": "30ZPCKM05025",
+      "name": "M5 X 25 Pozi CSK Machine Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0238,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 55,
+      "code": "30ZPCKM05030",
+      "name": "M5 X 30 Pozi CSK Machine Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0286,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 56,
+      "code": "30ZPCKM05035",
+      "name": "M5 X 35 Pozi CSK Machine Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0376,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 57,
+      "code": "30ZPCKM06030",
+      "name": "M6 X 30 Pozi CSK Machine Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0321,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 58,
+      "code": "30ZPCKM06040",
+      "name": "M6 X 40 Pozi CSK Machine Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0413,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 59,
+      "code": "30ZPPM05008",
+      "name": "M5 X 8 Pozi Pan Machine Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0173,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 60,
+      "code": "30ZPPM06016",
+      "name": "M6 X 16 Pozi Pan Machine Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0297,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 61,
+      "code": "30ZSCKM05010",
+      "name": "M5 X 10 Slotted CSK Machine Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0168,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 62,
+      "code": "31ZPCK03.5016",
+      "name": "3.5 X 16mm Pozi CSK Vortex Woodscrews",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0196,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 63,
+      "code": "31ZPCK03.5035",
+      "name": "3.5 X 35mm Pozi CSK Velocity Woodscrews",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0144,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 66,
+      "code": "32ZPCK06037",
+      "name": "6 X 3/8\" Pozi CSK Self Tapping Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0145,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 64,
+      "code": "32ZPF06075",
+      "name": "6 X 3/4\" Pozi Flange Self Tapping Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0091,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 65,
+      "code": "32ZPF08100",
+      "name": "8 X 1\" Pozi Flange Self Tapping Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0138,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 67,
+      "code": "32ZPP10075",
+      "name": "10 X 3/4\" Pozi Pan Self Tapping Screws BZP",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0275,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 18,
+      "category_id": 5,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 11,
+      "code": "BLADE-BIG-FISH",
+      "name": "BLADE FOR BIG FISH",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 87,
+      "code": "BOX.BLACK.1",
+      "name": "Carton Black 178x410x59mm Diecut",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.89,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 7,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 12,
+      "code": "BRASS-BOOT",
+      "name": "BRASS BOOT",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 89,
+      "code": "BRASS-RIVETS-F200S",
+      "name": "Brass Locking Rivets for F200S (pairs)",
+      "description": null,
+      "unit": "pairs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 13,
+      "code": "BRASS-SCREW-BOOT",
+      "name": "BRASS SCREW FOR BOOT",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 18,
+      "code": "BS/JIG BOX",
+      "name": "Belfast Sink Jig Box (598mm x 590mm x 113mm)",
+      "description": "BS/JIG BOX /RHF408148/A - 598mm x 590mm x 113mm",
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 1.08,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 19,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 19,
+      "code": "DG/JIG BOX",
+      "name": "Drainer Groove Jig Box (600mm x 585mm x 113mm)",
+      "description": "DGJIG - BROWN 1 COL BLACK B 200K 200T. Internal: 600mm x 585mm x 113mm. External: 785mm x 1264mm.",
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.845,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 20,
+      "category_id": 2,
+      "location": null,
+      "notes": "One-off setup costs on first order with ABC: Cutting tool charge £350.00 + Artwork/printing plates charge £299.00 (total £649.00). PO 5883_7, dated 28/04/2026."
+    },
+    {
+      "id": 95,
+      "code": "DUMMY-RAW",
+      "name": "Dummy Raw Material Sheet",
+      "description": "Test material — replaces Red PVC in dummy knife BOM",
+      "unit": "sheets",
+      "stock_qty": 0.0,
+      "cost_price": 15.0,
+      "reorder_point": 5.0,
+      "reorder_qty": 20.0,
+      "supplier_id": 21,
+      "category_id": null,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 24,
+      "code": "H/KWJ650 BOX",
+      "name": "Howden Kitchen Worktop Jig 650mm Box",
+      "description": "0401 Postal folder, outer meet. 995mm x 320mm x 12mm. SHF220758. PO 5844_4, dated 19/02/2026.",
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.87,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 19,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 25,
+      "code": "H/KWJ950 BOX",
+      "name": "Howden Kitchen Worktop Jig 950mm Box",
+      "description": "0401 Postal folder, outer meet. 1285mm x 320mm x 12mm. SHF220759. PO 5844_4, dated 19/02/2026.",
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.96,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 19,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 90,
+      "code": "HOOK-BLADE-CARBON",
+      "name": "Hook Blade Carbon for F200/F600/Big Fish",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 16,
+      "code": "JB3201802",
+      "name": "JB3201802 STRAIGHT BLADE FOR F200",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 17,
+      "code": "JB96Q-21822",
+      "name": "JB96Q-21822 SINGLE END HOOK STAINLESS",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 21,
+      "code": "KWJ650 BOX",
+      "name": "Kitchen Worktop Jig 650mm Box",
+      "description": "KWJ650 - BROWN 1 COL BLACK. 882mm x 237mm x 13mm. SHF221854/A. PO 5850_4, dated 25/02/2026.",
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.63,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 19,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 9,
+      "code": "KWJ700 BOX",
+      "name": "Box for KWJ700",
+      "description": "",
+      "unit": "pcs",
+      "stock_qty": 500.0,
+      "cost_price": 1.1,
+      "reorder_point": 300.0,
+      "reorder_qty": 1000.0,
+      "supplier_id": 19,
+      "category_id": 2,
+      "location": "Unit 4 racking",
+      "notes": null
+    },
+    {
+      "id": 23,
+      "code": "KWJ700/A BOX",
+      "name": "Kitchen Worktop Jig 700mm Amazon Box",
+      "description": "TREND 700MM KITCHEN/AMAZON. SHF223355/A. PO 5830_7, dated 05/02/2025.",
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 1.48,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 19,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 20,
+      "code": "KWJ900 BOX",
+      "name": "Kitchen Worktop Jig 900mm Box",
+      "description": "T-900 Box/white/SHF216410. PO 5848_7, dated 25/02/2026.",
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 1.59,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 19,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 22,
+      "code": "KWJ950 BOX",
+      "name": "Kitchen Worktop Jig 950mm Pro Box",
+      "description": "TREND KWJ950/PRO JIG. 1260mm x 341mm x 13mm. SHF106602/A. PO 5849_4, dated 25/02/2026.",
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 1.04,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 19,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 78,
+      "code": "LAB.EU.ADD",
+      "name": "Trend EU Address Label (FSC)",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.01,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 7,
+      "category_id": 3,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 88,
+      "code": "LAB.U*LOCK/JIG/B",
+      "name": "Lock Jig B USA Imperial Carton Label",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 1.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 7,
+      "category_id": 3,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 80,
+      "code": "LAB/H/KWJ650",
+      "name": "Label H/KWJ650",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.05,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 7,
+      "category_id": 3,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 83,
+      "code": "LAB/H/KWJ950",
+      "name": "Label H/KWJ950",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.05,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 7,
+      "category_id": 3,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 81,
+      "code": "LAB/QR/H",
+      "name": "Label QR Code Howdens Jigs",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.03,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 7,
+      "category_id": 3,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 91,
+      "code": "LABEL-BIG-FISH-DIST",
+      "name": "Big Fish Label Plain Distrib",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 14,
+      "code": "M10-LOCK-SCREW",
+      "name": "M10 LOCKING SCREW",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 92,
+      "code": "MACH-ASS-BFISH-TP",
+      "name": "Mach & Ass B/Fish Tamper Proof",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 15,
+      "code": "MACH-ASSEMB-BFISH",
+      "name": "MACHINE & ASSEMB B/FISH",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 84,
+      "code": "MANU/AR",
+      "name": "Aperture Radius Jig Manual",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.61,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 7,
+      "category_id": 3,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 79,
+      "code": "MANU/H/KWJ650",
+      "name": "Manual H/KWJ650",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.31,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 7,
+      "category_id": 3,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 82,
+      "code": "MANU/H/KWJ950",
+      "name": "Manual H/KWJ950",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.31,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 7,
+      "category_id": 3,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 10,
+      "code": "MANU/KWJ79",
+      "name": "Manual KWJ700/KWJ900",
+      "description": "",
+      "unit": "pcs",
+      "stock_qty": 500.0,
+      "cost_price": 0.57,
+      "reorder_point": 300.0,
+      "reorder_qty": 1000.0,
+      "supplier_id": 7,
+      "category_id": 3,
+      "location": "Unit 3-Heike room",
+      "notes": null
+    },
+    {
+      "id": 86,
+      "code": "MANU/LOCK/B",
+      "name": "Lock Jig B Manual",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.67,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 7,
+      "category_id": 3,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 68,
+      "code": "PSL/DG-JIG-BOX",
+      "name": "Drainer Groove Jig Protective Box",
+      "description": "776 x 586 x 30mm (with 25mm overlap). PO 5832_4, dated 05/02/2026.",
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 1.78,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 11,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 71,
+      "code": "PSL/FRAME-BOX",
+      "name": "Axminster Frame Box",
+      "description": "155 x 155 x 1145mm. PO 5852_4, dated 02/03/2026.",
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 2.64,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 11,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 73,
+      "code": "PSL/HINGE-JIG-BOX",
+      "name": "Axminster Hinge Jig Box",
+      "description": "482 x 90 x 42mm brown. PO 5723_4, dated 03/09/2025.",
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.8,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 11,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 69,
+      "code": "PSL/LG-ROUTER-BOX",
+      "name": "Axminster Large Router Top Box",
+      "description": "800 x 600 x 34mm brown. PO 5880_4, dated 22/04/2026.",
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 3.3,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 11,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 74,
+      "code": "PSL/LOCK-JIG-BOX",
+      "name": "Axminster Lock Jig Box",
+      "description": "320 x 120 x 28mm brown. PO 5723_4, dated 03/09/2025.",
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.8,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 11,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 75,
+      "code": "PSL/LOOSE-PARTS-BOX",
+      "name": "Axminster Loose Parts Box",
+      "description": "18\" x 18\" x 18\". PO 5662_4, dated 16/05/2025.",
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 1.75,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 11,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 76,
+      "code": "PSL/MFT-JIG-BOX",
+      "name": "Trend MFT Jig Box",
+      "description": "587 x 313 x 14mm. PO 5691_4, dated 01/07/2025.",
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 1.8,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 11,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 70,
+      "code": "PSL/SM-ROUTER-BOX",
+      "name": "Axminster Small Router Top Box",
+      "description": "610 x 410 x 34mm (with 25mm overlap). PO 5816_4, dated 26/01/2026.",
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 2.09,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 11,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 72,
+      "code": "PSL/VALCHROMAT-BOX",
+      "name": "Axminster Valchromat MFT Top Box",
+      "description": "1116 x 726 x 26mm. PO 5801_4, dated 09/01/2026.",
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 2.34,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 11,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 94,
+      "code": "PVC.RED.2001X1000X6",
+      "name": "PVC Red Sheet 2001x1000x6mm",
+      "description": "2001 x 1000 x 6mm PVC Red. PO 5866_4 / ref PO 5782, Amari Plastics.",
+      "unit": "sheet",
+      "stock_qty": 0.0,
+      "cost_price": 86.52,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 9,
+      "category_id": 1,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 93,
+      "code": "TAPE-CUTTER-F200BF",
+      "name": "Tape Cutter F200/F600/Big Fish",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 77,
+      "code": "ZEBRA.150",
+      "name": "Zebra 150mm x 76mm White Label",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.04,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 7,
+      "category_id": 3,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 85,
+      "code": "ZEBRA.40X40BO",
+      "name": "Zebra 40x40 White Black Out Label",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.02,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 7,
+      "category_id": 3,
+      "location": null,
+      "notes": null
+    }
+  ],
+  "products": [
+    {
+      "id": 24,
+      "code": "10050",
+      "name": "UJK Multifunction Workbench (Frame Only) Mk I",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 60.0,
+      "lead_time_days": 1,
+      "customer_id": 2
+    },
+    {
+      "id": 36,
+      "code": "101504",
+      "name": "UJK Hinge Jig with Clamp Plate",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 37.25,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 37,
+      "code": "101505",
+      "name": "UJK Stair Jig",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 53.0,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 22,
+      "code": "102537",
+      "name": "UJK HDF Valchromat Top for Parf Dogs",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 65.0,
+      "lead_time_days": 1,
+      "customer_id": 2
+    },
+    {
+      "id": 38,
+      "code": "102540",
+      "name": "UJK MultiFunction Workbench (Frame Only)",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 60.0,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 39,
+      "code": "102542",
+      "name": "UJK Twist Dogs (Pair) - 40mm",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 8.5,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 40,
+      "code": "102543",
+      "name": "UJK Laminated Router Top 600x800mm",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 90.0,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 17,
+      "code": "10386",
+      "name": "UJK Trim Router Table MK II (without fence)",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 76.0,
+      "lead_time_days": 1,
+      "customer_id": 2
+    },
+    {
+      "id": 18,
+      "code": "10389",
+      "name": "UJK Bench Top Router Table Top",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 75.0,
+      "lead_time_days": 1,
+      "customer_id": 2
+    },
+    {
+      "id": 19,
+      "code": "10390",
+      "name": "UJK Bench Top Router Table Frame",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 70.0,
+      "lead_time_days": 1,
+      "customer_id": 2
+    },
+    {
+      "id": 20,
+      "code": "10392",
+      "name": "UJK Floor Standing Router Table Top",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 115.0,
+      "lead_time_days": 1,
+      "customer_id": 2
+    },
+    {
+      "id": 21,
+      "code": "10393",
+      "name": "UJK Floor Standing Router Table Frame",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 195.0,
+      "lead_time_days": 1,
+      "customer_id": 2
+    },
+    {
+      "id": 41,
+      "code": "105278",
+      "name": "UJK Isometric HDF Valchromat Top",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 65.0,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 42,
+      "code": "105279",
+      "name": "UJK Aperture Radius Jig",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 42.0,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 43,
+      "code": "105280",
+      "name": "UJK Assembly Square",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 11.85,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 44,
+      "code": "108497",
+      "name": "UJK Work Top for T-Loc Systainer Cases",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 48.03,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 45,
+      "code": "108509",
+      "name": "UJK Purchased Rider Shooting Board (RSB)",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 30.75,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 46,
+      "code": "109294",
+      "name": "UJK Full Length Adjustable Hinge Jig",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 74.95,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 47,
+      "code": "109405",
+      "name": "UJK Compact Multifunction Workbench",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 60.0,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 25,
+      "code": "109796",
+      "name": "UJK Rail Clamp MFT Top",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 135.0,
+      "lead_time_days": 1,
+      "customer_id": 2
+    },
+    {
+      "id": 48,
+      "code": "109827",
+      "name": "UJK MRMDF Top for Bench Dogs",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 45.0,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 49,
+      "code": "110223",
+      "name": "UJK Blank Universal Sub-Base",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 8.85,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 27,
+      "code": "13154002",
+      "name": "BIG FISH 6MM + ST ST HOOK FOR MOD",
+      "description": "None",
+      "unit": "pcs",
+      "sale_price": 4.95,
+      "lead_time_days": 1,
+      "customer_id": 3
+    },
+    {
+      "id": 50,
+      "code": "508615",
+      "name": "UJK 700MM Standard Worktop Jig",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 50.0,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 51,
+      "code": "508619",
+      "name": "UJK Compact Lock Jig",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 37.25,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 23,
+      "code": "508620",
+      "name": "UJK Angle Adjustment Plate For Worktop Jigs",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 8.5,
+      "lead_time_days": 1,
+      "customer_id": 2
+    },
+    {
+      "id": 52,
+      "code": "508621",
+      "name": "UJK Worktop Pins for Worktop Jigs (pack)",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 1.75,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 53,
+      "code": "APT006105",
+      "name": "F25.4 Face Template 25.4mm (for 508619)",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 6.0,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 54,
+      "code": "APT008645",
+      "name": "Fixings Pack for 102543 Laminated Top",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 10.0,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 55,
+      "code": "APT009748",
+      "name": "H122 Front Top Rail for 109531",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 5.5,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 56,
+      "code": "APT010718",
+      "name": "Long Countersink Screw M5x40 x2 (Datum Stop)",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 0.0,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 2,
+      "code": "AR/JIG",
+      "name": "Aperture Radius Jig",
+      "description": "None",
+      "unit": "pcs",
+      "sale_price": 40.89,
+      "lead_time_days": 1,
+      "customer_id": 1
+    },
+    {
+      "id": 59,
+      "code": "ASSE/HJ/C",
+      "name": "Assembly Cost H/JIG/C",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 11.29,
+      "lead_time_days": 7,
+      "customer_id": 1
+    },
+    {
+      "id": 60,
+      "code": "ASSE/STRIKE/JIG",
+      "name": "Assembly & JIG Parts Strike/JIG",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 37.0,
+      "lead_time_days": 7,
+      "customer_id": 1
+    },
+    {
+      "id": 28,
+      "code": "BC-REAKTA-HD 001",
+      "name": "HD REAKTA CARRIER 92A BLADE",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 3.0,
+      "lead_time_days": 1,
+      "customer_id": 3
+    },
+    {
+      "id": 34,
+      "code": "BIG FISH 9MM 1 SINGLES",
+      "name": "Big Fish 9mm Single Item With Hook",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 4.95,
+      "lead_time_days": 1,
+      "customer_id": 3
+    },
+    {
+      "id": 26,
+      "code": "BIG FISH 9MM N/H 1 SGL",
+      "name": "BIG FISH 9MM N/H SINGLE ITEM NO HOOK",
+      "description": "None",
+      "unit": "pcs",
+      "sale_price": 4.95,
+      "lead_time_days": 1,
+      "customer_id": 3
+    },
+    {
+      "id": 35,
+      "code": "BIG FISH 9MM TC 1 SINGLE",
+      "name": "Big Fish 9mm Single Item Tapecutter",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 4.95,
+      "lead_time_days": 1,
+      "customer_id": 3
+    },
+    {
+      "id": 33,
+      "code": "BIG FISH 9MM TP 1 SINGLE",
+      "name": "Big Fish 9mm Tamper Proof Single Item",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 4.8,
+      "lead_time_days": 1,
+      "customer_id": 3
+    },
+    {
+      "id": 29,
+      "code": "BS/JIG/PRO",
+      "name": "Belfast Sink Jig Pro",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 52.0,
+      "lead_time_days": 1,
+      "customer_id": 1
+    },
+    {
+      "id": 3,
+      "code": "DG/JIG/A",
+      "name": "Drainer Groove Jig",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 43.8,
+      "lead_time_days": 1,
+      "customer_id": 1
+    },
+    {
+      "id": 65,
+      "code": "DUMMY/KNIFE",
+      "name": "Dummy Test Knife",
+      "description": "Test product for operator flow — based on Big Fish 9mm N/H BOM",
+      "unit": "pcs",
+      "sale_price": 25.0,
+      "lead_time_days": 1,
+      "customer_id": 3
+    },
+    {
+      "id": 61,
+      "code": "ECL/02",
+      "name": "Euro Barrel Template for ECL/JIG",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 4.0,
+      "lead_time_days": 7,
+      "customer_id": 1
+    },
+    {
+      "id": 4,
+      "code": "ECL/JIG",
+      "name": "Euro Cylinder Lock Barrel Jig",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 32.25,
+      "lead_time_days": 1,
+      "customer_id": 1
+    },
+    {
+      "id": 5,
+      "code": "H/CURVE/JIG",
+      "name": "Howden Curve Jig",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 38.25,
+      "lead_time_days": 1,
+      "customer_id": 1
+    },
+    {
+      "id": 6,
+      "code": "H/KWJ650",
+      "name": "Howden Kitchen Worktop Jig 650mm",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 42.56,
+      "lead_time_days": 1,
+      "customer_id": 1
+    },
+    {
+      "id": 7,
+      "code": "H/KWJ950",
+      "name": "Howden Kitchen Worktop Jig 950mm",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 56.0,
+      "lead_time_days": 1,
+      "customer_id": 1
+    },
+    {
+      "id": 8,
+      "code": "KWJ/PIN/10MM",
+      "name": "Pin for KWJ900 10mm Plastic",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 0.33,
+      "lead_time_days": 1,
+      "customer_id": 1
+    },
+    {
+      "id": 9,
+      "code": "KWJ650",
+      "name": "Kitchen Worktop Jig 650mm",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 28.22,
+      "lead_time_days": 1,
+      "customer_id": 1
+    },
+    {
+      "id": 1,
+      "code": "KWJ700",
+      "name": "Kitchen Worktop Jig 700mm",
+      "description": "",
+      "unit": "pcs",
+      "sale_price": 39.15,
+      "lead_time_days": 125,
+      "customer_id": 1
+    },
+    {
+      "id": 10,
+      "code": "KWJ700/A",
+      "name": "Kitchen Worktop Jig 700mm -Amazon",
+      "description": "None",
+      "unit": "pcs",
+      "sale_price": 41.0,
+      "lead_time_days": 1,
+      "customer_id": 1
+    },
+    {
+      "id": 11,
+      "code": "KWJ700/PRO",
+      "name": "Professional 700mm Worktop Jig",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 52.5,
+      "lead_time_days": 1,
+      "customer_id": 1
+    },
+    {
+      "id": 30,
+      "code": "KWJ900",
+      "name": "Kitchen Worktop Jig 900mm",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 61.06,
+      "lead_time_days": 1,
+      "customer_id": 1
+    },
+    {
+      "id": 12,
+      "code": "KWJ950/PRO",
+      "name": "Professional 950mm Worktop Jig",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 73.5,
+      "lead_time_days": 1,
+      "customer_id": 1
+    },
+    {
+      "id": 13,
+      "code": "LOCK/JIG/B",
+      "name": "Adjustable Trade Lock Jig",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 40.12,
+      "lead_time_days": 1,
+      "customer_id": 1
+    },
+    {
+      "id": 32,
+      "code": "LOCK/JIG/B/US",
+      "name": "Lock Jig B/US",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 40.12,
+      "lead_time_days": 1,
+      "customer_id": 1
+    },
+    {
+      "id": 16,
+      "code": "M00913",
+      "name": "Purchased Rider Shooting Board (RSB)",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 30.75,
+      "lead_time_days": 1,
+      "customer_id": 2
+    },
+    {
+      "id": 62,
+      "code": "MFT/01",
+      "name": "MFT Index Pin",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 2.0,
+      "lead_time_days": 7,
+      "customer_id": 1
+    },
+    {
+      "id": 63,
+      "code": "MFT/JIG",
+      "name": "Multi Functional Table Top JIG",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 52.29,
+      "lead_time_days": 7,
+      "customer_id": 1
+    },
+    {
+      "id": 14,
+      "code": "RS/JIG",
+      "name": "Router Surfacing Jig",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 52.37,
+      "lead_time_days": 1,
+      "customer_id": 1
+    },
+    {
+      "id": 15,
+      "code": "S/KWJ700",
+      "name": "Screwfix 700mm KWJ 79077",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 39.12,
+      "lead_time_days": 1,
+      "customer_id": 1
+    },
+    {
+      "id": 31,
+      "code": "S/KWJ900",
+      "name": "Screwfix 900mm KWJ",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 61.03,
+      "lead_time_days": 1,
+      "customer_id": 1
+    },
+    {
+      "id": 64,
+      "code": "TEMP/SS/A",
+      "name": "Template Shelf Support 5mm 32mm Centre",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 19.2,
+      "lead_time_days": 7,
+      "customer_id": 1
+    },
+    {
+      "id": 57,
+      "code": "UJK0000111",
+      "name": "L16 Lock Template 16mm for 508619",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 7.5,
+      "lead_time_days": 7,
+      "customer_id": 2
+    },
+    {
+      "id": 58,
+      "code": "UJK000012",
+      "name": "Pair of Sliding Stop Plates for Lock Jig 508619",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 4.85,
+      "lead_time_days": 7,
+      "customer_id": 2
+    }
+  ],
+  "bom_items": [
+    {
+      "product_id": 1,
+      "material_id": 6,
+      "qty_per_unit": 0.11
+    },
+    {
+      "product_id": 1,
+      "material_id": 7,
+      "qty_per_unit": 6.0
+    },
+    {
+      "product_id": 1,
+      "material_id": 8,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 1,
+      "material_id": 9,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 26,
+      "material_id": 11,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 26,
+      "material_id": 12,
+      "qty_per_unit": 5.0
+    },
+    {
+      "product_id": 26,
+      "material_id": 13,
+      "qty_per_unit": 5.0
+    },
+    {
+      "product_id": 26,
+      "material_id": 14,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 26,
+      "material_id": 15,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 27,
+      "material_id": 11,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 27,
+      "material_id": 16,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 27,
+      "material_id": 12,
+      "qty_per_unit": 5.0
+    },
+    {
+      "product_id": 27,
+      "material_id": 13,
+      "qty_per_unit": 5.0
+    },
+    {
+      "product_id": 27,
+      "material_id": 17,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 27,
+      "material_id": 14,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 27,
+      "material_id": 15,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 6,
+      "material_id": 6,
+      "qty_per_unit": 0.11
+    },
+    {
+      "product_id": 6,
+      "material_id": 7,
+      "qty_per_unit": 6.0
+    },
+    {
+      "product_id": 6,
+      "material_id": 8,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 7,
+      "material_id": 6,
+      "qty_per_unit": 0.11
+    },
+    {
+      "product_id": 7,
+      "material_id": 7,
+      "qty_per_unit": 6.0
+    },
+    {
+      "product_id": 7,
+      "material_id": 8,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 9,
+      "material_id": 6,
+      "qty_per_unit": 0.11
+    },
+    {
+      "product_id": 9,
+      "material_id": 7,
+      "qty_per_unit": 6.0
+    },
+    {
+      "product_id": 9,
+      "material_id": 8,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 10,
+      "material_id": 6,
+      "qty_per_unit": 0.11
+    },
+    {
+      "product_id": 10,
+      "material_id": 7,
+      "qty_per_unit": 6.0
+    },
+    {
+      "product_id": 10,
+      "material_id": 8,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 11,
+      "material_id": 6,
+      "qty_per_unit": 0.11
+    },
+    {
+      "product_id": 11,
+      "material_id": 7,
+      "qty_per_unit": 6.0
+    },
+    {
+      "product_id": 11,
+      "material_id": 8,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 12,
+      "material_id": 6,
+      "qty_per_unit": 0.11
+    },
+    {
+      "product_id": 12,
+      "material_id": 7,
+      "qty_per_unit": 6.0
+    },
+    {
+      "product_id": 12,
+      "material_id": 8,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 2,
+      "material_id": 6,
+      "qty_per_unit": 0.11
+    },
+    {
+      "product_id": 2,
+      "material_id": 7,
+      "qty_per_unit": 4.0
+    },
+    {
+      "product_id": 2,
+      "material_id": 8,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 3,
+      "material_id": 6,
+      "qty_per_unit": 0.11
+    },
+    {
+      "product_id": 3,
+      "material_id": 7,
+      "qty_per_unit": 6.0
+    },
+    {
+      "product_id": 3,
+      "material_id": 8,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 5,
+      "material_id": 6,
+      "qty_per_unit": 0.11
+    },
+    {
+      "product_id": 5,
+      "material_id": 7,
+      "qty_per_unit": 6.0
+    },
+    {
+      "product_id": 5,
+      "material_id": 8,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 15,
+      "material_id": 6,
+      "qty_per_unit": 0.11
+    },
+    {
+      "product_id": 15,
+      "material_id": 7,
+      "qty_per_unit": 6.0
+    },
+    {
+      "product_id": 15,
+      "material_id": 8,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 29,
+      "material_id": 6,
+      "qty_per_unit": 0.11
+    },
+    {
+      "product_id": 29,
+      "material_id": 7,
+      "qty_per_unit": 6.0
+    },
+    {
+      "product_id": 29,
+      "material_id": 8,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 29,
+      "material_id": 18,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 3,
+      "material_id": 19,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 11,
+      "material_id": 9,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 15,
+      "material_id": 9,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 10,
+      "material_id": 23,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 9,
+      "material_id": 21,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 12,
+      "material_id": 22,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 6,
+      "material_id": 24,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 7,
+      "material_id": 25,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 30,
+      "material_id": 20,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 22,
+      "material_id": 72,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 20,
+      "material_id": 69,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 18,
+      "material_id": 70,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 24,
+      "material_id": 71,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 1,
+      "material_id": 10,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 10,
+      "material_id": 10,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 11,
+      "material_id": 10,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 15,
+      "material_id": 10,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 30,
+      "material_id": 10,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 1,
+      "material_id": 77,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 10,
+      "material_id": 77,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 11,
+      "material_id": 77,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 30,
+      "material_id": 77,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 2,
+      "material_id": 77,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 6,
+      "material_id": 79,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 6,
+      "material_id": 80,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 6,
+      "material_id": 81,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 7,
+      "material_id": 82,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 7,
+      "material_id": 83,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 7,
+      "material_id": 81,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 2,
+      "material_id": 84,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 30,
+      "material_id": 6,
+      "qty_per_unit": 0.11
+    },
+    {
+      "product_id": 30,
+      "material_id": 7,
+      "qty_per_unit": 6.0
+    },
+    {
+      "product_id": 30,
+      "material_id": 8,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 31,
+      "material_id": 20,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 31,
+      "material_id": 10,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 31,
+      "material_id": 85,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 31,
+      "material_id": 6,
+      "qty_per_unit": 0.11
+    },
+    {
+      "product_id": 31,
+      "material_id": 7,
+      "qty_per_unit": 6.0
+    },
+    {
+      "product_id": 31,
+      "material_id": 8,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 13,
+      "material_id": 86,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 13,
+      "material_id": 87,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 32,
+      "material_id": 86,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 32,
+      "material_id": 87,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 32,
+      "material_id": 88,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 2,
+      "material_id": 78,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 29,
+      "material_id": 78,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 3,
+      "material_id": 78,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 4,
+      "material_id": 78,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 9,
+      "material_id": 78,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 1,
+      "material_id": 78,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 10,
+      "material_id": 78,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 11,
+      "material_id": 78,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 30,
+      "material_id": 78,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 12,
+      "material_id": 78,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 13,
+      "material_id": 78,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 32,
+      "material_id": 78,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 14,
+      "material_id": 78,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 33,
+      "material_id": 11,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 33,
+      "material_id": 89,
+      "qty_per_unit": 5.0
+    },
+    {
+      "product_id": 33,
+      "material_id": 91,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 33,
+      "material_id": 92,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 34,
+      "material_id": 11,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 34,
+      "material_id": 12,
+      "qty_per_unit": 5.0
+    },
+    {
+      "product_id": 34,
+      "material_id": 13,
+      "qty_per_unit": 5.0
+    },
+    {
+      "product_id": 34,
+      "material_id": 90,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 34,
+      "material_id": 91,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 34,
+      "material_id": 14,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 34,
+      "material_id": 15,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 35,
+      "material_id": 11,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 35,
+      "material_id": 12,
+      "qty_per_unit": 5.0
+    },
+    {
+      "product_id": 35,
+      "material_id": 13,
+      "qty_per_unit": 5.0
+    },
+    {
+      "product_id": 35,
+      "material_id": 91,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 35,
+      "material_id": 14,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 35,
+      "material_id": 15,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 35,
+      "material_id": 93,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 26,
+      "material_id": 94,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 33,
+      "material_id": 94,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 34,
+      "material_id": 94,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 35,
+      "material_id": 94,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 27,
+      "material_id": 94,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 65,
+      "material_id": 11,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 65,
+      "material_id": 12,
+      "qty_per_unit": 5.0
+    },
+    {
+      "product_id": 65,
+      "material_id": 13,
+      "qty_per_unit": 5.0
+    },
+    {
+      "product_id": 65,
+      "material_id": 14,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 65,
+      "material_id": 15,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 65,
+      "material_id": 95,
+      "qty_per_unit": 0.01
+    }
+  ],
+  "orders": [
+    {
+      "id": 94,
+      "order_ref": "066922",
+      "customer_id": 1,
+      "status": "confirmed",
+      "required_date": "2026-06-01",
+      "notes": "Imported from Trend PO 066922",
+      "items": [
+        {
+          "product_id": 60,
+          "qty": 500.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 37.0
+        }
+      ]
+    },
+    {
+      "id": 102,
+      "order_ref": "067019",
+      "customer_id": 1,
+      "status": "confirmed",
+      "required_date": "2026-06-01",
+      "notes": "Imported from Trend PO 067019",
+      "items": [
+        {
+          "product_id": 2,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 40.89
+        },
+        {
+          "product_id": 29,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 52.0
+        },
+        {
+          "product_id": 3,
+          "qty": 200.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 43.8
+        },
+        {
+          "product_id": 4,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 32.25
+        },
+        {
+          "product_id": 8,
+          "qty": 3000.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 0.33
+        },
+        {
+          "product_id": 9,
+          "qty": 250.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 28.22
+        },
+        {
+          "product_id": 1,
+          "qty": 300.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 39.15
+        },
+        {
+          "product_id": 11,
+          "qty": 350.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 52.5
+        },
+        {
+          "product_id": 30,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 61.06
+        },
+        {
+          "product_id": 13,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 40.12
+        },
+        {
+          "product_id": 14,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 52.37
+        },
+        {
+          "product_id": 15,
+          "qty": 400.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 39.12
+        }
+      ]
+    },
+    {
+      "id": 103,
+      "order_ref": "067034",
+      "customer_id": 1,
+      "status": "confirmed",
+      "required_date": "2026-06-01",
+      "notes": "Imported from Trend PO 067034",
+      "items": [
+        {
+          "product_id": 6,
+          "qty": 450.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 42.56
+        },
+        {
+          "product_id": 7,
+          "qty": 250.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 56.0
+        }
+      ]
+    },
+    {
+      "id": 104,
+      "order_ref": "067044",
+      "customer_id": 1,
+      "status": "confirmed",
+      "required_date": "2026-06-01",
+      "notes": "Imported from Trend PO 067044",
+      "items": [
+        {
+          "product_id": 32,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 40.12
+        }
+      ]
+    },
+    {
+      "id": 105,
+      "order_ref": "067090",
+      "customer_id": 1,
+      "status": "confirmed",
+      "required_date": "2026-08-03",
+      "notes": "Imported from Trend PO 067090",
+      "items": [
+        {
+          "product_id": 60,
+          "qty": 500.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 37.0
+        }
+      ]
+    },
+    {
+      "id": 63,
+      "order_ref": "PO-00001332",
+      "customer_id": 2,
+      "status": "confirmed",
+      "required_date": "2026-05-01",
+      "notes": "Imported from NuCo PO PO-00001332",
+      "items": [
+        {
+          "product_id": 41,
+          "qty": 12.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 65.0
+        }
+      ]
+    },
+    {
+      "id": 64,
+      "order_ref": "PO-00001345",
+      "customer_id": 2,
+      "status": "confirmed",
+      "required_date": "2026-05-07",
+      "notes": "Imported from NuCo PO PO-00001345",
+      "items": [
+        {
+          "product_id": 51,
+          "qty": 40.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 37.25
+        }
+      ]
+    },
+    {
+      "id": 66,
+      "order_ref": "PO-00001361",
+      "customer_id": 2,
+      "status": "confirmed",
+      "required_date": "2026-05-13",
+      "notes": "Imported from NuCo PO PO-00001361",
+      "items": [
+        {
+          "product_id": 43,
+          "qty": 96.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 11.85
+        }
+      ]
+    },
+    {
+      "id": 106,
+      "order_ref": "067162",
+      "customer_id": 1,
+      "status": "confirmed",
+      "required_date": "2026-07-13",
+      "notes": "Imported from Trend PO 067162",
+      "items": [
+        {
+          "product_id": 60,
+          "qty": 1000.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 37.0
+        }
+      ]
+    },
+    {
+      "id": 68,
+      "order_ref": "PO-00001384",
+      "customer_id": 2,
+      "status": "confirmed",
+      "required_date": "2026-05-22",
+      "notes": "Imported from NuCo PO PO-00001384",
+      "items": [
+        {
+          "product_id": 24,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 60.0
+        }
+      ]
+    },
+    {
+      "id": 69,
+      "order_ref": "PO-00001393",
+      "customer_id": 2,
+      "status": "confirmed",
+      "required_date": "2026-05-29",
+      "notes": "Imported from NuCo PO PO-00001393",
+      "items": [
+        {
+          "product_id": 17,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 76.0
+        },
+        {
+          "product_id": 18,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 75.0
+        },
+        {
+          "product_id": 19,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 70.0
+        },
+        {
+          "product_id": 20,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 115.0
+        },
+        {
+          "product_id": 21,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 195.0
+        }
+      ]
+    },
+    {
+      "id": 107,
+      "order_ref": "067190",
+      "customer_id": 1,
+      "status": "confirmed",
+      "required_date": "2026-06-01",
+      "notes": "Imported from Trend PO 067190",
+      "items": [
+        {
+          "product_id": 61,
+          "qty": 30.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 4.0
+        }
+      ]
+    },
+    {
+      "id": 108,
+      "order_ref": "067191",
+      "customer_id": 1,
+      "status": "confirmed",
+      "required_date": "2026-07-06",
+      "notes": "Imported from Trend PO 067191",
+      "items": [
+        {
+          "product_id": 5,
+          "qty": 400.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 38.25
+        },
+        {
+          "product_id": 3,
+          "qty": 200.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 43.8
+        },
+        {
+          "product_id": 6,
+          "qty": 100.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 42.56
+        },
+        {
+          "product_id": 8,
+          "qty": 3000.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 0.33
+        },
+        {
+          "product_id": 9,
+          "qty": 200.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 28.22
+        },
+        {
+          "product_id": 13,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 40.12
+        },
+        {
+          "product_id": 14,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 52.37
+        },
+        {
+          "product_id": 15,
+          "qty": 400.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 39.12
+        }
+      ]
+    },
+    {
+      "id": 109,
+      "order_ref": "067192",
+      "customer_id": 1,
+      "status": "confirmed",
+      "required_date": "2026-08-03",
+      "notes": "Imported from Trend PO 067192",
+      "items": [
+        {
+          "product_id": 2,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 40.89
+        },
+        {
+          "product_id": 3,
+          "qty": 150.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 43.8
+        },
+        {
+          "product_id": 4,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 32.25
+        },
+        {
+          "product_id": 6,
+          "qty": 150.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 42.56
+        },
+        {
+          "product_id": 7,
+          "qty": 100.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 56.0
+        },
+        {
+          "product_id": 8,
+          "qty": 3000.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 0.33
+        },
+        {
+          "product_id": 9,
+          "qty": 200.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 28.22
+        },
+        {
+          "product_id": 1,
+          "qty": 250.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 39.15
+        },
+        {
+          "product_id": 12,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 73.5
+        },
+        {
+          "product_id": 14,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 52.37
+        },
+        {
+          "product_id": 15,
+          "qty": 400.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 39.12
+        }
+      ]
+    },
+    {
+      "id": 110,
+      "order_ref": "067193",
+      "customer_id": 1,
+      "status": "confirmed",
+      "required_date": "2026-09-07",
+      "notes": "Imported from Trend PO 067193",
+      "items": [
+        {
+          "product_id": 3,
+          "qty": 150.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 43.8
+        },
+        {
+          "product_id": 5,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 38.25
+        },
+        {
+          "product_id": 6,
+          "qty": 100.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 42.56
+        },
+        {
+          "product_id": 8,
+          "qty": 3000.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 0.33
+        },
+        {
+          "product_id": 9,
+          "qty": 200.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 28.22
+        },
+        {
+          "product_id": 1,
+          "qty": 250.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 39.15
+        },
+        {
+          "product_id": 10,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 41.0
+        },
+        {
+          "product_id": 11,
+          "qty": 350.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 52.5
+        },
+        {
+          "product_id": 12,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 73.5
+        },
+        {
+          "product_id": 13,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 40.12
+        },
+        {
+          "product_id": 14,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 52.37
+        },
+        {
+          "product_id": 15,
+          "qty": 400.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 39.12
+        }
+      ]
+    },
+    {
+      "id": 70,
+      "order_ref": "PO-00001407",
+      "customer_id": 2,
+      "status": "confirmed",
+      "required_date": "2026-06-30",
+      "notes": "Imported from NuCo PO PO-00001407",
+      "items": [
+        {
+          "product_id": 22,
+          "qty": 60.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 65.0
+        }
+      ]
+    },
+    {
+      "id": 71,
+      "order_ref": "PO-00001413",
+      "customer_id": 2,
+      "status": "confirmed",
+      "required_date": "2026-06-12",
+      "notes": "Imported from NuCo PO PO-00001413",
+      "items": [
+        {
+          "product_id": 23,
+          "qty": 20.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 8.5
+        },
+        {
+          "product_id": 24,
+          "qty": 50.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 60.0
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "order_ref": "WO26437",
+      "customer_id": 3,
+      "status": "confirmed",
+      "required_date": "2026-05-11",
+      "notes": "Imported from Safety Knife WO WO26437",
+      "items": [
+        {
+          "product_id": 33,
+          "qty": 200.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 4.8
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "order_ref": "WO26438",
+      "customer_id": 3,
+      "status": "confirmed",
+      "required_date": "2026-06-08",
+      "notes": "Imported from Safety Knife WO WO26438",
+      "items": [
+        {
+          "product_id": 26,
+          "qty": 1000.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 4.95
+        }
+      ]
+    },
+    {
+      "id": 72,
+      "order_ref": "PO-00001445",
+      "customer_id": 2,
+      "status": "confirmed",
+      "required_date": "2026-06-29",
+      "notes": "Imported from NuCo PO PO-00001445",
+      "items": [
+        {
+          "product_id": 25,
+          "qty": 25.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 135.0
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "order_ref": "WO26458",
+      "customer_id": 3,
+      "status": "confirmed",
+      "required_date": "2026-05-18",
+      "notes": "Imported from Safety Knife WO WO26458",
+      "items": [
+        {
+          "product_id": 27,
+          "qty": 1000.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 4.95
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "order_ref": "WO26459",
+      "customer_id": 3,
+      "status": "confirmed",
+      "required_date": "2026-06-15",
+      "notes": "Imported from Safety Knife WO WO26459",
+      "items": [
+        {
+          "product_id": 27,
+          "qty": 1000.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 4.95
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "order_ref": "8876",
+      "customer_id": 3,
+      "status": "confirmed",
+      "required_date": "2026-05-12",
+      "notes": "Imported from Safety Knife PO 8876",
+      "items": [
+        {
+          "product_id": 28,
+          "qty": 500.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 3.0
+        }
+      ]
+    },
+    {
+      "id": 48,
+      "order_ref": "8877",
+      "customer_id": 3,
+      "status": "confirmed",
+      "required_date": "2026-06-22",
+      "notes": "Imported from Safety Knife PO 8877",
+      "items": [
+        {
+          "product_id": 28,
+          "qty": 500.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 3.0
+        }
+      ]
+    },
+    {
+      "id": 73,
+      "order_ref": "303823",
+      "customer_id": 2,
+      "status": "confirmed",
+      "required_date": "2026-06-29",
+      "notes": "Imported from NuCo PO 303823",
+      "items": [
+        {
+          "product_id": 45,
+          "qty": 100.0,
+          "qty_dispatched": 0.0,
+          "unit_price": 30.75
+        }
+      ]
+    },
+    {
+      "id": 111,
+      "order_ref": "ORD-SK-12345",
+      "customer_id": 3,
+      "status": "dispatched",
+      "required_date": "2026-06-30",
+      "notes": "Safety Knife Company PO reference: 12345",
+      "items": [
+        {
+          "product_id": 65,
+          "qty": 1000.0,
+          "qty_dispatched": 1000.0,
+          "unit_price": 25.0
+        }
+      ]
+    }
+  ]
+}

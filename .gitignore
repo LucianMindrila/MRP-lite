@@ -39,3 +39,8 @@ Thumbs.db
 
 # Scratch / command output files
 *.txt
+
+# Generated working spreadsheets (regenerate with scripts/make_bom_template.py;
+# the data they hold flows into git via scripts/db_export.json after import)
+*.xlsx
+~$*

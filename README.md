@@ -46,27 +46,34 @@ COMPANY_VAT_NUMBER=GB 000 0000 00
 `SECRET_KEY` can be any random string for local testing.  
 `DB_PASSWORD` is only used if you switch to PostgreSQL — for SQLite (default) it is ignored.
 
-### 4. Initialise the database
+### 4. Initialise the database — pick ONE
 
 ```bash
-flask db upgrade
-```
+# A) Real DT Solutions catalog (recommended). Builds the schema AND loads the real
+#    suppliers / materials / products / BOMs / customers / logins from db_export.json:
+python scripts/setup_real_data.py
 
-This creates the SQLite database at `instance/mrp.db` and runs all migrations.
-
-### 5. Seed initial data (optional)
-
-To create two default users and some sample data:
-
-```bash
+# B) Dummy sample data for quick testing:
 flask seed
 ```
 
-This creates:
+Both create the SQLite database at `instance/mrp.db` and the two default logins below.
+
+> **Note:** `flask db upgrade` cannot build a database from scratch — the migration
+> chain assumes the base tables already exist, so it only works on a database that
+> is already populated. `setup_real_data.py` creates the schema from the models and
+> stamps the migration state to head, so on a fresh machine you do **not** need to
+> run `flask db upgrade` first; future migrations still apply normally afterwards.
+>
+> To refresh the real-data snapshot, run `python scripts/export_db.py` on the work
+> PC and commit the updated `scripts/db_export.json`. For an *exact* clone of a live
+> machine (including orders/stock), copy the `instance/mrp.db` file directly.
+
+The two default logins created either way:
 - **Admin user** — username: `admin`, password: `admin123`
 - **Operator user** — username: `operator`, password: `operator123`
 
-### 6. Run the app
+### 5. Run the app
 
 ```bash
 flask run
