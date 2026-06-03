@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Syncing MRP-lite between machines</title>
+<style>
+  :root { --navy:#1F4E78; --line:#cfd8e3; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Arial, sans-serif; color:#1a1a1a; line-height:1.5;
+    max-width: 820px; margin: 24px auto; padding: 0 24px;
+  }
+  h1 { color:var(--navy); font-size:24px; margin:0 0 4px; }
+  .sub { color:#555; margin:0 0 20px; font-size:14px; }
+  h2 { color:var(--navy); font-size:17px; margin:26px 0 8px; border-bottom:2px solid var(--line); padding-bottom:4px; }
+  ul { margin:8px 0; padding-left:22px; }
+  li { margin:6px 0; }
+  code {
+    font-family: Consolas, "Courier New", monospace; font-size:13.5px;
+    background:#f3f3f3; border:1px solid #e0e0e0; border-radius:3px; padding:1px 5px;
+  }
+  pre {
+    background:#1e1e1e; color:#e6e6e6; padding:12px 16px; border-radius:5px;
+    font-family: Consolas, "Courier New", monospace; font-size:13px; overflow:auto; white-space:pre-wrap;
+  }
+  pre .c { color:#7fb069; }
+  .rule {
+    background:#f5f8fc; border:1px solid var(--line); border-left:5px solid var(--navy);
+    padding:12px 16px; border-radius:4px; margin:14px 0; font-size:15px;
+  }
+  .note { background:#fff7e6; border:1px solid #ffe1a8; border-radius:5px; padding:12px 16px; margin:14px 0; font-size:14px; }
+  .note b { color:#9a6700; }
+  .tldr { background:#eef7ee; border:1px solid #bcdfbc; border-radius:5px; padding:12px 16px; margin:18px 0; font-size:14px; }
+  .foot { margin-top:30px; padding-top:10px; border-top:1px solid var(--line); color:#888; font-size:12px; }
+  @media print {
+    body { margin:0; max-width:none; font-size:12px; }
+    h2 { page-break-after:avoid; }
+    pre, .rule, .note, .tldr { page-break-inside:avoid; }
+    a { color:#000; text-decoration:none; }
+  }
+</style>
+</head>
+<body>
+
+  <h1>Syncing MRP-lite between machines</h1>
+  <p class="sub">Moving work between the work PC, home PC and office server without losing data</p>
+
+  <h2>The one concept that makes this make sense</h2>
+  <ul>
+    <li>Your <strong>code</strong> travels through <strong>git</strong> (GitHub).</li>
+    <li>Your <strong>data does NOT travel as the <code>mrp.db</code> file.</strong> The database is
+        deliberately kept out of git. Instead your data travels as
+        <strong><code>scripts/db_export.json</code></strong> (which <em>is</em> committed) and gets
+        <strong>rebuilt</strong> on the other machine.</li>
+  </ul>
+  <div class="rule">
+    <strong>The rule:</strong> &ldquo;Latest data&rdquo; on any machine = pull the latest
+    <code>db_export.json</code>, then rebuild the database from it with
+    <code>setup_real_data.py</code>.
+  </div>
+
+  <h2>Before you STOP working on a machine</h2>
+  <p>If you changed any data (added BOMs, edited materials, etc.), push it so the next machine can
+  pick it up:</p>
+  <pre>python scripts/import_boms.py     <span class="c"># only if you filled in the BOM template</span>
+python scripts/export_db.py       <span class="c"># refresh db_export.json with the latest data</span>
+git add -A
+git commit -m "Describe what you changed"
+git push</pre>
+  <p>After this, GitHub has your latest data.</p>
+
+  <h2>When you START on another machine</h2>
+  <p>If the repo already exists on that machine:</p>
+  <pre>cd &lt;your MRP-lite folder&gt;
+git pull
+venv\Scripts\activate
+pip install -r requirements.txt          <span class="c"># installs any new dependencies (e.g. openpyxl)</span>
+python scripts/setup_real_data.py --force <span class="c"># rebuild the catalog from the latest snapshot</span></pre>
+
+  <p>If the repo is NOT on that machine yet (first time):</p>
+  <pre>git clone https://github.com/LucianMindrila/MRP-lite.git
+cd MRP-lite
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+<span class="c"># create a .env file in the project root (gitignored - copy values from README.md)</span>
+python scripts/setup_real_data.py</pre>
+
+  <ul>
+    <li><strong><code>pip install -r requirements.txt</code> is not optional</strong> &mdash; if a new
+        library was added (like <code>openpyxl</code> for the BOM template), the scripts error without it.</li>
+    <li><strong><code>--force</code></strong> wipes that machine&rsquo;s old catalog and reloads the
+        current one. It is safe: it <strong>refuses</strong> if the machine has live orders/stock, so it
+        can&rsquo;t destroy real work. If it ever refuses and you want a clean slate, delete
+        <code>instance\mrp.db</code> on that machine and run <code>setup_real_data.py</code> without
+        <code>--force</code>.</li>
+  </ul>
+
+  <h2>The rule that catches people out</h2>
+  <p><strong><code>bom_template.xlsx</code> does NOT sync through git</strong> &mdash; it&rsquo;s a scratch
+  working file and it&rsquo;s gitignored. Your filled-in BOMs only become real and portable once you
+  <strong>import them</strong> (<code>import_boms.py</code>) and then <strong>export + commit + push</strong>.</p>
+  <div class="note">
+    <b>Simplest habit:</b> do all your template work on <b>one</b> machine, import it, push &mdash;
+    <em>then</em> switch machines. If you fill in the template but don&rsquo;t import and push, that work
+    stays trapped on that one PC.
+  </div>
+  <p>To recreate the template on any machine: <code>python scripts/make_bom_template.py</code>.</p>
+
+  <h2>A note about OneDrive</h2>
+  <p>The working folder currently lives inside OneDrive. If another PC logs into the same OneDrive
+  account, this folder (including the database and template) <em>may</em> appear there automatically.
+  <strong>Don&rsquo;t rely on it</strong> &mdash; OneDrive syncing a live database and a <code>.git</code>
+  folder can cause conflicts or &ldquo;file in use&rdquo; errors. Treat <strong>git as the source of
+  truth</strong> and follow the steps above; let OneDrive be a convenience, not the mechanism.</p>
+
+  <div class="tldr">
+    <strong>TL;DR</strong><br>
+    <b>Stopping (if you changed data):</b> <code>import_boms.py</code> (if used) &rarr;
+    <code>export_db.py</code> &rarr; <code>git add -A</code> &rarr; <code>git commit</code> &rarr;
+    <code>git push</code><br>
+    <b>Starting elsewhere:</b> <code>git pull</code> &rarr; <code>pip install -r requirements.txt</code>
+    &rarr; <code>python scripts/setup_real_data.py --force</code>
+  </div>
+
+  <p class="foot">MRP-lite &middot; To save as PDF: press Ctrl+P, then choose &ldquo;Save as PDF&rdquo;.
+  Email it to yourself to follow on another machine.</p>
+
+</body>
+</html>
