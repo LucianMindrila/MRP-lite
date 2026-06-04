@@ -1307,6 +1307,21 @@
       "notes": null
     },
     {
+      "id": 373,
+      "code": "2070X1860X12-CARMINE-RED",
+      "name": "2070 x 1860 x 12mm Carmine Red Compact Laminate",
+      "description": null,
+      "unit": "sheet",
+      "stock_qty": 0.0,
+      "cost_price": 205.93,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 23,
+      "category_id": 1,
+      "location": null,
+      "notes": null
+    },
+    {
       "id": 290,
       "code": "20MM-DRILL",
       "name": "20mm drill",
@@ -6094,6 +6109,26 @@
       "customer_id": 3
     },
     {
+      "id": 73,
+      "code": "BS/JIG/DRIP-ADJ",
+      "name": "BS/JIG Drip Tray Slot Adjuster (12mm polycarb)",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 1.7268,
+      "lead_time_days": 1,
+      "customer_id": null
+    },
+    {
+      "id": 72,
+      "code": "BS/JIG/OFFSET",
+      "name": "BS/JIG 8.65mm Offset Piece (carmine red)",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 1.0296,
+      "lead_time_days": 1,
+      "customer_id": null
+    },
+    {
       "id": 29,
       "code": "BS/JIG/PRO",
       "name": "Belfast Sink Jig Pro",
@@ -6102,6 +6137,16 @@
       "sale_price": 52.0,
       "lead_time_days": 1,
       "customer_id": 1
+    },
+    {
+      "id": 71,
+      "code": "BS/JIG/SLIDE-SET",
+      "name": "BS/JIG Sliding Block Set (top + bottom, carmine red)",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 1.0296,
+      "lead_time_days": 1,
+      "customer_id": null
     },
     {
       "id": 3,
@@ -7460,6 +7505,42 @@
       "material_id": null,
       "component_product_id": 70,
       "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 71,
+      "material_id": 373,
+      "component_product_id": null,
+      "qty_per_unit": 0.005
+    },
+    {
+      "product_id": 29,
+      "material_id": null,
+      "component_product_id": 71,
+      "qty_per_unit": 2.0
+    },
+    {
+      "product_id": 72,
+      "material_id": 373,
+      "component_product_id": null,
+      "qty_per_unit": 0.005
+    },
+    {
+      "product_id": 29,
+      "material_id": null,
+      "component_product_id": 72,
+      "qty_per_unit": 2.0
+    },
+    {
+      "product_id": 73,
+      "material_id": 232,
+      "component_product_id": null,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 29,
+      "material_id": null,
+      "component_product_id": 73,
+      "qty_per_unit": 2.0
     }
   ],
   "orders": [
