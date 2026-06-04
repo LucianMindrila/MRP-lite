@@ -76,16 +76,33 @@ def product_edit(pid):
             flash(f'Product {p.code} updated.', 'success')
 
         elif action == 'add_bom':
-            material_id = request.form.get('bom_material_id')
-            qty = request.form.get('bom_qty', 0)
-            if material_id and float(qty) > 0:
-                existing = BOMItem.query.filter_by(product_id=p.id, material_id=int(material_id)).first()
-                if existing:
-                    existing.qty_per_unit = float(qty)
-                    flash('BOM line updated.', 'success')
-                else:
-                    db.session.add(BOMItem(product_id=p.id, material_id=int(material_id), qty_per_unit=float(qty)))
-                    flash('BOM line added.', 'success')
+            material_id = request.form.get('bom_material_id') or None
+            component_id = request.form.get('bom_component_product_id') or None
+            qty_raw = request.form.get('bom_qty', 0)
+            try:
+                qty = float(qty_raw)
+            except (TypeError, ValueError):
+                qty = 0
+            if qty > 0 and (material_id or component_id):
+                if material_id:
+                    existing = BOMItem.query.filter_by(product_id=p.id, material_id=int(material_id)).first()
+                    if existing:
+                        existing.qty_per_unit = qty
+                        flash('BOM line updated.', 'success')
+                    else:
+                        db.session.add(BOMItem(product_id=p.id, material_id=int(material_id), qty_per_unit=qty))
+                        flash('BOM line added.', 'success')
+                elif component_id:
+                    if int(component_id) == p.id:
+                        flash('A product cannot contain itself.', 'danger')
+                    else:
+                        existing = BOMItem.query.filter_by(product_id=p.id, component_product_id=int(component_id)).first()
+                        if existing:
+                            existing.qty_per_unit = qty
+                            flash('BOM line updated.', 'success')
+                        else:
+                            db.session.add(BOMItem(product_id=p.id, component_product_id=int(component_id), qty_per_unit=qty))
+                            flash('Sub-product added to BOM.', 'success')
                 db.session.commit()
 
         elif action == 'update_bom':
@@ -110,10 +127,17 @@ def product_edit(pid):
         return redirect(url_for('inventory.product_edit', pid=p.id))
 
     bom_items = BOMItem.query.filter_by(product_id=p.id).all()
-    total_bom_cost = sum(b.qty_per_unit * b.unit_cost for b in bom_items)
+    total_bom_cost = sum(
+        b.qty_per_unit * (
+            b.material.cost_price if b.material else
+            b.component_product.sale_price if b.component_product else 0
+        ) for b in bom_items
+    )
     customers = Customer.query.order_by(Customer.name).all()
+    all_products = Product.query.filter_by(is_archived=False).order_by(Product.code).all()
     return render_template('inventory/product_form.html', product=p, bom_items=bom_items,
-                           materials=materials, total_bom_cost=total_bom_cost, customers=customers)
+                           materials=materials, total_bom_cost=total_bom_cost,
+                           customers=customers, all_products=all_products)
 
 
 @inventory_bp.route('/products/<int:pid>/delete', methods=['POST'])
