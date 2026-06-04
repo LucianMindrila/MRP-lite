@@ -6,12 +6,13 @@
 <div class="d-flex justify-content-between mb-3">
   <div class="d-flex align-items-center gap-3">
     <span class="text-muted">{{ products|length }} product{{ 's' if products|length != 1 }}</span>
+    {% set cur_cust = request.args.get('cust') %}
     {% if show_archived %}
-    <a href="{{ url_for('inventory.products_list') }}" class="btn btn-sm btn-outline-secondary">
+    <a href="{{ url_for('inventory.products_list', cust=cur_cust) }}" class="btn btn-sm btn-outline-secondary">
       <i class="bi bi-eye-slash me-1"></i>Hide Archived
     </a>
     {% else %}
-    <a href="{{ url_for('inventory.products_list', archived=1) }}" class="btn btn-sm btn-outline-secondary">
+    <a href="{{ url_for('inventory.products_list', archived=1, cust=cur_cust) }}" class="btn btn-sm btn-outline-secondary">
       <i class="bi bi-archive me-1"></i>Show Archived
     </a>
     {% endif %}
