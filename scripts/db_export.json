@@ -1175,7 +1175,7 @@
       "id": 127,
       "code": "2-12-X-12-ALU-FLAT",
       "name": "2 1/2\" x 1/2\" Alu Flat",
-      "description": null,
+      "description": "None",
       "unit": "pcs",
       "stock_qty": 0.0,
       "cost_price": 66.0,
@@ -1183,8 +1183,8 @@
       "reorder_qty": 0.0,
       "supplier_id": 32,
       "category_id": 7,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 128,
@@ -5162,6 +5162,306 @@
       "notes": "None"
     },
     {
+      "id": 369,
+      "code": "STRIKE/LOCK/LG",
+      "name": "Lock Plate - Large (machined in-house)",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 3.71,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 1,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 351,
+      "code": "STRIKE/M1",
+      "name": "Mortise Top/Bottom Plate",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 360,
+      "code": "STRIKE/M10",
+      "name": "Strike Tongue Plate Nut",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 361,
+      "code": "STRIKE/M11",
+      "name": "Flanged Nut",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 362,
+      "code": "STRIKE/M12",
+      "name": "Strike Tongue Plate 'A'",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 352,
+      "code": "STRIKE/M2",
+      "name": "Mortise LH Plate",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 353,
+      "code": "STRIKE/M3",
+      "name": "Mortise RH Plate",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 354,
+      "code": "STRIKE/M4",
+      "name": "Strike Top Plate 'B'",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 355,
+      "code": "STRIKE/M5",
+      "name": "Strike Bottom Plate 'A'",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 356,
+      "code": "STRIKE/M6",
+      "name": "Strike Tongue Plate 'B'",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 357,
+      "code": "STRIKE/M7",
+      "name": "Strike Edge Guide",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 358,
+      "code": "STRIKE/M8",
+      "name": "Strike Edge Guide Plate",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 359,
+      "code": "STRIKE/M9",
+      "name": "Strike Edge Guide Spacer",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 370,
+      "code": "STRIKE/MORT/SM",
+      "name": "Mortise Plate - Small (machined in-house)",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 1.48,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 1,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 363,
+      "code": "STRIKE/P1",
+      "name": "Top/Bottom Gauge 'A/B'",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 364,
+      "code": "STRIKE/P2",
+      "name": "Tongue Strike Gauge 'A'",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 365,
+      "code": "STRIKE/P3",
+      "name": "Tongue Strike Gauge 'B'",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 366,
+      "code": "STRIKE/P4",
+      "name": "Deadbolt Gauge",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 367,
+      "code": "STRIKE/P5",
+      "name": "Pin",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 368,
+      "code": "STRIKE/P6",
+      "name": "Rebate Spacer",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.0,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": null,
+      "category_id": 4,
+      "location": null,
+      "notes": null
+    },
+    {
       "id": 341,
       "code": "SWEATSHIRTLOGO-SIZE-L-CODE-U",
       "name": "SWEATSHIRT+LOGO (SIZE L) CODE UX3",
@@ -5697,7 +5997,7 @@
       "id": 59,
       "code": "ASSE/HJ/C",
       "name": "Assembly Cost H/JIG/C",
-      "description": null,
+      "description": "None",
       "unit": "pcs",
       "sale_price": 11.29,
       "lead_time_days": 7,
@@ -6958,6 +7258,132 @@
     {
       "product_id": 14,
       "material_id": 350,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 28,
+      "material_id": 127,
+      "component_product_id": null,
+      "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 60,
+      "material_id": 351,
+      "component_product_id": null,
+      "qty_per_unit": 2.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 352,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 353,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 354,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 355,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 356,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 357,
+      "component_product_id": null,
+      "qty_per_unit": 2.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 358,
+      "component_product_id": null,
+      "qty_per_unit": 2.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 359,
+      "component_product_id": null,
+      "qty_per_unit": 2.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 360,
+      "component_product_id": null,
+      "qty_per_unit": 2.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 361,
+      "component_product_id": null,
+      "qty_per_unit": 6.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 362,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 363,
+      "component_product_id": null,
+      "qty_per_unit": 2.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 364,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 365,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 366,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 367,
+      "component_product_id": null,
+      "qty_per_unit": 4.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 368,
+      "component_product_id": null,
+      "qty_per_unit": 2.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 369,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 370,
       "component_product_id": null,
       "qty_per_unit": 1.0
     }
