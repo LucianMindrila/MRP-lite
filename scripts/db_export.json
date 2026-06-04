@@ -6314,6 +6314,26 @@
       "customer_id": 1
     },
     {
+      "id": 68,
+      "code": "PIN/PACK/4",
+      "name": "4-Pin Pack (heat-sealed lay flat)",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 0.307,
+      "lead_time_days": 1,
+      "customer_id": null
+    },
+    {
+      "id": 69,
+      "code": "PIN/PACK/6",
+      "name": "6-Pin Pack (heat-sealed lay flat)",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 0.447,
+      "lead_time_days": 1,
+      "customer_id": null
+    },
+    {
       "id": 14,
       "code": "RS/JIG",
       "name": "Router Surfacing Jig",
@@ -6380,12 +6400,6 @@
       "material_id": 6,
       "component_product_id": null,
       "qty_per_unit": 0.11
-    },
-    {
-      "product_id": 1,
-      "material_id": 7,
-      "component_product_id": null,
-      "qty_per_unit": 6.0
     },
     {
       "product_id": 1,
@@ -6472,22 +6486,10 @@
       "qty_per_unit": 0.11
     },
     {
-      "product_id": 6,
-      "material_id": 7,
-      "component_product_id": null,
-      "qty_per_unit": 6.0
-    },
-    {
       "product_id": 7,
       "material_id": 6,
       "component_product_id": null,
       "qty_per_unit": 0.11
-    },
-    {
-      "product_id": 7,
-      "material_id": 7,
-      "component_product_id": null,
-      "qty_per_unit": 6.0
     },
     {
       "product_id": 9,
@@ -6496,22 +6498,10 @@
       "qty_per_unit": 0.11
     },
     {
-      "product_id": 9,
-      "material_id": 7,
-      "component_product_id": null,
-      "qty_per_unit": 4.0
-    },
-    {
       "product_id": 10,
       "material_id": 6,
       "component_product_id": null,
       "qty_per_unit": 0.11
-    },
-    {
-      "product_id": 10,
-      "material_id": 7,
-      "component_product_id": null,
-      "qty_per_unit": 4.0
     },
     {
       "product_id": 11,
@@ -6520,34 +6510,16 @@
       "qty_per_unit": 0.11
     },
     {
-      "product_id": 11,
-      "material_id": 7,
-      "component_product_id": null,
-      "qty_per_unit": 6.0
-    },
-    {
       "product_id": 12,
       "material_id": 6,
       "component_product_id": null,
       "qty_per_unit": 0.11
     },
     {
-      "product_id": 12,
-      "material_id": 7,
-      "component_product_id": null,
-      "qty_per_unit": 6.0
-    },
-    {
       "product_id": 2,
       "material_id": 6,
       "component_product_id": null,
       "qty_per_unit": 0.11
-    },
-    {
-      "product_id": 2,
-      "material_id": 7,
-      "component_product_id": null,
-      "qty_per_unit": 4.0
     },
     {
       "product_id": 2,
@@ -6562,22 +6534,10 @@
       "qty_per_unit": 0.11
     },
     {
-      "product_id": 5,
-      "material_id": 7,
-      "component_product_id": null,
-      "qty_per_unit": 4.0
-    },
-    {
       "product_id": 15,
       "material_id": 6,
       "component_product_id": null,
       "qty_per_unit": 0.11
-    },
-    {
-      "product_id": 15,
-      "material_id": 7,
-      "component_product_id": null,
-      "qty_per_unit": 6.0
     },
     {
       "product_id": 15,
@@ -6737,12 +6697,6 @@
     },
     {
       "product_id": 30,
-      "material_id": 7,
-      "component_product_id": null,
-      "qty_per_unit": 6.0
-    },
-    {
-      "product_id": 30,
       "material_id": 8,
       "component_product_id": null,
       "qty_per_unit": 0.2
@@ -6770,12 +6724,6 @@
       "material_id": 6,
       "component_product_id": null,
       "qty_per_unit": 0.14
-    },
-    {
-      "product_id": 31,
-      "material_id": 7,
-      "component_product_id": null,
-      "qty_per_unit": 6.0
     },
     {
       "product_id": 31,
@@ -7430,6 +7378,102 @@
       "material_id": 372,
       "component_product_id": null,
       "qty_per_unit": 10.0
+    },
+    {
+      "product_id": 68,
+      "material_id": 7,
+      "component_product_id": null,
+      "qty_per_unit": 4.0
+    },
+    {
+      "product_id": 68,
+      "material_id": 8,
+      "component_product_id": null,
+      "qty_per_unit": 0.2
+    },
+    {
+      "product_id": 69,
+      "material_id": 7,
+      "component_product_id": null,
+      "qty_per_unit": 6.0
+    },
+    {
+      "product_id": 69,
+      "material_id": 8,
+      "component_product_id": null,
+      "qty_per_unit": 0.2
+    },
+    {
+      "product_id": 1,
+      "material_id": null,
+      "component_product_id": 69,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 6,
+      "material_id": null,
+      "component_product_id": 68,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 7,
+      "material_id": null,
+      "component_product_id": 68,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 9,
+      "material_id": null,
+      "component_product_id": 68,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 10,
+      "material_id": null,
+      "component_product_id": 68,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 11,
+      "material_id": null,
+      "component_product_id": 69,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 12,
+      "material_id": null,
+      "component_product_id": 69,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 2,
+      "material_id": null,
+      "component_product_id": 68,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 5,
+      "material_id": null,
+      "component_product_id": 68,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 15,
+      "material_id": null,
+      "component_product_id": 69,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 30,
+      "material_id": null,
+      "component_product_id": 69,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 31,
+      "material_id": null,
+      "component_product_id": 69,
+      "qty_per_unit": 1.0
     }
   ],
   "orders": [
