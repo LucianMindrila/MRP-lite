@@ -6124,6 +6124,16 @@
       "customer_id": null
     },
     {
+      "id": 70,
+      "code": "DG/JIG/KIT",
+      "name": "DG/JIG Accessories Kit (heat-sealed in lay flat)",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 0.387,
+      "lead_time_days": 1,
+      "customer_id": null
+    },
+    {
       "id": 67,
       "code": "DG/JIG/RAIL",
       "name": "DG/JIG Rail (machined in-house)",
@@ -7327,24 +7337,6 @@
     },
     {
       "product_id": 3,
-      "material_id": 110,
-      "component_product_id": null,
-      "qty_per_unit": 15.0
-    },
-    {
-      "product_id": 3,
-      "material_id": 107,
-      "component_product_id": null,
-      "qty_per_unit": 1.0
-    },
-    {
-      "product_id": 3,
-      "material_id": 371,
-      "component_product_id": null,
-      "qty_per_unit": 0.2
-    },
-    {
-      "product_id": 3,
       "material_id": 372,
       "component_product_id": null,
       "qty_per_unit": 10.0
@@ -7443,6 +7435,30 @@
       "product_id": 31,
       "material_id": null,
       "component_product_id": 69,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 70,
+      "material_id": 110,
+      "component_product_id": null,
+      "qty_per_unit": 15.0
+    },
+    {
+      "product_id": 70,
+      "material_id": 107,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 70,
+      "material_id": 371,
+      "component_product_id": null,
+      "qty_per_unit": 0.2
+    },
+    {
+      "product_id": 3,
+      "material_id": null,
+      "component_product_id": 70,
       "qty_per_unit": 1.0
     }
   ],
