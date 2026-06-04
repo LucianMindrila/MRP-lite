@@ -28,7 +28,7 @@ def orders_list():
 @login_required
 def create_order():
     customers = Customer.query.order_by(Customer.name).all()
-    products = Product.query.order_by(Product.code).all()
+    products = Product.query.filter_by(is_archived=False).order_by(Product.code).all()
     if request.method == 'POST':
         order = Order(
             order_ref=gen_ref(),
@@ -279,7 +279,7 @@ def order_history():
 
     orders = q.order_by(Order.dispatched_date.desc()).all()
     customers = Customer.query.order_by(Customer.name).all()
-    products = Product.query.order_by(Product.code).all()
+    products = Product.query.filter_by(is_archived=False).order_by(Product.code).all()
 
     total_revenue = sum(
         sum((i.qty_dispatched or 0) * i.unit_price for i in o.items)

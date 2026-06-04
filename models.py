@@ -73,6 +73,7 @@ class Product(db.Model):
     sale_price = db.Column(db.Float, default=0)
     lead_time_days = db.Column(db.Integer, default=1)
     is_subassembly = db.Column(db.Boolean, default=False)
+    is_archived = db.Column(db.Boolean, default=False, nullable=False)
     customer_id = db.Column(db.Integer, db.ForeignKey('customers.id'))
     bom_items = db.relationship('BOMItem', foreign_keys='BOMItem.product_id',
                                 backref='product', lazy=True, cascade='all, delete-orphan')

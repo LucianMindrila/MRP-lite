@@ -30,7 +30,7 @@ def index():
     from_date, to_date = _date_range()
 
     customers = Customer.query.order_by(Customer.name).all()
-    products = Product.query.order_by(Product.code).all()
+    products = Product.query.filter_by(is_archived=False).order_by(Product.code).all()
     customer_id = request.args.get('customer_id', type=int)
     product_id = request.args.get('product_id', type=int)
 

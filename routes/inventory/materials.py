@@ -82,12 +82,19 @@ def material_edit(mid):
     m = Material.query.get_or_404(mid)
     suppliers = Supplier.query.order_by(Supplier.name).all()
     categories = _all_categories()
-    products = Product.query.order_by(Product.code).all()
+    products = Product.query.filter_by(is_archived=False).order_by(Product.code).all()
 
     if request.method == 'POST':
         action = request.form.get('action', 'save')
 
         if action == 'save':
+            new_code = request.form['code'].strip().upper()
+            if new_code != m.code:
+                conflict = Material.query.filter_by(code=new_code).first()
+                if conflict:
+                    flash(f'Code "{new_code}" is already used by another material.', 'danger')
+                    return redirect(url_for('inventory.material_edit', mid=mid))
+                m.code = new_code
             m.name = request.form['name'].strip()
             m.description = request.form.get('description', '').strip()
             m.unit = request.form.get('unit', 'pcs')

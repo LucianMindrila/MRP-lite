@@ -5977,7 +5977,7 @@
       "id": 15,
       "code": "S/KWJ700",
       "name": "Screwfix 700mm KWJ 79077",
-      "description": null,
+      "description": "None",
       "unit": "pcs",
       "sale_price": 39.12,
       "lead_time_days": 1,
@@ -5987,7 +5987,7 @@
       "id": 31,
       "code": "S/KWJ900",
       "name": "Screwfix 900mm KWJ",
-      "description": null,
+      "description": "None",
       "unit": "pcs",
       "sale_price": 61.03,
       "lead_time_days": 1,
@@ -6042,12 +6042,6 @@
       "material_id": 8,
       "component_product_id": null,
       "qty_per_unit": 0.01
-    },
-    {
-      "product_id": 1,
-      "material_id": 9,
-      "component_product_id": null,
-      "qty_per_unit": 1.0
     },
     {
       "product_id": 26,
@@ -6302,12 +6296,6 @@
       "qty_per_unit": 1.0
     },
     {
-      "product_id": 15,
-      "material_id": 9,
-      "component_product_id": null,
-      "qty_per_unit": 1.0
-    },
-    {
       "product_id": 10,
       "material_id": 23,
       "component_product_id": null,
@@ -6479,7 +6467,7 @@
       "product_id": 31,
       "material_id": 6,
       "component_product_id": null,
-      "qty_per_unit": 0.11
+      "qty_per_unit": 0.14
     },
     {
       "product_id": 31,

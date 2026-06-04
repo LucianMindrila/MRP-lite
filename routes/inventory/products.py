@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required
-from models import db, Product, BOMItem, Material, Customer
+from models import db, Product, BOMItem, Material, Customer, WorkOrder, ProductOperation
 from . import inventory_bp
 
 
@@ -17,18 +17,21 @@ def _unique_code(base):
 @login_required
 def products_list():
     customers = Customer.query.order_by(Customer.name).all()
+    show_archived = request.args.get('archived') == '1'
     cust_filter = request.args.get('cust')
+    q = Product.query if show_archived else Product.query.filter_by(is_archived=False)
     if cust_filter == 'none':
-        products = Product.query.filter_by(customer_id=None).order_by(Product.code).all()
+        products = q.filter_by(customer_id=None).order_by(Product.code).all()
         active_customer = 'none'
     elif cust_filter:
-        products = Product.query.filter_by(customer_id=int(cust_filter)).order_by(Product.code).all()
+        products = q.filter_by(customer_id=int(cust_filter)).order_by(Product.code).all()
         active_customer = int(cust_filter)
     else:
-        products = Product.query.order_by(Product.code).all()
+        products = q.order_by(Product.code).all()
         active_customer = None
     return render_template('inventory/products_list.html', products=products,
-                           customers=customers, active_customer=active_customer)
+                           customers=customers, active_customer=active_customer,
+                           show_archived=show_archived)
 
 
 @inventory_bp.route('/products/add', methods=['GET', 'POST'])
@@ -117,10 +120,27 @@ def product_edit(pid):
 @login_required
 def product_delete(pid):
     p = Product.query.get_or_404(pid)
+    if p.order_items:
+        flash(f'Cannot delete {p.code} — it is referenced on {len(p.order_items)} order(s).', 'danger')
+        return redirect(url_for('inventory.product_edit', pid=pid))
+    ProductOperation.query.filter_by(product_id=pid).delete()
+    WorkOrder.query.filter_by(product_id=pid).delete()
+    BOMItem.query.filter_by(component_product_id=pid).delete()
     db.session.delete(p)
     db.session.commit()
     flash(f'Product {p.code} deleted.', 'success')
     return redirect(url_for('inventory.products_list'))
+
+
+@inventory_bp.route('/products/<int:pid>/archive', methods=['POST'])
+@login_required
+def product_archive(pid):
+    p = Product.query.get_or_404(pid)
+    p.is_archived = not p.is_archived
+    db.session.commit()
+    action = 'archived' if p.is_archived else 'unarchived'
+    flash(f'Product {p.code} {action}.', 'success')
+    return redirect(url_for('inventory.product_edit', pid=pid))
 
 
 @inventory_bp.route('/products/<int:pid>/copy', methods=['POST'])

@@ -4,7 +4,18 @@
 
 {% block content %}
 <div class="d-flex justify-content-between mb-3">
-  <span class="text-muted">{{ products|length }} product{{ 's' if products|length != 1 }}</span>
+  <div class="d-flex align-items-center gap-3">
+    <span class="text-muted">{{ products|length }} product{{ 's' if products|length != 1 }}</span>
+    {% if show_archived %}
+    <a href="{{ url_for('inventory.products_list') }}" class="btn btn-sm btn-outline-secondary">
+      <i class="bi bi-eye-slash me-1"></i>Hide Archived
+    </a>
+    {% else %}
+    <a href="{{ url_for('inventory.products_list', archived=1) }}" class="btn btn-sm btn-outline-secondary">
+      <i class="bi bi-archive me-1"></i>Show Archived
+    </a>
+    {% endif %}
+  </div>
   <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#productModal">
     <i class="bi bi-plus-lg me-1"></i>Add Product
   </button>
@@ -40,8 +51,11 @@
       </thead>
       <tbody>
         {% for p in products %}
-        <tr>
-          <td><strong>{{ p.code }}</strong></td>
+        <tr class="{% if p.is_archived %}text-muted{% endif %}">
+          <td>
+            <strong>{{ p.code }}</strong>
+            {% if p.is_archived %}<span class="badge bg-secondary ms-1">Archived</span>{% endif %}
+          </td>
           <td>{{ p.name }}</td>
           <td><span class="badge bg-secondary">{{ p.customer.name if p.customer else '—' }}</span></td>
           <td>{{ p.unit }}</td>
