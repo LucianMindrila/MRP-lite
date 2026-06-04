@@ -45,6 +45,14 @@
             {% endfor %}
           </select>
         </div>
+        <div class="col-md-8">
+          <label class="form-label">BOM Status</label>
+          <select name="bom_status" class="form-select">
+            {% for val, label in bom_status_options %}
+            <option value="{{ val }}" {% if material and material.bom_status == val %}selected{% elif not val and (not material or not material.bom_status) %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+          </select>
+        </div>
         <div class="col-md-3">
           <label class="form-label">Unit</label>
           <select name="unit" class="form-select">

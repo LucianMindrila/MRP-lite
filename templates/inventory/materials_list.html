@@ -32,15 +32,36 @@
 </div>
 {% endif %}
 
+<!-- BOM status legend -->
+<div class="d-flex gap-3 mb-2 ms-1" style="font-size:.85rem;">
+  <span><span style="color:#198754;font-size:1rem;">●</span> Assigned to a product</span>
+  <span><span style="color:#0d6efd;font-size:1rem;">●</span> Consumable / no assignment needed</span>
+  <span><span style="color:#fd7e14;font-size:1rem;">●</span> Misc customers</span>
+  <span><span style="color:#dc3545;font-size:1rem;">●</span> Not yet assigned</span>
+</div>
+
 <div class="card">
   <div class="card-body p-0">
     <table class="table table-hover mb-0">
       <thead class="table-light">
-        <tr><th>Code</th><th>Name</th><th>Category</th><th>Unit</th><th>Stock</th><th>Reorder Pt</th><th>Cost</th><th>Supplier</th><th></th></tr>
+        <tr><th style="width:2rem;"></th><th>Code</th><th>Name</th><th>Category</th><th>Unit</th><th>Stock</th><th>Reorder Pt</th><th>Cost</th><th>Supplier</th><th></th></tr>
       </thead>
       <tbody>
         {% for m in materials %}
+        {% set cat_name = m.category.name if m.category else '' %}
+        {% if m.bom_status == 'consumable' %}
+          {% set dot_color = '#0d6efd' %}
+        {% elif m.bom_status == 'misc_customer' %}
+          {% set dot_color = '#fd7e14' %}
+        {% elif m.id in bom_mat_ids %}
+          {% set dot_color = '#198754' %}
+        {% elif cat_name in bom_auto_blue %}
+          {% set dot_color = '#0d6efd' %}
+        {% else %}
+          {% set dot_color = '#dc3545' %}
+        {% endif %}
         <tr class="{% if (m.stock_qty or 0) <= (m.reorder_point or 0) and (m.reorder_point or 0) > 0 %}table-warning{% endif %}">
+          <td class="text-center"><span style="color:{{ dot_color }};font-size:1.1rem;line-height:1;">●</span></td>
           <td><strong>{{ m.code }}</strong></td>
           <td>{{ m.name }}</td>
           <td><span class="badge bg-secondary">{{ m.category.name if m.category else '—' }}</span></td>
@@ -54,7 +75,7 @@
           </td>
         </tr>
         {% else %}
-        <tr><td colspan="9" class="text-muted text-center py-4">No materials in this category yet.</td></tr>
+        <tr><td colspan="10" class="text-muted text-center py-4">No materials in this category yet.</td></tr>
         {% endfor %}
       </tbody>
     </table>

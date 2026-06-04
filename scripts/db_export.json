@@ -725,16 +725,16 @@
       "id": 249,
       "code": "1015X-390X-15MM-PLAIN-WHITE",
       "name": "1015x 390x 15mm plain White (KWJ700 Trend) - Product code SHF216409",
-      "description": null,
-      "unit": "each",
+      "description": "None",
+      "unit": "pcs",
       "stock_qty": 0.0,
       "cost_price": 1.1,
       "reorder_point": 0.0,
       "reorder_qty": 0.0,
       "supplier_id": 19,
       "category_id": 2,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 43,
@@ -785,16 +785,16 @@
       "id": 241,
       "code": "1116-X-726-X-26MM-AXMINSTER",
       "name": "1116 x 726 x 26mm Axminster Valchromat Top-MFT",
-      "description": null,
-      "unit": "each",
+      "description": "None",
+      "unit": "pcs",
       "stock_qty": 0.0,
       "cost_price": 2.34,
       "reorder_point": 0.0,
       "reorder_qty": 0.0,
       "supplier_id": 11,
       "category_id": 2,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 124,
@@ -1070,16 +1070,16 @@
       "id": 242,
       "code": "155-X-155-X-1145MM-AXMINSTER",
       "name": "155 x 155 x 1145mm Axminster Frame box",
-      "description": null,
-      "unit": "each",
+      "description": "None",
+      "unit": "pcs",
       "stock_qty": 0.0,
       "cost_price": 2.64,
       "reorder_point": 0.0,
       "reorder_qty": 0.0,
       "supplier_id": 11,
       "category_id": 2,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 289,
@@ -2465,31 +2465,16 @@
       "id": 248,
       "code": "585-X-525-X-25MM-AXMINSTER-S",
       "name": "585 x 525 x 25mm (Axminster Stair Jig)",
-      "description": null,
-      "unit": "each",
+      "description": "None",
+      "unit": "pcs",
       "stock_qty": 0.0,
       "cost_price": 2.98,
       "reorder_point": 0.0,
       "reorder_qty": 0.0,
       "supplier_id": 44,
       "category_id": 2,
-      "location": null,
-      "notes": null
-    },
-    {
-      "id": 243,
-      "code": "587-X-313-X-14MM-REF-TREND-M",
-      "name": "587 X 313 X 14MM Ref. Trend MFT Jig WHITE BOX",
-      "description": null,
-      "unit": "each",
-      "stock_qty": 0.0,
-      "cost_price": 1.8,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 11,
-      "category_id": 2,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 209,
@@ -2525,7 +2510,7 @@
       "id": 244,
       "code": "610-X-410-X-34MM-WITH-25MM-O",
       "name": "610 x 410 x 34mm (with 25mm overlap) Axminster Small Router Top",
-      "description": null,
+      "description": "None",
       "unit": "pcs",
       "stock_qty": 0.0,
       "cost_price": 2.09,
@@ -2533,8 +2518,8 @@
       "reorder_qty": 0.0,
       "supplier_id": 11,
       "category_id": 2,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 292,
@@ -2612,21 +2597,6 @@
       "notes": null
     },
     {
-      "id": 245,
-      "code": "776X-586-X-30MM-WITH-25MM-OV",
-      "name": "776x 586 x 30mm (with 25mm overlap) Drainer Jig",
-      "description": null,
-      "unit": "pcs",
-      "stock_qty": 0.0,
-      "cost_price": 1.78,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 11,
-      "category_id": 2,
-      "location": null,
-      "notes": null
-    },
-    {
       "id": 156,
       "code": "8-X-1-POZI-FLANGE-STS-BZP",
       "name": "8 x 1\" Pozi Flange STS BZP",
@@ -2660,16 +2630,16 @@
       "id": 246,
       "code": "800-X-600-X-34MM-AXMINSTER-L",
       "name": "800 x 600 x 34mm Axminster Large Router Top Brown",
-      "description": null,
-      "unit": "each",
+      "description": "None",
+      "unit": "pcs",
       "stock_qty": 0.0,
       "cost_price": 3.3,
       "reorder_point": 0.0,
       "reorder_qty": 0.0,
       "supplier_id": 11,
       "category_id": 2,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 99,
@@ -2837,21 +2807,6 @@
       "notes": null
     },
     {
-      "id": 247,
-      "code": "AXMINSTER-VALCHROMAT-TOP-MFT",
-      "name": "Axminster Valchromat Top - MFT 1116 x 726 x 26mm",
-      "description": null,
-      "unit": "each",
-      "stock_qty": 0.0,
-      "cost_price": 2.32,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 11,
-      "category_id": 2,
-      "location": null,
-      "notes": null
-    },
-    {
       "id": 323,
       "code": "BEECHFIELD-SUPRAFLEECE-SU-2",
       "name": "Beechfield Suprafleece Summit Hat with LOGO M/XL Product code: B244",
@@ -2942,25 +2897,10 @@
       "notes": null
     },
     {
-      "id": 270,
-      "code": "BOX-ROLL-50MMX66M-CLEAR-DENV",
-      "name": "BOX ROLL 50MMx66M Clear denva PP TAPE",
-      "description": null,
-      "unit": "box",
-      "stock_qty": 0.0,
-      "cost_price": 21.96,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 6,
-      "category_id": 9,
-      "location": null,
-      "notes": null
-    },
-    {
       "id": 87,
       "code": "BOX.BLACK.1",
       "name": "Carton Black 178x410x59mm Diecut",
-      "description": null,
+      "description": "None",
       "unit": "pcs",
       "stock_qty": 0.0,
       "cost_price": 0.89,
@@ -2968,8 +2908,8 @@
       "reorder_qty": 0.0,
       "supplier_id": 7,
       "category_id": 2,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 296,
@@ -3032,10 +2972,10 @@
       "notes": null
     },
     {
-      "id": 18,
-      "code": "BS/JIG BOX",
-      "name": "Belfast Sink Jig Box (598mm x 590mm x 113mm)",
-      "description": "BS/JIG BOX /RHF408148/A - 598mm x 590mm x 113mm",
+      "id": 250,
+      "code": "BSJIG-BOX-RHF408148A-598MM-X",
+      "name": "BS/JIG BOX /RHF408148/A (598mm x 590mm x 13mm)",
+      "description": "None",
       "unit": "pcs",
       "stock_qty": 0.0,
       "cost_price": 1.08,
@@ -3043,23 +2983,8 @@
       "reorder_qty": 0.0,
       "supplier_id": 19,
       "category_id": 2,
-      "location": null,
-      "notes": null
-    },
-    {
-      "id": 250,
-      "code": "BSJIG-BOX-RHF408148A-598MM-X",
-      "name": "BS/JIG BOX /RHF408148/A (598mm x 590mm x 13mm)",
-      "description": null,
-      "unit": "each",
-      "stock_qty": 0.0,
-      "cost_price": 1.08,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 19,
-      "category_id": 2,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 239,
@@ -3092,34 +3017,19 @@
       "notes": null
     },
     {
-      "id": 19,
-      "code": "DG/JIG BOX",
-      "name": "Drainer Groove Jig Box (600mm x 585mm x 113mm)",
-      "description": "DGJIG - BROWN 1 COL BLACK B 200K 200T. Internal: 600mm x 585mm x 113mm. External: 785mm x 1264mm.",
-      "unit": "pcs",
-      "stock_qty": 0.0,
-      "cost_price": 0.845,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 20,
-      "category_id": 2,
-      "location": null,
-      "notes": "One-off setup costs on first order with ABC: Cutting tool charge £350.00 + Artwork/printing plates charge £299.00 (total £649.00). PO 5883_7, dated 28/04/2026."
-    },
-    {
       "id": 116,
       "code": "DGJIG-BROWN-1-COL-BLACK-B-20",
       "name": "DGJIG - BROWN 1 COL BLACK B 200K 200T, 600mm x 585mm x 13mm (internal size), 785 x 1264 (external size)",
-      "description": null,
-      "unit": "each",
+      "description": "None",
+      "unit": "pcs",
       "stock_qty": 0.0,
       "cost_price": 0.85,
       "reorder_point": 0.0,
       "reorder_qty": 0.0,
       "supplier_id": 20,
       "category_id": 2,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 95,
@@ -3441,21 +3351,6 @@
       "code": "KWJ650 BOX",
       "name": "Kitchen Worktop Jig 650mm Box",
       "description": "KWJ650 - BROWN 1 COL BLACK. 882mm x 237mm x 13mm. SHF221854/A. PO 5850_4, dated 25/02/2026.",
-      "unit": "pcs",
-      "stock_qty": 0.0,
-      "cost_price": 0.63,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 19,
-      "category_id": 2,
-      "location": null,
-      "notes": null
-    },
-    {
-      "id": 251,
-      "code": "KWJ650-BROWN-1-COL-BLACK-882",
-      "name": "KWJ650 - BROWN 1 COL BLACK 882mm x 237mm x 13mm, Product code SHF221854/A",
-      "description": null,
       "unit": "pcs",
       "stock_qty": 0.0,
       "cost_price": 0.63,
@@ -4697,21 +4592,6 @@
       "notes": null
     },
     {
-      "id": 273,
-      "code": "PLAIN-RESEAL-BAGS-35X45",
-      "name": "Plain Reseal Bags 3.5x4.5\"",
-      "description": null,
-      "unit": "box",
-      "stock_qty": 0.0,
-      "cost_price": 7.05,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 6,
-      "category_id": 9,
-      "location": null,
-      "notes": null
-    },
-    {
       "id": 334,
       "code": "POLOLOGO-SIZE-L-CODE-UC105",
       "name": "POLO+LOGO (SIZE L) CODE UC105",
@@ -4772,36 +4652,6 @@
       "notes": null
     },
     {
-      "id": 252,
-      "code": "POSTAL-FOLDER-OUTER-MEET-128",
-      "name": "Postal folder, outer meet 1285mm x 320mm x 12mm brown H/KWJ950",
-      "description": null,
-      "unit": "each",
-      "stock_qty": 0.0,
-      "cost_price": 0.96,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 19,
-      "category_id": 2,
-      "location": null,
-      "notes": null
-    },
-    {
-      "id": 253,
-      "code": "POSTAL-FOLDER-OUTER-MEET-995",
-      "name": "Postal folder, outer meet 995mm x 320mm x 12mm brown H/KWJ650",
-      "description": null,
-      "unit": "each",
-      "stock_qty": 0.0,
-      "cost_price": 0.87,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 19,
-      "category_id": 2,
-      "location": null,
-      "notes": null
-    },
-    {
       "id": 68,
       "code": "PSL/DG-JIG-BOX",
       "name": "Drainer Groove Jig Protective Box",
@@ -4809,21 +4659,6 @@
       "unit": "pcs",
       "stock_qty": 0.0,
       "cost_price": 1.78,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 11,
-      "category_id": 2,
-      "location": null,
-      "notes": null
-    },
-    {
-      "id": 71,
-      "code": "PSL/FRAME-BOX",
-      "name": "Axminster Frame Box",
-      "description": "155 x 155 x 1145mm. PO 5852_4, dated 02/03/2026.",
-      "unit": "pcs",
-      "stock_qty": 0.0,
-      "cost_price": 2.64,
       "reorder_point": 0.0,
       "reorder_qty": 0.0,
       "supplier_id": 11,
@@ -4843,23 +4678,8 @@
       "reorder_qty": 0.0,
       "supplier_id": 11,
       "category_id": 2,
-      "location": null,
-      "notes": null
-    },
-    {
-      "id": 69,
-      "code": "PSL/LG-ROUTER-BOX",
-      "name": "Axminster Large Router Top Box",
-      "description": "800 x 600 x 34mm brown. PO 5880_4, dated 22/04/2026.",
-      "unit": "pcs",
-      "stock_qty": 0.0,
-      "cost_price": 3.3,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 11,
-      "category_id": 2,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 74,
@@ -4873,8 +4693,8 @@
       "reorder_qty": 0.0,
       "supplier_id": 11,
       "category_id": 2,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 75,
@@ -4903,8 +4723,8 @@
       "reorder_qty": 0.0,
       "supplier_id": 11,
       "category_id": 2,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 70,
@@ -4914,21 +4734,6 @@
       "unit": "pcs",
       "stock_qty": 0.0,
       "cost_price": 2.09,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 11,
-      "category_id": 2,
-      "location": null,
-      "notes": null
-    },
-    {
-      "id": 72,
-      "code": "PSL/VALCHROMAT-BOX",
-      "name": "Axminster Valchromat MFT Top Box",
-      "description": "1116 x 726 x 26mm. PO 5801_4, dated 09/01/2026.",
-      "unit": "pcs",
-      "stock_qty": 0.0,
-      "cost_price": 2.34,
       "reorder_point": 0.0,
       "reorder_qty": 0.0,
       "supplier_id": 11,
@@ -5012,21 +4817,6 @@
       "notes": null
     },
     {
-      "id": 275,
-      "code": "REEL-12MM-X1000M-TENSO-PR260",
-      "name": "REEL 12MM X1000M TENSO PR260 PP STRAPPING",
-      "description": null,
-      "unit": "roll",
-      "stock_qty": 0.0,
-      "cost_price": 26.11,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 6,
-      "category_id": 9,
-      "location": null,
-      "notes": null
-    },
-    {
       "id": 276,
       "code": "ROLL-1-12-500G-LAYFLAT-TUBIN",
       "name": "ROLL 1 1/2\" 500G Layflat Tubing",
@@ -5072,21 +4862,6 @@
       "notes": null
     },
     {
-      "id": 279,
-      "code": "ROLL-12MM-ECONOMY-SEALER-FOR",
-      "name": "ROLL 12MM ECONOMY SEALER FOR PP STRAPPING SGP12",
-      "description": null,
-      "unit": "roll",
-      "stock_qty": 0.0,
-      "cost_price": 31.78,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 6,
-      "category_id": 9,
-      "location": null,
-      "notes": null
-    },
-    {
       "id": 280,
       "code": "ROLL-2-HD-LAYFLAT-TUBING",
       "name": "ROLL 2\" HD Layflat Tubing",
@@ -5117,36 +4892,6 @@
       "notes": null
     },
     {
-      "id": 282,
-      "code": "ROLL-50MM-X-66M-CLEAR-DENVA",
-      "name": "ROLL 50MM x 66M Clear denva PP TAPE",
-      "description": null,
-      "unit": "box",
-      "stock_qty": 0.0,
-      "cost_price": 21.96,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 6,
-      "category_id": 9,
-      "location": null,
-      "notes": null
-    },
-    {
-      "id": 283,
-      "code": "ROLL-50MM-X-66M-FRAGILE-HAND",
-      "name": "ROLL 50MM X 66M FRAGILE HANDLE WITH CARE TAPE",
-      "description": null,
-      "unit": "box",
-      "stock_qty": 0.0,
-      "cost_price": 33.77,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 6,
-      "category_id": 9,
-      "location": null,
-      "notes": null
-    },
-    {
       "id": 284,
       "code": "ROLL-50MM-X-BUFF-DENVA-PP-TA",
       "name": "ROLL 50MM x Buff denva PP tape",
@@ -5154,51 +4899,6 @@
       "unit": "box",
       "stock_qty": 0.0,
       "cost_price": 24.84,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 6,
-      "category_id": 9,
-      "location": null,
-      "notes": null
-    },
-    {
-      "id": 285,
-      "code": "ROLL-50MMX-BUFF-DENVA-PP-TAP",
-      "name": "ROLL 50MMx Buff denva PP tape",
-      "description": null,
-      "unit": "box",
-      "stock_qty": 0.0,
-      "cost_price": 24.84,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 6,
-      "category_id": 9,
-      "location": null,
-      "notes": null
-    },
-    {
-      "id": 286,
-      "code": "ROLL-750MM-X-100MM-SMALL-BUB",
-      "name": "Roll 750mm x 100mm small bubblewrap",
-      "description": null,
-      "unit": "roll",
-      "stock_qty": 0.0,
-      "cost_price": 12.87,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 6,
-      "category_id": 9,
-      "location": null,
-      "notes": null
-    },
-    {
-      "id": 287,
-      "code": "ROLL-750MM-X100MM-SMALL-BUBB",
-      "name": "Roll 750mm x100mm small bubblewrap",
-      "description": null,
-      "unit": "roll",
-      "stock_qty": 0.0,
-      "cost_price": 12.87,
       "reorder_point": 0.0,
       "reorder_qty": 0.0,
       "supplier_id": 6,
@@ -5417,21 +5117,6 @@
       "notes": null
     },
     {
-      "id": 254,
-      "code": "T900-BOXWHITESHF216410",
-      "name": "T-900 Box/white/SHF216410",
-      "description": null,
-      "unit": "each",
-      "stock_qty": 0.0,
-      "cost_price": 1.59,
-      "reorder_point": 0.0,
-      "reorder_qty": 0.0,
-      "supplier_id": 19,
-      "category_id": 2,
-      "location": null,
-      "notes": null
-    },
-    {
       "id": 93,
       "code": "TAPE-CUTTER-F200BF",
       "name": "Tape Cutter F200/F600/Big Fish",
@@ -5465,16 +5150,16 @@
       "id": 255,
       "code": "TREND-KWJ950PRO-JIG-1260MM-X",
       "name": "TREND KWJ950/PRO JIG 1260mm x 341mm x 13mm",
-      "description": null,
-      "unit": "each",
+      "description": "None",
+      "unit": "pcs",
       "stock_qty": 0.0,
       "cost_price": 1.04,
       "reorder_point": 0.0,
       "reorder_qty": 0.0,
       "supplier_id": 19,
       "category_id": 2,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 343,
@@ -6268,682 +5953,926 @@
     {
       "product_id": 1,
       "material_id": 6,
+      "component_product_id": null,
       "qty_per_unit": 0.11
     },
     {
       "product_id": 1,
       "material_id": 7,
+      "component_product_id": null,
       "qty_per_unit": 6.0
     },
     {
       "product_id": 1,
       "material_id": 8,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 1,
       "material_id": 9,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 26,
       "material_id": 11,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 26,
       "material_id": 12,
+      "component_product_id": null,
       "qty_per_unit": 5.0
     },
     {
       "product_id": 26,
       "material_id": 13,
+      "component_product_id": null,
       "qty_per_unit": 5.0
     },
     {
       "product_id": 26,
       "material_id": 14,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 26,
       "material_id": 15,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 27,
       "material_id": 11,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 27,
       "material_id": 16,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 27,
       "material_id": 12,
+      "component_product_id": null,
       "qty_per_unit": 5.0
     },
     {
       "product_id": 27,
       "material_id": 13,
+      "component_product_id": null,
       "qty_per_unit": 5.0
     },
     {
       "product_id": 27,
       "material_id": 17,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 27,
       "material_id": 14,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 27,
       "material_id": 15,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 6,
       "material_id": 6,
+      "component_product_id": null,
       "qty_per_unit": 0.11
     },
     {
       "product_id": 6,
       "material_id": 7,
+      "component_product_id": null,
       "qty_per_unit": 6.0
     },
     {
       "product_id": 6,
       "material_id": 8,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 7,
       "material_id": 6,
+      "component_product_id": null,
       "qty_per_unit": 0.11
     },
     {
       "product_id": 7,
       "material_id": 7,
+      "component_product_id": null,
       "qty_per_unit": 6.0
     },
     {
       "product_id": 7,
       "material_id": 8,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 9,
       "material_id": 6,
+      "component_product_id": null,
       "qty_per_unit": 0.11
     },
     {
       "product_id": 9,
       "material_id": 7,
+      "component_product_id": null,
       "qty_per_unit": 6.0
     },
     {
       "product_id": 9,
       "material_id": 8,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 10,
       "material_id": 6,
+      "component_product_id": null,
       "qty_per_unit": 0.11
     },
     {
       "product_id": 10,
       "material_id": 7,
+      "component_product_id": null,
       "qty_per_unit": 6.0
     },
     {
       "product_id": 10,
       "material_id": 8,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 11,
       "material_id": 6,
+      "component_product_id": null,
       "qty_per_unit": 0.11
     },
     {
       "product_id": 11,
       "material_id": 7,
+      "component_product_id": null,
       "qty_per_unit": 6.0
     },
     {
       "product_id": 11,
       "material_id": 8,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 12,
       "material_id": 6,
+      "component_product_id": null,
       "qty_per_unit": 0.11
     },
     {
       "product_id": 12,
       "material_id": 7,
+      "component_product_id": null,
       "qty_per_unit": 6.0
     },
     {
       "product_id": 12,
       "material_id": 8,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 2,
       "material_id": 6,
+      "component_product_id": null,
       "qty_per_unit": 0.11
     },
     {
       "product_id": 2,
       "material_id": 7,
+      "component_product_id": null,
       "qty_per_unit": 4.0
     },
     {
       "product_id": 2,
       "material_id": 8,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 3,
       "material_id": 6,
+      "component_product_id": null,
       "qty_per_unit": 0.11
     },
     {
       "product_id": 3,
       "material_id": 7,
+      "component_product_id": null,
       "qty_per_unit": 6.0
     },
     {
       "product_id": 3,
       "material_id": 8,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 5,
       "material_id": 6,
+      "component_product_id": null,
       "qty_per_unit": 0.11
     },
     {
       "product_id": 5,
       "material_id": 7,
+      "component_product_id": null,
       "qty_per_unit": 6.0
     },
     {
       "product_id": 5,
       "material_id": 8,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 15,
       "material_id": 6,
+      "component_product_id": null,
       "qty_per_unit": 0.11
     },
     {
       "product_id": 15,
       "material_id": 7,
+      "component_product_id": null,
       "qty_per_unit": 6.0
     },
     {
       "product_id": 15,
       "material_id": 8,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 29,
       "material_id": 6,
+      "component_product_id": null,
       "qty_per_unit": 0.11
     },
     {
       "product_id": 29,
       "material_id": 7,
+      "component_product_id": null,
       "qty_per_unit": 6.0
     },
     {
       "product_id": 29,
       "material_id": 8,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 29,
-      "material_id": 18,
+      "material_id": null,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 3,
-      "material_id": 19,
+      "material_id": null,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 11,
       "material_id": 9,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 15,
       "material_id": 9,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 10,
       "material_id": 23,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 9,
       "material_id": 21,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 12,
       "material_id": 22,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 6,
       "material_id": 24,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 7,
       "material_id": 25,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 30,
       "material_id": 20,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 22,
-      "material_id": 72,
+      "material_id": null,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 20,
-      "material_id": 69,
+      "material_id": null,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 18,
       "material_id": 70,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 24,
-      "material_id": 71,
+      "material_id": null,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 1,
       "material_id": 10,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 10,
       "material_id": 10,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 11,
       "material_id": 10,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 15,
       "material_id": 10,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 30,
       "material_id": 10,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 1,
       "material_id": 77,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 10,
       "material_id": 77,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 11,
       "material_id": 77,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 30,
       "material_id": 77,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 2,
       "material_id": 77,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 6,
       "material_id": 79,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 6,
       "material_id": 80,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 6,
       "material_id": 81,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 7,
       "material_id": 82,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 7,
       "material_id": 83,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 7,
       "material_id": 81,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 2,
       "material_id": 84,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 30,
       "material_id": 6,
+      "component_product_id": null,
       "qty_per_unit": 0.11
     },
     {
       "product_id": 30,
       "material_id": 7,
+      "component_product_id": null,
       "qty_per_unit": 6.0
     },
     {
       "product_id": 30,
       "material_id": 8,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 31,
       "material_id": 20,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 31,
       "material_id": 10,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 31,
       "material_id": 85,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 31,
       "material_id": 6,
+      "component_product_id": null,
       "qty_per_unit": 0.11
     },
     {
       "product_id": 31,
       "material_id": 7,
+      "component_product_id": null,
       "qty_per_unit": 6.0
     },
     {
       "product_id": 31,
       "material_id": 8,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 13,
       "material_id": 86,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 13,
       "material_id": 87,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 32,
       "material_id": 86,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 32,
       "material_id": 87,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 32,
       "material_id": 88,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 2,
       "material_id": 78,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 29,
       "material_id": 78,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 3,
       "material_id": 78,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 4,
       "material_id": 78,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 9,
       "material_id": 78,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 1,
       "material_id": 78,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 10,
       "material_id": 78,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 11,
       "material_id": 78,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 30,
       "material_id": 78,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 12,
       "material_id": 78,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 13,
       "material_id": 78,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 32,
       "material_id": 78,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 14,
       "material_id": 78,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 33,
       "material_id": 11,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 33,
       "material_id": 89,
+      "component_product_id": null,
       "qty_per_unit": 5.0
     },
     {
       "product_id": 33,
       "material_id": 91,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 33,
       "material_id": 92,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 34,
       "material_id": 11,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 34,
       "material_id": 12,
+      "component_product_id": null,
       "qty_per_unit": 5.0
     },
     {
       "product_id": 34,
       "material_id": 13,
+      "component_product_id": null,
       "qty_per_unit": 5.0
     },
     {
       "product_id": 34,
       "material_id": 90,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 34,
       "material_id": 91,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 34,
       "material_id": 14,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 34,
       "material_id": 15,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 35,
       "material_id": 11,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 35,
       "material_id": 12,
+      "component_product_id": null,
       "qty_per_unit": 5.0
     },
     {
       "product_id": 35,
       "material_id": 13,
+      "component_product_id": null,
       "qty_per_unit": 5.0
     },
     {
       "product_id": 35,
       "material_id": 91,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 35,
       "material_id": 14,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 35,
       "material_id": 15,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 35,
       "material_id": 93,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 26,
       "material_id": 94,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 33,
       "material_id": 94,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 34,
       "material_id": 94,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 35,
       "material_id": 94,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 27,
       "material_id": 94,
+      "component_product_id": null,
       "qty_per_unit": 0.01
     },
     {
       "product_id": 65,
       "material_id": 11,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 65,
       "material_id": 12,
+      "component_product_id": null,
       "qty_per_unit": 5.0
     },
     {
       "product_id": 65,
       "material_id": 13,
+      "component_product_id": null,
       "qty_per_unit": 5.0
     },
     {
       "product_id": 65,
       "material_id": 14,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 65,
       "material_id": 15,
+      "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
       "product_id": 65,
       "material_id": 95,
+      "component_product_id": null,
       "qty_per_unit": 0.01
+    },
+    {
+      "product_id": 1,
+      "material_id": 249,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 15,
+      "material_id": 249,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 2,
+      "material_id": 249,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 41,
+      "material_id": 241,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 22,
+      "material_id": 241,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 48,
+      "material_id": 241,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 25,
+      "material_id": 241,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 38,
+      "material_id": 242,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 37,
+      "material_id": 248,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 63,
+      "material_id": null,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 18,
+      "material_id": 244,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 20,
+      "material_id": 246,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 29,
+      "material_id": 250,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 3,
+      "material_id": 116,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 63,
+      "material_id": 76,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 36,
+      "material_id": 73,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 51,
+      "material_id": 74,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 12,
+      "material_id": 255,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
     }
   ],
   "orders": [

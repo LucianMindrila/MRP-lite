@@ -17,6 +17,14 @@ def _unique_code(base):
     return candidate
 
 
+BOM_AUTO_BLUE = {'Consumables', 'Tooling'}
+BOM_STATUS_OPTIONS = [
+    ('', 'Auto (system decides)'),
+    ('consumable', 'Consumable — no product assignment needed'),
+    ('misc_customer', 'Misc Customers — used for unregistered customers'),
+]
+
+
 @inventory_bp.route('/materials')
 @login_required
 def materials_list():
@@ -32,8 +40,11 @@ def materials_list():
     else:
         materials = Material.query.order_by(Material.code).all()
         active_cat = None
+    bom_mat_ids = {r[0] for r in db.session.query(BOMItem.material_id).distinct().all()}
     return render_template('inventory/materials_list.html', materials=materials,
-                           suppliers=suppliers, categories=categories, active_cat=active_cat)
+                           suppliers=suppliers, categories=categories, active_cat=active_cat,
+                           bom_mat_ids=bom_mat_ids, bom_auto_blue=BOM_AUTO_BLUE,
+                           bom_status_options=BOM_STATUS_OPTIONS)
 
 
 @inventory_bp.route('/materials/add', methods=['GET', 'POST'])
@@ -86,6 +97,7 @@ def material_edit(mid):
             m.category_id = request.form.get('category_id') or None
             m.location = request.form.get('location', '').strip()
             m.notes = request.form.get('notes', '').strip()
+            m.bom_status = request.form.get('bom_status') or None
             db.session.commit()
             flash(f'Material {m.code} updated.', 'success')
             return redirect(url_for('inventory.materials_list'))
@@ -128,7 +140,8 @@ def material_edit(mid):
     bom_items = BOMItem.query.filter_by(material_id=m.id).all()
     return render_template('inventory/material_form.html', material=m,
                            suppliers=suppliers, categories=categories,
-                           products=products, bom_items=bom_items)
+                           products=products, bom_items=bom_items,
+                           bom_status_options=BOM_STATUS_OPTIONS)
 
 
 @inventory_bp.route('/materials/<int:mid>/delete', methods=['POST'])

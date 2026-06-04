@@ -58,6 +58,7 @@ class Material(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
     location = db.Column(db.String(40))  # warehouse location/bay
     notes = db.Column(db.Text)
+    bom_status = db.Column(db.String(20))  # None=auto, 'consumable', 'misc_customer'
     bom_items = db.relationship('BOMItem', backref='material', lazy=True)
     stock_movements = db.relationship('StockMovement', backref='material', lazy=True)
 
