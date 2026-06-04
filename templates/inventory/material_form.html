@@ -48,9 +48,9 @@
         <div class="col-md-8">
           <label class="form-label">BOM Status</label>
           <select name="bom_status" class="form-select">
-            {% for val, label in bom_status_options %}
-            <option value="{{ val }}" {% if material and material.bom_status == val %}selected{% elif not val and (not material or not material.bom_status) %}selected{% endif %}>{{ label }}</option>
-            {% endfor %}
+            <option value="" {% if not material or not material.bom_status %}selected{% endif %}>Auto (system decides)</option>
+            <option value="consumable" {% if material and material.bom_status == 'consumable' %}selected{% endif %}>Consumable — no product assignment needed</option>
+            <option value="misc_customer" {% if material and material.bom_status == 'misc_customer' %}selected{% endif %}>Misc Customers — used for unregistered customers</option>
           </select>
         </div>
         <div class="col-md-3">

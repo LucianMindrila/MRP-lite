@@ -72,7 +72,8 @@ def material_add():
         flash(f'Material {m.code} added.', 'success')
         return redirect(url_for('inventory.materials_list'))
     return render_template('inventory/material_form.html', material=None,
-                           suppliers=suppliers, categories=categories)
+                           suppliers=suppliers, categories=categories,
+                           bom_status_options=BOM_STATUS_OPTIONS)
 
 
 @inventory_bp.route('/materials/<int:mid>/edit', methods=['GET', 'POST'])

@@ -2780,16 +2780,16 @@
       "id": 294,
       "code": "AR-MANUALS-LABELS",
       "name": "AR Manuals, Labels",
-      "description": null,
-      "unit": "each",
+      "description": "None",
+      "unit": "pcs",
       "stock_qty": 0.0,
       "cost_price": 0.0,
       "reorder_point": 0.0,
       "reorder_qty": 0.0,
       "supplier_id": 47,
       "category_id": 3,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 295,
@@ -3122,6 +3122,21 @@
       "notes": null
     },
     {
+      "id": 349,
+      "code": "H/CURVE/JIG BOX",
+      "name": "Howden Curve Jig Box",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 1.45,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 19,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
       "id": 24,
       "code": "H/KWJ650 BOX",
       "name": "Howden Kitchen Worktop Jig 650mm Box",
@@ -3185,16 +3200,16 @@
       "id": 257,
       "code": "HCURVEJIG-MANUAL-16PP-210-X",
       "name": "H/CURVE/JIG Manual 16pp, 210 x 148mm, 16 pages, 1 black + gloss coating both sides, 150gsm gloss, fold stitch and trim",
-      "description": null,
-      "unit": "each",
+      "description": "None",
+      "unit": "pcs",
       "stock_qty": 0.0,
       "cost_price": 0.94,
       "reorder_point": 0.0,
       "reorder_qty": 0.0,
       "supplier_id": 46,
       "category_id": 3,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 298,
@@ -4352,6 +4367,21 @@
       "notes": null
     },
     {
+      "id": 347,
+      "code": "MANU/BS/JIG",
+      "name": "Belfast Sink Jig Pro Manual",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 1.13,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 46,
+      "category_id": 3,
+      "location": null,
+      "notes": null
+    },
+    {
       "id": 79,
       "code": "MANU/H/KWJ650",
       "name": "Manual H/KWJ650",
@@ -4382,6 +4412,21 @@
       "notes": null
     },
     {
+      "id": 346,
+      "code": "MANU/KWJ650",
+      "name": "Kitchen Worktop Jig 650mm Manual",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.71,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 46,
+      "category_id": 3,
+      "location": null,
+      "notes": null
+    },
+    {
       "id": 10,
       "code": "MANU/KWJ79",
       "name": "Manual KWJ700/KWJ900",
@@ -4407,6 +4452,21 @@
       "reorder_point": 0.0,
       "reorder_qty": 0.0,
       "supplier_id": 7,
+      "category_id": 3,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 348,
+      "code": "MANU/RS/JIG",
+      "name": "Router Surfacing Jig Manual",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 1.17,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 46,
       "category_id": 3,
       "location": null,
       "notes": null
@@ -4663,8 +4723,8 @@
       "reorder_qty": 0.0,
       "supplier_id": 11,
       "category_id": 2,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 73,
@@ -4708,8 +4768,8 @@
       "reorder_qty": 0.0,
       "supplier_id": 11,
       "category_id": 2,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 76,
@@ -4907,6 +4967,21 @@
       "notes": null
     },
     {
+      "id": 350,
+      "code": "RS/JIG BOX",
+      "name": "Router Surfacing Jig Box",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.52,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 19,
+      "category_id": 2,
+      "location": null,
+      "notes": null
+    },
+    {
       "id": 317,
       "code": "S553LHX12STC-95MM-DOWNSPIRAL",
       "name": "S55/3LHX1/2STC 9.5MM DOWNSPIRAL",
@@ -5075,16 +5150,16 @@
       "id": 261,
       "code": "STRIKE-JIG-44PP-210-X-148MM",
       "name": "Strike Jig 44pp (210 x 148mm) Portrait, Cover: 4 Pages, Text: 40 Pages. Cover: 1 Offset Process Black + gloss coating both sides",
-      "description": null,
-      "unit": "each",
+      "description": "None",
+      "unit": "pcs",
       "stock_qty": 0.0,
       "cost_price": 0.7,
       "reorder_point": 0.0,
       "reorder_qty": 0.0,
       "supplier_id": 46,
       "category_id": 3,
-      "location": null,
-      "notes": null
+      "location": "None",
+      "notes": "None"
     },
     {
       "id": 341,
@@ -6059,12 +6134,6 @@
       "qty_per_unit": 6.0
     },
     {
-      "product_id": 6,
-      "material_id": 8,
-      "component_product_id": null,
-      "qty_per_unit": 0.01
-    },
-    {
       "product_id": 7,
       "material_id": 6,
       "component_product_id": null,
@@ -6077,12 +6146,6 @@
       "qty_per_unit": 6.0
     },
     {
-      "product_id": 7,
-      "material_id": 8,
-      "component_product_id": null,
-      "qty_per_unit": 0.01
-    },
-    {
       "product_id": 9,
       "material_id": 6,
       "component_product_id": null,
@@ -6092,7 +6155,7 @@
       "product_id": 9,
       "material_id": 7,
       "component_product_id": null,
-      "qty_per_unit": 6.0
+      "qty_per_unit": 4.0
     },
     {
       "product_id": 9,
@@ -6110,7 +6173,7 @@
       "product_id": 10,
       "material_id": 7,
       "component_product_id": null,
-      "qty_per_unit": 6.0
+      "qty_per_unit": 4.0
     },
     {
       "product_id": 10,
@@ -6182,7 +6245,7 @@
       "product_id": 3,
       "material_id": 7,
       "component_product_id": null,
-      "qty_per_unit": 6.0
+      "qty_per_unit": 2.0
     },
     {
       "product_id": 3,
@@ -6200,13 +6263,7 @@
       "product_id": 5,
       "material_id": 7,
       "component_product_id": null,
-      "qty_per_unit": 6.0
-    },
-    {
-      "product_id": 5,
-      "material_id": 8,
-      "component_product_id": null,
-      "qty_per_unit": 0.01
+      "qty_per_unit": 4.0
     },
     {
       "product_id": 15,
@@ -6234,27 +6291,9 @@
     },
     {
       "product_id": 29,
-      "material_id": 7,
-      "component_product_id": null,
-      "qty_per_unit": 6.0
-    },
-    {
-      "product_id": 29,
       "material_id": 8,
       "component_product_id": null,
       "qty_per_unit": 0.01
-    },
-    {
-      "product_id": 29,
-      "material_id": null,
-      "component_product_id": null,
-      "qty_per_unit": 1.0
-    },
-    {
-      "product_id": 3,
-      "material_id": null,
-      "component_product_id": null,
-      "qty_per_unit": 1.0
     },
     {
       "product_id": 11,
@@ -6305,43 +6344,13 @@
       "qty_per_unit": 1.0
     },
     {
-      "product_id": 22,
-      "material_id": null,
-      "component_product_id": null,
-      "qty_per_unit": 1.0
-    },
-    {
-      "product_id": 20,
-      "material_id": null,
-      "component_product_id": null,
-      "qty_per_unit": 1.0
-    },
-    {
       "product_id": 18,
       "material_id": 70,
       "component_product_id": null,
       "qty_per_unit": 1.0
     },
     {
-      "product_id": 24,
-      "material_id": null,
-      "component_product_id": null,
-      "qty_per_unit": 1.0
-    },
-    {
       "product_id": 1,
-      "material_id": 10,
-      "component_product_id": null,
-      "qty_per_unit": 1.0
-    },
-    {
-      "product_id": 10,
-      "material_id": 10,
-      "component_product_id": null,
-      "qty_per_unit": 1.0
-    },
-    {
-      "product_id": 11,
       "material_id": 10,
       "component_product_id": null,
       "qty_per_unit": 1.0
@@ -6821,12 +6830,6 @@
       "qty_per_unit": 1.0
     },
     {
-      "product_id": 63,
-      "material_id": null,
-      "component_product_id": null,
-      "qty_per_unit": 1.0
-    },
-    {
       "product_id": 18,
       "material_id": 244,
       "component_product_id": null,
@@ -6871,6 +6874,102 @@
     {
       "product_id": 12,
       "material_id": 255,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 2,
+      "material_id": 294,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 60,
+      "material_id": 261,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 5,
+      "material_id": 257,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 12,
+      "material_id": 258,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 3,
+      "material_id": 256,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 14,
+      "material_id": 6,
+      "component_product_id": null,
+      "qty_per_unit": 0.0833
+    },
+    {
+      "product_id": 15,
+      "material_id": 77,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 15,
+      "material_id": 78,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 5,
+      "material_id": 78,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 10,
+      "material_id": 260,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 11,
+      "material_id": 258,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 9,
+      "material_id": 346,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 29,
+      "material_id": 347,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 14,
+      "material_id": 348,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 5,
+      "material_id": 349,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 14,
+      "material_id": 350,
       "component_product_id": null,
       "qty_per_unit": 1.0
     }
