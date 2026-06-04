@@ -668,12 +668,27 @@
       "description": "",
       "unit": "m",
       "stock_qty": 151.0,
-      "cost_price": 18.5,
+      "cost_price": 0.135,
       "reorder_point": 50.0,
       "reorder_qty": 200.0,
       "supplier_id": 6,
       "category_id": 5,
       "location": "Unit 3-Heike room",
+      "notes": null
+    },
+    {
+      "id": 371,
+      "code": "1 INCH LAY FLAT",
+      "name": "1 inch lay flat tubing",
+      "description": null,
+      "unit": "m",
+      "stock_qty": 0.0,
+      "cost_price": 0.135,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 6,
+      "category_id": 9,
+      "location": null,
       "notes": null
     },
     {
@@ -3117,6 +3132,21 @@
       "reorder_point": 0.0,
       "reorder_qty": 0.0,
       "supplier_id": 50,
+      "category_id": 9,
+      "location": null,
+      "notes": null
+    },
+    {
+      "id": 372,
+      "code": "FOAM/PEANUTS",
+      "name": "Foam Peanuts / Biodegradable Padding",
+      "description": null,
+      "unit": "pcs",
+      "stock_qty": 0.0,
+      "cost_price": 0.001,
+      "reorder_point": 0.0,
+      "reorder_qty": 0.0,
+      "supplier_id": 6,
       "category_id": 9,
       "location": null,
       "notes": null
@@ -6084,6 +6114,26 @@
       "customer_id": 1
     },
     {
+      "id": 66,
+      "code": "DG/JIG/BODY",
+      "name": "DG/JIG Body (machined in-house)",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 11.13,
+      "lead_time_days": 1,
+      "customer_id": null
+    },
+    {
+      "id": 67,
+      "code": "DG/JIG/RAIL",
+      "name": "DG/JIG Rail (machined in-house)",
+      "description": null,
+      "unit": "pcs",
+      "sale_price": 0.3975,
+      "lead_time_days": 1,
+      "customer_id": null
+    },
+    {
       "id": 65,
       "code": "DUMMY/KNIFE",
       "name": "Dummy Test Knife",
@@ -6341,7 +6391,7 @@
       "product_id": 1,
       "material_id": 8,
       "component_product_id": null,
-      "qty_per_unit": 0.01
+      "qty_per_unit": 0.2
     },
     {
       "product_id": 26,
@@ -6452,12 +6502,6 @@
       "qty_per_unit": 4.0
     },
     {
-      "product_id": 9,
-      "material_id": 8,
-      "component_product_id": null,
-      "qty_per_unit": 0.01
-    },
-    {
       "product_id": 10,
       "material_id": 6,
       "component_product_id": null,
@@ -6470,12 +6514,6 @@
       "qty_per_unit": 4.0
     },
     {
-      "product_id": 10,
-      "material_id": 8,
-      "component_product_id": null,
-      "qty_per_unit": 0.01
-    },
-    {
       "product_id": 11,
       "material_id": 6,
       "component_product_id": null,
@@ -6488,12 +6526,6 @@
       "qty_per_unit": 6.0
     },
     {
-      "product_id": 11,
-      "material_id": 8,
-      "component_product_id": null,
-      "qty_per_unit": 0.01
-    },
-    {
       "product_id": 12,
       "material_id": 6,
       "component_product_id": null,
@@ -6504,12 +6536,6 @@
       "material_id": 7,
       "component_product_id": null,
       "qty_per_unit": 6.0
-    },
-    {
-      "product_id": 12,
-      "material_id": 8,
-      "component_product_id": null,
-      "qty_per_unit": 0.01
     },
     {
       "product_id": 2,
@@ -6527,25 +6553,7 @@
       "product_id": 2,
       "material_id": 8,
       "component_product_id": null,
-      "qty_per_unit": 0.01
-    },
-    {
-      "product_id": 3,
-      "material_id": 6,
-      "component_product_id": null,
-      "qty_per_unit": 0.11
-    },
-    {
-      "product_id": 3,
-      "material_id": 7,
-      "component_product_id": null,
-      "qty_per_unit": 2.0
-    },
-    {
-      "product_id": 3,
-      "material_id": 8,
-      "component_product_id": null,
-      "qty_per_unit": 0.01
+      "qty_per_unit": 0.2
     },
     {
       "product_id": 5,
@@ -6575,19 +6583,13 @@
       "product_id": 15,
       "material_id": 8,
       "component_product_id": null,
-      "qty_per_unit": 0.01
+      "qty_per_unit": 0.2
     },
     {
       "product_id": 29,
       "material_id": 6,
       "component_product_id": null,
       "qty_per_unit": 0.11
-    },
-    {
-      "product_id": 29,
-      "material_id": 8,
-      "component_product_id": null,
-      "qty_per_unit": 0.01
     },
     {
       "product_id": 11,
@@ -6743,7 +6745,7 @@
       "product_id": 30,
       "material_id": 8,
       "component_product_id": null,
-      "qty_per_unit": 0.01
+      "qty_per_unit": 0.2
     },
     {
       "product_id": 31,
@@ -6779,7 +6781,7 @@
       "product_id": 31,
       "material_id": 8,
       "component_product_id": null,
-      "qty_per_unit": 0.01
+      "qty_per_unit": 0.2
     },
     {
       "product_id": 13,
@@ -6819,12 +6821,6 @@
     },
     {
       "product_id": 29,
-      "material_id": 78,
-      "component_product_id": null,
-      "qty_per_unit": 1.0
-    },
-    {
-      "product_id": 3,
       "material_id": 78,
       "component_product_id": null,
       "qty_per_unit": 1.0
@@ -7386,6 +7382,54 @@
       "material_id": 370,
       "component_product_id": null,
       "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 66,
+      "material_id": 6,
+      "component_product_id": null,
+      "qty_per_unit": 0.1
+    },
+    {
+      "product_id": 67,
+      "material_id": 6,
+      "component_product_id": null,
+      "qty_per_unit": 0.003571
+    },
+    {
+      "product_id": 3,
+      "material_id": null,
+      "component_product_id": 66,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 3,
+      "material_id": null,
+      "component_product_id": 67,
+      "qty_per_unit": 5.0
+    },
+    {
+      "product_id": 3,
+      "material_id": 110,
+      "component_product_id": null,
+      "qty_per_unit": 15.0
+    },
+    {
+      "product_id": 3,
+      "material_id": 107,
+      "component_product_id": null,
+      "qty_per_unit": 1.0
+    },
+    {
+      "product_id": 3,
+      "material_id": 371,
+      "component_product_id": null,
+      "qty_per_unit": 0.2
+    },
+    {
+      "product_id": 3,
+      "material_id": 372,
+      "component_product_id": null,
+      "qty_per_unit": 10.0
     }
   ],
   "orders": [
