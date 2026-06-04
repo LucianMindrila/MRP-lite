@@ -20,8 +20,7 @@
         <div class="col-md-4">
           <label class="form-label fw-semibold">Code *</label>
           <input type="text" name="code" class="form-control text-uppercase" required
-                 value="{{ material.code if material else '' }}"
-                 {% if material %}readonly{% endif %}/>
+                 value="{{ material.code if material else '' }}"/>
         </div>
         <div class="col-md-8">
           <label class="form-label fw-semibold">Name *</label>

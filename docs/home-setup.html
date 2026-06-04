@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MRP-lite — Home Setup Instructions</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      max-width: 720px;
+      margin: 48px auto;
+      padding: 0 24px;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+    h1 { font-size: 1.6rem; margin-bottom: 4px; }
+    .subtitle { color: #666; margin-top: 0; margin-bottom: 36px; }
+    h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-top: 36px; margin-bottom: 8px; }
+    ol { padding-left: 20px; }
+    li { margin-bottom: 10px; }
+    code {
+      background: #f4f4f4;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: 'Cascadia Code', 'Courier New', monospace;
+      font-size: 0.9em;
+    }
+    pre {
+      background: #1e1e2e;
+      color: #cdd6f4;
+      border-radius: 8px;
+      padding: 16px 20px;
+      overflow-x: auto;
+      font-family: 'Cascadia Code', 'Courier New', monospace;
+      font-size: 0.9em;
+      line-height: 1.7;
+    }
+    .note {
+      background: #fff8e1;
+      border-left: 4px solid #f9a825;
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      margin: 20px 0;
+      font-size: 0.95em;
+    }
+    .env-block {
+      background: #1e1e2e;
+      color: #cdd6f4;
+      border-radius: 8px;
+      padding: 16px 20px;
+      font-family: 'Cascadia Code', 'Courier New', monospace;
+      font-size: 0.88em;
+      line-height: 1.8;
+    }
+    .env-key { color: #89dceb; }
+    .env-val { color: #a6e3a1; }
+    .section { margin-bottom: 40px; }
+    hr { border: none; border-top: 1px solid #e8e8e8; margin: 40px 0; }
+    .tag {
+      display: inline-block;
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-size: 0.78em;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .tag.warn {
+      background: #fff3e0;
+      color: #e65100;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>MRP-lite &mdash; Home Setup</h1>
+  <p class="subtitle">Follow these steps when working from home.</p>
+
+  <hr>
+
+  <div class="section">
+    <h2>Option A &mdash; Already cloned at home</h2>
+    <ol>
+      <li>Open a terminal and <code>cd</code> into your MRP-lite folder.</li>
+      <li>Pull the latest changes:
+        <pre>git pull</pre>
+      </li>
+      <li>Activate the virtual environment and update dependencies:
+        <pre>venv\Scripts\activate
+pip install -r requirements.txt</pre>
+      </li>
+      <li>Run any new database migrations:
+        <pre>flask db upgrade</pre>
+      </li>
+      <li>Load the real data (suppliers, materials, etc.):
+        <pre>python scripts/setup_real_data.py</pre>
+      </li>
+      <li>Start the app:
+        <pre>flask run</pre>
+        Then open <code>http://localhost:5000</code> in your browser.
+      </li>
+    </ol>
+  </div>
+
+  <hr>
+
+  <div class="section">
+    <h2>Option B &mdash; First time on this machine <span class="tag">fresh clone</span></h2>
+    <ol>
+      <li>Clone the repo:
+        <pre>git clone https://github.com/LucianMindrila/MRP-lite.git
+cd MRP-lite</pre>
+      </li>
+      <li>Create a virtual environment and install dependencies:
+        <pre>python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt</pre>
+      </li>
+      <li>Create a <code>.env</code> file in the root of the project (see below).</li>
+      <li>Set up the database:
+        <pre>flask db upgrade</pre>
+      </li>
+      <li>Load the real data:
+        <pre>python scripts/setup_real_data.py</pre>
+      </li>
+      <li>Start the app:
+        <pre>flask run</pre>
+      </li>
+    </ol>
+  </div>
+
+  <hr>
+
+  <div class="section">
+    <h2>.env file contents <span class="tag warn">required</span></h2>
+    <p>Create a file called <code>.env</code> in the project root with exactly this content:</p>
+    <div class="env-block">
+      <span class="env-key">FLASK_ENV</span>=<span class="env-val">development</span><br>
+      <span class="env-key">SECRET_KEY</span>=<span class="env-val">any-random-string</span><br>
+      <span class="env-key">DB_PASSWORD</span>=<span class="env-val">localtest123</span><br>
+      <span class="env-key">COMPANY_NAME</span>=<span class="env-val">DT Solutions Ltd</span><br>
+      <span class="env-key">COMPANY_ADDRESS</span>=<span class="env-val">Units 3-4 Pearce Way, Gloucester, GL2 5YD</span><br>
+      <span class="env-key">COMPANY_VAT_NUMBER</span>=<span class="env-val">GB 000 0000 00</span>
+    </div>
+    <div class="note">
+      The <code>.env</code> file is gitignored — it never gets pushed to GitHub, so you need to create it manually on every machine.
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section">
+    <h2>Login credentials</h2>
+    <table style="border-collapse:collapse; width:100%;">
+      <thead>
+        <tr style="background:#f4f4f4;">
+          <th style="text-align:left; padding:8px 12px; border:1px solid #e0e0e0;">Role</th>
+          <th style="text-align:left; padding:8px 12px; border:1px solid #e0e0e0;">Username</th>
+          <th style="text-align:left; padding:8px 12px; border:1px solid #e0e0e0;">Password</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:8px 12px; border:1px solid #e0e0e0;">Admin</td>
+          <td style="padding:8px 12px; border:1px solid #e0e0e0;"><code>admin</code></td>
+          <td style="padding:8px 12px; border:1px solid #e0e0e0;"><code>admin123</code></td>
+        </tr>
+        <tr style="background:#fafafa;">
+          <td style="padding:8px 12px; border:1px solid #e0e0e0;">Operator</td>
+          <td style="padding:8px 12px; border:1px solid #e0e0e0;"><code>operator</code></td>
+          <td style="padding:8px 12px; border:1px solid #e0e0e0;"><code>operator123</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>
